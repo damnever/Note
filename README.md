@@ -1,0 +1,3 @@
+##Personal learning note ...
+
+[Python](./Python.md)
