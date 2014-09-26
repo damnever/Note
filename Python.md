@@ -65,16 +65,31 @@ Change Activity:
 ---
 ***
 ##==正则表达式==
-> match(): 匹配字符串开始位置。(只匹配开头，有且一个)
- search(): 扫描字符串,找到第一一个位置。(匹配第一次出现的，有且一个)
- findall(): 找到全部匹配,以列表返回。
- finditer(): 找到全部匹配,以迭代器返回
- group(): 返回匹配的完整字符串;可接收多个参数,返回指定序号的分组。
- start(): 匹配的开始位置; 同样能接收分组序号。和 group() 一样,序号 0 表示整体匹配结果。
- end(): 匹配的结束位置； 同上。
- span(): 包含起始、结束位置的元组； 同上。
- groups(): 返回分组信息。
- groupdict(): 返回命名分组信息
+> **方法:**
+ - match(): 匹配字符串开始位置。(只匹配开头，有且一个)
+ - search(): 扫描字符串,找到第一个位置。(匹配第一次出现的，有且一个)
+ - findall(): 找到全部匹配,以列表返回。
+ - finditer(): 找到全部匹配,以迭代器返回
+ - group(): 返回匹配的完整字符串;可接收多个参数,返回指定序号的分组。
+ - start(): 匹配的开始位置; 同样能接收分组序号。和 group() 一样,序号 0 表示整体匹配结果。
+ - end(): 匹配的结束位置； 同上。
+ - span(): 包含起始、结束位置的元组； 同上。
+ - groups(): 返回分组信息。
+ - groupdict(): 返回命名分组信息
+
+> **编译标志:**(可以用 re.I、re.M 等参数,也可以直接在表达式中添加 "(?iLmsux)" 标志)
+ - s: 单行。"." 匹配包括换行符在内的所有字符。
+ - i: 忽略大小写。
+ - L: 让 "\w" 能匹配当地字符,貌似对中文支支持不好。
+ - m: 多行行。
+ - x: 忽略多余的空白字符,让表达式更易阅读。
+ - u: Unicode。
+```
+>>> re.findall(r"(?i)[a-z]+", "123ABc123Dxc")
+['ABc', 'Dxc']
+>>> re.findall(r"[a-z]+", "123ABc123Dxc", re.I)
+['ABc', 'Dxc']
+```
 
  - [正则表达式指南](http://blog.jobbole.com/75188/)
  - [高级正则表达式](http://blog.jobbole.com/65605/)
@@ -164,7 +179,7 @@ attribute:  __dict__
 ---
 #####元类 (metaclass)
 > **类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
-当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。(这也是为什么在模块中可以用用 `__metaclass__` 为所有类型指定默认元类的缘故。)
+当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
 **`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ -> type`**
 
  - [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
@@ -172,11 +187,11 @@ attribute:  __dict__
 
 ---
 #####上下文与 with
-> **上下文文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文文环境。即便代码块发生生异常,清理操作也会被执行。**
- + `__enter__`: 初始化环境,返回上下文文对象。
- + `__exit__`: 执行行清理操作。返回 True 时,将阻止止异常向外传递。
+> **上下文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文环境。即便代码块发生异常,清理操作也会被执行。**
+ + `__enter__`: 初始化环境,返回上下文对象。
+ + `__exit__`: 执行行清理操作。返回 True 时,将阻止异常向外传递。
 
-> 可以在一一个 with 语句中使用用多个上下文文对象,依次按照 *FILO* 顺序调用用。
+> 可以在一个 with 语句中使用用多个上下文对象,依次按照 *FILO* 顺序调用。
 
  - [理解 Python 的 with 语句](http://python.42qu.com/11155501)
 
@@ -248,6 +263,7 @@ func = @decorator(func)
 	如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
 
 	做 web，读 BaseHTTPServer、SimpleHTTPServer 和 CGIHTTPServer，读 cgi/cgitb，自己随意写框架，读cookielib，读 wsgiref，这时候自己写一个简便的 web framework 就 so easy 了，老板再也不担心你写 web 了，选择 flask/web.py/django/pyramid 都心中有数了。因为走的是 web 的路，所以难免要调用一下别人的 api，搞懂一下 httplib/urllib/urllib/urlparse。
+                                                                                                                    --引用自某位知友
 
 - [走马观花](http://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html)
 
