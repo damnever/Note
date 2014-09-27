@@ -76,6 +76,9 @@ Change Activity:
  - span(): 包含起始、结束位置的元组； 同上。
  - groups(): 返回分组信息。
  - groupdict(): 返回命名分组信息
+ - split(): 用 pattern 做分隔符切割字符串。如果用 "(pattern)",那么分隔符也会返回。
+ - sub(): 替换子子串。可指定替换次数。sub(pattern, new, s, counts)。
+ - subn(): 和 sub() 差不多,不过返回 "(新字符串,替换次数)",可以将替换字符串改成函数,以便替换成不同的结果。
 
 > **编译标志:**(可以用 re.I、re.M 等参数,也可以直接在表达式中添加 "(?iLmsux)" 标志)
  - s: 单行。"." 匹配包括换行符在内的所有字符。
@@ -106,6 +109,12 @@ Change Activity:
 ---
 #####格式化
  - [关于格式化规范的迷你语言](https://docs.python.org/3.1/library/string.html#format-specification-mini-language)
+
+---
+#####文件与目录
+> 如果要把数据写到磁盘上,除调用 `flush()` 外,还得用 `sync()`,以确保数据从系统缓冲区同步到磁盘。`close()` 总是会调用用这两个方法。
+读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
+通常建议用迭代器或 `xreadlines()` 代替 `readlines()`,后者默认一次性读取整个文件。
 
 ---
 #####类
@@ -247,7 +256,26 @@ func = @decorator(func)
 
 ---
 #####数据结构和算法
- - [导航](http://hujiaweibujidao.github.io/python/)
+> **bisect** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
+ - 只查找可插入位置，不插入
+  - `bisect(l, a)` # 查找 a 在序列 l 中的合适插入位置,默认插入以存在元素右侧。
+  - `bisect_left(l, a)` # 如果待查找元素在列表中存在,则返回左侧插入位置。
+  - `bisect_right(l, a)` # 如果待查找元素在列表中存在,则返回右侧插入位置。
+ - 直接插入
+  - `insort(l, a)` # 同理，但直接插入
+  - `insort_left(l, a)` # 同理，但直接插入
+  - `insort_right(l, a)` # 同理，但直接插入
+---
+> **heapq** 最小堆 (完全平衡二叉树，每个父节点小于等于其左右子节点)
+ - heappush(heap, item) # 将 item 压入堆中
+ - heappop(heap) # 总是弹出最小 item（堆顶）
+ - heappushpop(heap, item) # 先push , 再pop, 弹出值小于等于 item
+ - heapreplace(heap, item) # 先pop, 再push, 弹出值可能大于 item
+ - heapify(list) # 将序列转换成堆
+ - nlargest/nsmallest(n, l) # 从列表(不一定是堆)有序返回最大(最小)的 n 个元素
+
+
+- [导航](http://hujiaweibujidao.github.io/python/)
 
 ---
 #####性能和内存管理
@@ -266,6 +294,13 @@ func = @decorator(func)
                                                                                                                     --引用自某位知友
 
 - [走马观花](http://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html)
+
+#####struct & array
+> struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
+ - pack(fmt, v1, v2) 转换成 fmt 中描述的 struct类型的二进制形式
+ - unpack(fmt, v1, v2) 将二进制形式的 struct 类型通过 fmt 格式转换成 Python 类型
+
+> array： 将 Python 类型的数据（二进制、序列、文件内容）转换成给定类型的 C 数组
 
 #####Time 模块
  - **时间戳（timestamp）**的方式：通常来说，时间戳表示的是从 1970 年 1 月 1 日 00:00:00 开始按秒计算的偏移量（time.gmtime(0)）此模块中的函数无法处理 1970 纪元年以前的日期和时间或太遥远的未来（处理极限取决于 C 函数库，对于 32 位系统来说，是 2038 年）。
