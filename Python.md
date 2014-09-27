@@ -265,7 +265,8 @@ func = @decorator(func)
   + `insort(l, a)` # 同理，但直接插入
   + `insort_left(l, a)` # 同理，但直接插入
   + `insort_right(l, a)` # 同理，但直接插入
-___
+
+
 > **heapq** 最小堆 (完全平衡二叉树，每个父节点小于等于其左右子节点)
  - heappush(heap, item) # 将 item 压入堆中
  - heappop(heap) # 总是弹出最小 item（堆顶）
