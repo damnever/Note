@@ -258,14 +258,14 @@ func = @decorator(func)
 #####数据结构和算法
 > **bisect** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
  - 只查找可插入位置，不插入
-  - `bisect(l, a)` # 查找 a 在序列 l 中的合适插入位置,默认插入以存在元素右侧。
-  - `bisect_left(l, a)` # 如果待查找元素在列表中存在,则返回左侧插入位置。
-  - `bisect_right(l, a)` # 如果待查找元素在列表中存在,则返回右侧插入位置。
+  + `bisect(l, a)` # 查找 a 在序列 l 中的合适插入位置,默认插入以存在元素右侧。
+  + `bisect_left(l, a)` # 如果待查找元素在列表中存在,则返回左侧插入位置。
+  + `bisect_right(l, a)` # 如果待查找元素在列表中存在,则返回右侧插入位置。
  - 直接插入
-  - `insort(l, a)` # 同理，但直接插入
-  - `insort_left(l, a)` # 同理，但直接插入
-  - `insort_right(l, a)` # 同理，但直接插入
----
+  + `insort(l, a)` # 同理，但直接插入
+  + `insort_left(l, a)` # 同理，但直接插入
+  + `insort_right(l, a)` # 同理，但直接插入
+___
 > **heapq** 最小堆 (完全平衡二叉树，每个父节点小于等于其左右子节点)
  - heappush(heap, item) # 将 item 压入堆中
  - heappop(heap) # 总是弹出最小 item（堆顶）
