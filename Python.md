@@ -111,7 +111,7 @@ Change Activity:
  - [关于格式化规范的迷你语言](https://docs.python.org/3.1/library/string.html#format-specification-mini-language)
 
 ---
-#####文件与目录
+#####文件
 > 如果要把数据写到磁盘上,除调用 `flush()` 外,还得用 `sync()`,以确保数据从系统缓冲区同步到磁盘。`close()` 总是会调用用这两个方法。
 读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
 通常建议用迭代器或 `xreadlines()` 代替 `readlines()`,后者默认一次性读取整个文件。
@@ -308,6 +308,24 @@ func = @decorator(func)
  - **UTC**（Coordinated Universal Time，世界协调时）也叫格林威治天文时间，是世界标准时间。在中国为 UTC+8。
  - **DST**（Daylight Saving Time）即夏令时的意思。
  - [time模块详解](http://bbs.fishc.com/thread-51326-1-1.html)
+```
+# clock: 返回当前进程消耗的CPU时间 (秒)。
+# sleep: 暂停进程 (秒,可以是小小数,以便设置毫秒、微秒级暂停)。
+>>> time.clock()
+0.027975
+>>> time.sleep(1)
+# strftime: 将 struct_time 格式化为字符串。
+# strptime: 将字符串格式化为 struct_time。
+# %H 24小时制, %l 12小时制, %a/%A 简化（完整星期名称）
+>>> time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
+'2014-09-28 17:44:28'
+# timezone: 与 UTC 的时差
+# tzname: 当前时区名称
+>>> time.timezone / 3600
+-8
+>>> time.tzname      # 北京时间, China Standard Time
+('CST', 'CST')
+ ```
 
 #####网络【socket, socketserver, http.server】
  - [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
