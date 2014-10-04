@@ -256,7 +256,7 @@ func = @decorator(func)
 
 ---
 #####数据结构和算法
-> **bisect** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
+> **++bisect++** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
  - 只查找可插入位置，不插入
   + `bisect(l, a)` # 查找 a 在序列 l 中的合适插入位置,默认插入以存在元素右侧。
   + `bisect_left(l, a)` # 如果待查找元素在列表中存在,则返回左侧插入位置。
@@ -267,13 +267,21 @@ func = @decorator(func)
   + `insort_right(l, a)` # 同理，但直接插入
 
 
-> **heapq** 最小堆 (完全平衡二叉树，每个父节点小于等于其左右子节点)
- - heappush(heap, item) # 将 item 压入堆中
- - heappop(heap) # 总是弹出最小 item（堆顶）
- - heappushpop(heap, item) # 先push , 再pop, 弹出值小于等于 item
- - heapreplace(heap, item) # 先pop, 再push, 弹出值可能大于 item
- - heapify(list) # 将序列转换成堆
- - nlargest/nsmallest(n, l) # 从列表(不一定是堆)有序返回最大(最小)的 n 个元素
+> **++heapq++** 最小堆 (完全平衡二叉树，每个父节点小于等于其左右子节点)
+ - `heappush(heap, item)` # 将 item 压入堆中
+ - `heappop(heap)` # 总是弹出最小 item（堆顶）
+ - `heappushpop(heap, item)` # 先push , 再pop, 弹出值小于等于 item
+ - `heapreplace(heap, item)` # 先pop, 再push, 弹出值可能大于 item
+ - `heapify(list)` # 将序列转换成堆
+ - `nlargest/nsmallest(n, l)` # 从列表(不一定是堆)有序返回最大(最小)的 n 个元素
+
+> **++Queue++** 队列（在 Python3 里为 queue）
+Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： 优先级队列，级别低先出
+ - `put(item, [, block[, timeout]]) / get([, block[, timeout]])` # 压入/取出元素。**put**：如果 block 为 True，timeout 不为 None，在等待时间 timeout 内队列一直为满，引发 Queue.Full 异常；如果 block 为 False，则timeout被忽略，只要入队的时候队列为满，立即引发 Queue.Full 异常。**get**： 同理引发 Queue.Empty 异常。
+ - `put_nowait(item) / get_nowait()` # 相当于 `put(item, False) / get(False)`
+ - `empty() / full()` # 返回 bool 型
+ - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
+ - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
 
 
 - [导航](http://hujiaweibujidao.github.io/python/)
@@ -284,6 +292,7 @@ func = @decorator(func)
  + 如果需要创建 "海量" 对象实例,优先考虑 `__slots__`(**`__slots__` 属性会阻止虚拟机创建实例 `__dict__`,仅为名单中的指定成员分配内存空间。这有助于减少内存占用,提升执行行性能,尤其是在需要大量此类对象的时候。**) 。其派生类同样必须用` __slots__` 为新增字段分配存储空间 (即便是空 `__slots__ = []`),否则依然会创建 __dict__,反而导致更慢的执行行效率。。
  - [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
  - [Python 代码优化指南](http://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/)
+ - [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
  - [内存管理](http://www.cnblogs.com/vamei/p/3232088.html)
 
 ---
@@ -292,7 +301,7 @@ func = @decorator(func)
 	如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
 
 	做 web，读 BaseHTTPServer、SimpleHTTPServer 和 CGIHTTPServer，读 cgi/cgitb，自己随意写框架，读cookielib，读 wsgiref，这时候自己写一个简便的 web framework 就 so easy 了，老板再也不担心你写 web 了，选择 flask/web.py/django/pyramid 都心中有数了。因为走的是 web 的路，所以难免要调用一下别人的 api，搞懂一下 httplib/urllib/urllib/urlparse。
-                                                                                                                    --引用自某位知友
+                                                                                                      --引用自某位知友
 
 - [走马观花](http://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html)
 
@@ -360,6 +369,60 @@ func = @decorator(func)
 ***
 ##==Tornado==
 #####使用
+> **++HTTP状态码++** 可以使用 RequestHandler 类的`set_status()`方法显式地设置。在某些情况下，Tornado会自动地设置HTTP状态码。【如果你想使用自己的方法代替默认的错误响应，你可以重写`write_error`方法在你的 RequestHandler 类中】下面是一个常用情况的纲要：
+ - **404 Not Found**
+	Tornado会在HTTP请求的路径无法匹配任何RequestHandler类相对应的模式时返回404（Not Found）响应码。
+ - **400 Bad Request**
+	如果你调用了一个没有默认值的get_argument函数，并且没有发现给定名称的参数，Tornado将自动返回一个400（Bad Request）响应码。
+ - **405 Method Not Allowed**
+	如果传入的请求使用了RequestHandler中没有定义的HTTP方法（比如，一个POST请求，但是处理函数中只有定义了get方法），Tornado将返回一个405（Methos Not Allowed）响应码。
+ - **500 Internal Server Error**
+	当程序遇到任何不能让其退出的错误时，Tornado将返回500（Internal Server Error）响应码。你代码中任何没有捕获的异常也会导致500响应码。
+ - **200 OK**
+	如果响应成功，并且没有其他返回码被设置，Tornado将默认返回一个200（OK）响应码。
+
+> **++`static_url`++**的疑惑， 为什么不在你的模板中硬编码？有如下几个原因。其一，`static_url`函数创建了一个基于文件内容的 hash 值，并将其添加到 URL 末尾（查询字符串的参数v）。这个 hash 值确保浏览器总是加载一个文件的最新版而不是之前的缓存版本。无论是在你应用的开发阶段，还是在部署到生产环境使用时，都非常有用，因为你的用户不必再为了看到你的静态内容而清除浏览器缓存了。
+
+> **UI模块**是封装模板中包含的标记、样式以及行为的可复用组件。它所定义的元素通常用于多个模板交叉复用或在同一个模板中重复使用。模块本身是一个继承自Tornado的UIModule类的简单Python类，并定义了一个render方法。当一个模板使用{% module Foo(...) %}标签引用一个模块时，Tornado的模板引擎调用模块的render方法，然后返回一个字符串来替换模板中的模块标签。UI模块也可以在渲染后的页面中嵌入自己的JavaScript和CSS文件，或指定额外包含的JavaScript或CSS文件。你可以定义可选的embedded_javascript、embedded_css、javascript_files和css_files方法来实现这一方法。
+
+> **++模板++** (tornado.template)
+ - 使用
+```
+# 设置本地变量，执行函数
+{% set *x* = *y* %}
+{% apply *function* %} ... {% end %}    # 有待研究
+# 转义
+{% autoescape *function* %}
+{% raw *expr* %}
+# 注释
+{% comment ... %}
+# 外部文件
+{% extends *filename* %}
+{% block *name* %} ... {% end %}
+{% include *filename* %}
+{% module *expr* %}    # 渲染 UIModule
+# 导入
+{% from *x* import *y* %}  # 和 Python语句一样, 有待研究
+{% import *module* %}
+# 流程控制
+{% for *var* in *expr* %} ... {% end %}
+{% if *condition* %} ... {% elif *condition* %} ... {% else %} ... {% end %}
+{% while *condition* %} ... {% end %}
+{% try %} ... {% except %} ... {% else %} ... {% finally %} ... {% end %}
+```
+ - 默认提供了一些方法: escape(), url_escape(), json_encode(), squeeze().
+ - 可以添加任意自命名的方法 (在 tornado.web.RquestHandler 里, 可重写 get_template_namespace):
+```
+# Python code
+def add(x ,y):
+       return x + y
+tornado.template.execute(add = add)
+# the template
+{{ add(1, 2) }}
+```
+
+> ++HTTP长轮询++在站点或特定用户状态的高度交互反馈通信中非常有用。
+
  - [Introduction to Tornado](http://www.pythoner.com/tag/tornado)
  - [官方文档中译版](http://www.tornadoweb.cn/documentation#_13)
  - [官方文档4.0.1](http://www.tornadoweb.org/en/stable/)
