@@ -317,6 +317,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - **UTC**（Coordinated Universal Time，世界协调时）也叫格林威治天文时间，是世界标准时间。在中国为 UTC+8。
  - **DST**（Daylight Saving Time）即夏令时的意思。
  - [time模块详解](http://bbs.fishc.com/thread-51326-1-1.html)
+ - [Python 时间和日期](http://www.yiibai.com/python/python_date_time.html#python_date_time)
 ```
 # clock: 返回当前进程消耗的CPU时间 (秒)。
 # sleep: 暂停进程 (秒,可以是小小数,以便设置毫秒、微秒级暂停)。
@@ -336,6 +337,45 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 ('CST', 'CST')
  ```
 
+---
+#####urllib / urllib2
+> **++urllib++** 同 Python3 中整合更好的 urllib.parse
+ - `urlopen(url[, data[, proxies]])` # 创建一个表示远程 url 的类文件对象，然后像本地文件一样操作这个类文件对象来获取远程数据。参数data表示以post方式提交到 url 的数据。
+ ```
+ >>> doc = urllib.urlopen("http://www.baidu.com/")
+>>> doc.info()
+<httplib.HTTPMessage instance at 0x7f008dbf0710>
+>>> doc.info().getheader('Content-Type')
+'text/html; charset=utf-8'
+ ```
+ - `urlretrieve(url[, filename[, reporthook[, data]]])` # 同上，可以将内容保存在本地文件中，如果获取的内容大小小于原始大小，会引发异常。[ reporthook(blocknum, blocksize, totalsize) 是一个回调函数，可以用来获得文件下载进度]
+ - [上述方法的实例](http://www.jb51.net/article/42630.htm)
+ - `quote(string[, safe])` # 对字符串进行编码。参数safe指定了不需要编码的字符。
+ - `quote(string[, safe])` # 同 quote，但是将空格替换成 + 号。
+ - `unquote(string)` # 对字符串进行解码。
+ - `unquote_plus(string)` # 同 unquote，但是将 + 替换成空格。
+ - `urlencode(query[, doseq])` # 将 dict 或者包含两个元素的元组列表转换成url参数。如果某个键对应的值是一个序列，将 doseq 设置为 True，会生成用 & 分割开的多个值对应同一个键的形式。
+ ```
+>>> urllib.urlencode({"name": ["user", "user2"], "age": 20})
+'age=20&name=%5B%27user%27%2C+%27user2%27%5D'
+>>> urllib.urlencode({"name": ["user", "user2"], "age": 20}, False)
+'age=20&name=%5B%27user%27%2C+%27user2%27%5D'
+>>> urllib.urlencode({"name": ["user", "user2"], "age": 20}, True)
+'age=20&name=user&name=user2'
+ ```
+ - `pathname2url(path)` # 将本地路径转换成url路径，返回值已用quote编码。
+ ```
+ >>> urllib.pathname2url("D:\home\lastd\Documents")
+'D%3A%5Chome%5Clastd%5CDocuments' # 不再被解析成路径
+ ```
+ - `url2pathname(path)` # 将 url 路径转换成本地路径，并用 unquote 解码。
+ ```
+ >>> urllib.url2pathname("D%3A%5Chome%5Clastd%5CDocuments")
+'D:\\home\\lastd\\Documents'   # \ 被转义, 同 /
+ ```
+
+
+---
 #####网络【socket, socketserver, http.server】
  - [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
 
