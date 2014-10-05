@@ -379,7 +379,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `build_opener([handler, ...])` # 创建自定义 opener 对象，支持验证、cookie等HTTP高级功能。参数 handler 是 Handler 实例。返回对象(OpenerDirector)具有 open() (同urlopen())方法。
  - `install_opener(opener)` # 使用此方法仅当想要通过 urlopen() 来使用 opener 对象。
  - `Request(url[, data][, headers][, origin_req_host][, unverifiable])` # 使用 headers 参数伪装浏览器。传入给 urlopen 作为 url 参数。可以使用比较Hack的方式通过其 get_method 方法来设置 HTTP 方法。
- - `HTTPCookieProcessor([cookiejar])` # 传入 cookielib.CookieJar 对象。返回 Handler 对象。
+ - `HTTPCookieProcessor([cookiejar])` # 传入 cookielib.CookieJar 对象。继承于 BaseHandler。
  - `ProxyHandler([proxies])` # 参数proxies是一个字典，将协议名称（http，ftp）等映射到相应代理服务器的URL。
  - `HTTPPasswordMgr()/HTTPPasswordMgrWithDefaultRealm(realm, uri, user, passwd)` # 使用一个密码管理的对象来处理 urls 和 realms 来映射用户名和密码。如果知道 realm (realm 是与验证相关联的名称或描述信息，取决于远程服务器)是什么,就能使用前者(通过add_password(realm, uri, user, passwd)设置密码)。后者(继承于前者)没有找到合适的，realm 为 None。
  - `ProxyBasicAuthHandler([password_mgr])` # 继承于(AbstractBasicAuthHandler, BaseHandler)，可选参数为一个 HTTPPasswordMgr 对象。可以用 add_password(realm,uri,user,passwd) 来代替设置密码。
