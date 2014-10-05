@@ -219,9 +219,26 @@ def func():
 func = @decorator(func)
 ```
 
-
  - [装饰器](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819879946007bbf6ad052463ab18034f0254bf355000)
  - [Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)
+
+---
+#####@property
+> **将方法当成属性用**
+```
+>>> class Name(object):
+...     @property
+...     def name(self):
+...         return self._name
+...     @name.setter
+...     def name(self, value):
+...         self._name = value
+...
+>>> n = Name()
+>>> n.name = "last"  # 转化成 n.set_name("last")
+>>> n.name   # n.get_name()
+'last'
+```
 
 ---
 #####偏函数 (partial)
@@ -304,6 +321,27 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
                                                                                                       --引用自某位知友
 
 - [走马观花](http://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html)
+- [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
+
+---
+#####unittest & doctest
+> **++unittest++**
+ - TestCase (以test开头的方法就是测试方法)常用方法(help(unittest.TestCase)):
+  - `assertEqual(first, second[, msg]) == assertEquals` # 判断两个对象是否相同
+  - `assertTrue(expr[, msg]) / assertFalse` # 验证条件是否为 True/False
+  - `assertRaises(excClass[[[, callableObj], *args], **kwargs])` # 返回一个上下文对象，验证异常的抛出。*args,**kwargs 是 callableObj 的参数。
+  - `setUp()/tearDown()` # 在每调用一个测试方法的前后分别被执行。
+  - `unittest.main()` # 启动测试，可以用命令行参数代替。
+  - ```suite = unittest.TestLoader().loadTestsFromTestCase(TestObj)
+  unittest.TextTestRunner(verbosity=2).run(suite)``` # 可用来代替main()。
+ - [单元测试](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00140137128705556022982cfd844b38d050add8565dcb9000)
+
+> **++doctest++** 直接提取注释中的代码并执行测试
+ - `doctest.testmod()` # 开始文档测试
+ - `python doc_test.py -v` # 如果没有错误什么都不会输出，加上参数 'v' 可以得到更详细的信息。
+ - `python -m doctest -v example.py` # 导入标准库中的 example 模块并进行测试。
+ - `doctest.testfile("example.txt")` # 将文档放于 example.txt 中，进行测试。
+ - 文档中注释代码的异常必须和自定义异常一样。
 
 #####struct & array
 > struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
@@ -338,7 +376,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  ```
 
 ---
-#####hashlib / hmac / md5 / sha
+#####hashlib & hmac & md5 & sha
 > **++hashlib++** 散列算法(支持md5 sha1 sha224 sha256 sha384 sha512)
 ```
 # 创建 md5 加密对象
@@ -406,7 +444,78 @@ aa0fb38cbe017bdb388fbfb9f9da1645
 ```
 
 ---
-#####urllib / urllib2
+#####json & base64 & uuid
+> **++json++** JavaScript Object Notation(JavaScript 对象表示法)，用于存储和交换文本信息。
+ - JSON 值可以是：
+  + 数字（整数或浮点数）
+  + 字符串（在双引号中）
+  + 逻辑值（true 或 false）
+  + 数组（在方括号中）
+  + 对象（在花括号中）
+  + null
+```
+# Neither of these calls raises an exception, but the results are not valid JSON 【Infinity, -Infinity, NaN】
+>>> json.dumps(float('-inf'))
+'-Infinity'
+>>> json.dumps(float('nan'))
+'NaN'
+# Same when deserializing
+>>> json.loads('-Infinity')
+-inf
+>>> json.loads('NaN')
+nan
+# 一个 json 对象里定义的名字必须是无二的
+>>> json.loads('{"x":1, "x":2, "x": 3}')
+{u'x': 3}
+ # dump()/load() 可传入文件对象
+```
+
+> **++base64++** Base64编码会把3字节的二进制数据编码为4字节的文本数据，长度增加33%
+编码后的文本数据为 4 的倍数。若被编码的二进制数据不是 3 的倍数，会剩下 1～2个字节，base64用 \x00 字节在末尾补足后，再在编码的末尾加上 1~2 个 '='，表示补了多少字节，解码的时候自动去掉。
+```
+>>> base64.b64encode('Hello, world!')
+'SGVsbG8sIHdvcmxkIQ=='
+>>> base64.b64decode('SGVsbG8sIHdvcmxkIQ==')
+'Hello, world!'
+```
+在 URL 中字符 ‘+/-’ 可能引起歧义，必须用 'url_safe' 的 base64 来编码
+```
+>>> base64.b64encode('i\xb7\x1d\xfb\xef\xff')
+'abcd++//'
+>>> base64.urlsafe_b64encode('i\xb7\x1d\xfb\xef\xff')
+'abcd--__'
+>>> base64.urlsafe_b64decode('abcd--__')
+'i\xb7\x1d\xfb\xef\xff'
+```
+
+> **++uuid++** 一种唯一标识
+ - `UUID([hex[, bytes[, bytes_le[, fields[, int[, version]]]]]])` # 得到原始的数据
+ - `uuid1([node[, clock_seq]])` # 由 MAC 地址、当前时间戳、随机数生成。(有安全性问题)
+ - `uuid3(namespace, name)` # 基于命名空间和名字的MD5散列值。namespace 是给定的(参见官方文档)。
+ - `uuid4()` # 由伪随机数得到，有一定的重复概率。
+ - `uuid5(namespace, name)` # 基于命名空间和名字的 SHA-1 hash。
+ - `bytes/int/hex` # 把生成的 uuid 转化成相应的格式。
+```
+>>> x = uuid.UUID('{00010203-0405-0607-0809-0a0b0c0d0e0f}')
+>>> str(x)
+'00010203-0405-0607-0809-0a0b0c0d0e0f'
+>>> x.bytes
+'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f'
+>>> print uuid.UUID(bytes=x.bytes)
+00010203-0405-0607-0809-0a0b0c0d0e0f
+>>> print uuid.uuid1()
+292b1924-4c96-11e4-8413-000c298861ee
+>>> print uuid.uuid3(uuid.NAMESPACE_DNS, 'python.org')
+6fa459ea-ee8a-3ca4-894e-db77e160355e
+>>> print uuid.uuid4()
+1e31baf7-cb01-4e22-b18a-2f830ee6f4d8
+>>> print uuid.uuid4().hex
+e17366f236084bdc8ed46ee5cdaddbe4
+>>> print uuid.uuid5(uuid.NAMESPACE_DNS, 'python.org')
+886313e1-3b8a-5372-9b90-0c9aee199e5d
+```
+---
+#####urllib & urllib2
 > **++urllib++** 同 Python3 中整合更好的 urllib.parse
  - `urlopen(url[, data[, proxies]])` # 创建一个表示远程 url 的类文件对象，然后像本地文件一样操作这个类文件对象来获取远程数据。参数data表示以post方式提交到 url 的数据。
 ```
