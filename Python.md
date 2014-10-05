@@ -338,6 +338,74 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  ```
 
 ---
+#####hashlib / hmac / md5 / sha
+> **++hashlib++** 散列算法(支持md5 sha1 sha224 sha256 sha384 sha512)
+```
+# 创建 md5 加密对象
+>>> m = hashlib.md5()
+# 加密文本，可追加
+>>> m.update("Nobody inspects")
+>>> m.update(" the spammish repetition")
+>>> print m.hexdigest()
+bb649c83dd1ea5c9d9dec9a18df0ffe9
+# new(name, string='') 第一个参数为OpenSSL库中存在的函数名
+>>> hashlib.new("md5", "Nobody inspects the spammish repetition").hexdigest()
+'bb649c83dd1ea5c9d9dec9a18df0ffe9'
+# sha1 加密
+>>> hashlib.sha1('Nobody inspects the spammish repetition').hexdigest()
+'531b07a0f5b66477a21742d2827176264f4bbfe2'
+```
+
+
+> **++hmac++** 签名(认证)加密算法(需要秘钥)
+```
+# 创建一个新的 hmac 对象，new(key[, msg[, digestmod]])
+>>> m1 = hmac.new("MyKey", "I'm young.")
+# 输出被 hmac 加密后的十六进制数据。digest()非十六进制
+>>> print m1.hexdigest()
+c83ac1cac45ba92b2f6629bee67fb953
+# 用新字符串来更新 hmac
+>>> m1.update("I'm old.")
+>>> print m1.hexdigest()
+3ee16436c0621a5d46fc8f3a4eb1d27e
+# update(a); update(b) == update(a + b)
+>>> m2 = hmac.new("MyKey")
+>>> m2.update("I'm young."); m.update("I'm old.")
+>>> print m2.hexdigest()
+3ee16436c0621a5d46fc8f3a4eb1d27e
+# 拷贝一个 hmac 的副本
+>>> m3 = m2.copy()
+>>> print m3.hexdigest()
+3ee16436c0621a5d46fc8f3a4eb1d27e
+>>> print hmac.new("MyKey", "I'm young.I'mold.").hexdigest()
+aa0fb38cbe017bdb388fbfb9f9da1645
+```
+
+> **++md5++**
+```
+>>> m = md5.new()
+>>> m.update("Hello,")
+>>> m.update(" world!")
+>>> m.hexdigest()
+'6cd3556deb0da54bca060b4c39479839'
+>>> md5.new("Hello, world!").hexdigest()
+'6cd3556deb0da54bca060b4c39479839'
+>>> md5.md5("Hello, world!").hexdigest()
+'6cd3556deb0da54bca060b4c39479839'
+```
+
+> **++sha++** sha1
+```
+>>> s = sha.new()
+>>> s.update("Hello,")
+>>> s.update(" world!")
+>>> s.hexdigest()
+'943a702d06f34599aee1f8da8ef9f7296031d699'
+>>> sha.new("Hello, world!").hexdigest()
+'943a702d06f34599aee1f8da8ef9f7296031d699'
+```
+
+---
 #####urllib / urllib2
 > **++urllib++** 同 Python3 中整合更好的 urllib.parse
  - `urlopen(url[, data[, proxies]])` # 创建一个表示远程 url 的类文件对象，然后像本地文件一样操作这个类文件对象来获取远程数据。参数data表示以post方式提交到 url 的数据。
