@@ -343,6 +343,9 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `doctest.testfile("example.txt")` # 将文档放于 example.txt 中，进行测试。
  - 文档中注释代码的异常必须和自定义异常一样。
 
+---
+#####collections
+
 #####struct & array
 > struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
  - pack(fmt, v1, v2) 转换成 fmt 中描述的 struct类型的二进制形式
@@ -518,11 +521,25 @@ e17366f236084bdc8ed46ee5cdaddbe4
 ---
 #####smtplib & email & poplib
  - email(mime,parser,header,utils...) 主要用于构造/解析邮件
+```
+Message          # 继承关系 #
+    MIMEBase
+        MIMEMultipart
+        MIMENonMultipart
+            MIMEMessage
+            MIMEText
+            MIMEImage
+```
  - [SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
  - [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
 
 ---
 #####urlparse & urllib & urllib2
+>  **一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成**。
+![如图](./Data/http1.png)
+ HTTP响应也由三个部分组成，分别是：状态行、消息报头、响应正文。
+ - [爬虫教程](http://blog.csdn.net/column/details/why-bug.html)
+
 > **++urlparse++** 解析 URL 并进行拆分或拼接
  - `urlparse(urlstring[, scheme[, allow_fragments]])` # 拆分成六元素元组
  - `urlunparse(parts)` # 拼接通过 urlparse 拆分 url 的返回对象
@@ -567,9 +584,9 @@ e17366f236084bdc8ed46ee5cdaddbe4
 
 > **++urllib2++**
  - `urlopen(url[, data][, timeout])` # url 可以是 Request 对象。如果 *_proxy 环境变量被检测到，将会默认使用代理。
- - `build_opener([handler, ...])` # 创建自定义 opener 对象，支持验证、cookie等HTTP高级功能。参数 handler 是 Handler 实例。返回对象(OpenerDirector)具有 open() (同urlopen())方法。
+ - `build_opener([handler, ...])` # 创建自定义 opener 对象，支持验证、cookie等HTTP高级功能。参数 handler 是 Handler 实例。返回对象(**OpenerDirector**其**addheaders[不能为 dict]**属性可以用来设置 header)具有 open() (类同urlopen())方法。
  - `install_opener(opener)` # 使用此方法仅当想要通过 urlopen() 来使用 opener 对象。
- - `Request(url[, data][, headers][, origin_req_host][, unverifiable])` # 使用 headers 参数伪装浏览器。传入给 urlopen 作为 url 参数。可以使用比较Hack的方式通过其 get_method 方法来设置 HTTP 方法。
+ - `Request(url[, data][, headers][, origin_req_host][, unverifiable])` # 使用 **headers(必须是一个 dict)** 参数伪装浏览器。传入给 urlopen 作为 url 参数。可以使用比较Hack的方式通过其 get_method 方法来设置 HTTP 方法。
  - `HTTPCookieProcessor([cookiejar])` # 传入 cookielib.CookieJar 对象。继承于 BaseHandler。
  - `ProxyHandler([proxies])` # 参数proxies是一个字典，将协议名称（http，ftp）等映射到相应代理服务器的URL。
  - `HTTPPasswordMgr()/HTTPPasswordMgrWithDefaultRealm(realm, uri, user, passwd)` # 使用一个密码管理的对象来处理 urls 和 realms 来映射用户名和密码。如果知道 realm (realm 是与验证相关联的名称或描述信息，取决于远程服务器)是什么,就能使用前者(通过add_password(realm, uri, user, passwd)设置密码)。后者(继承于前者)没有找到合适的，realm 为 None。
