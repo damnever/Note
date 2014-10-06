@@ -514,9 +514,23 @@ e17366f236084bdc8ed46ee5cdaddbe4
 >>> print uuid.uuid5(uuid.NAMESPACE_DNS, 'python.org')
 886313e1-3b8a-5372-9b90-0c9aee199e5d
 ```
+
 ---
-#####urllib & urllib2
-> **++urllib++** 同 Python3 中整合更好的 urllib.parse
+#####smtplib & email & poplib
+ - email(mime,parser,header,utils...) 主要用于构造/解析邮件
+ - [SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
+ - [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
+
+---
+#####urlparse & urllib & urllib2
+> **++urlparse++** 解析 URL 并进行拆分或拼接
+ - `urlparse(urlstring[, scheme[, allow_fragments]])` # 拆分成六元素元组
+ - `urlunparse(parts)` # 拼接通过 urlparse 拆分 url 的返回对象
+ - `urlsplit(urlstring[, scheme[, allow_fragments]])` # 拆分成五元素元组，空格/空参数/请求/片段标示符将被舍弃
+ - `urlunsplit(parts)` # 拼接通过 urlsplit 拆分 url 的返回对象
+ - `urljoin(base, url[, allow_fragments])` # 拼接相对的 url
+
+> **++urllib++**
  - `urlopen(url[, data[, proxies]])` # 创建一个表示远程 url 的类文件对象，然后像本地文件一样操作这个类文件对象来获取远程数据。参数data表示以post方式提交到 url 的数据。
 ```
  >>> doc = urllib.urlopen("http://www.baidu.com/")
