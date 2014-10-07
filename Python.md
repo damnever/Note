@@ -344,12 +344,89 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - 文档中注释代码的异常必须和自定义异常一样。
 
 ---
-#####collections
+#####collections [Counter, deque, namedtuple, defaultdict, OrderedDict]
+> `Counter([iterable-or-mapping])` # 简单的计数器，dict 的一个子类，Key 不存在用返回0来代替 KeyError。并且支持集合形式的运算。
+```
+>>> cnt = collections.Counter()
+>>> for word in ['red', 'blue', 'red', 'green', 'blue', 'blue']:
+...     cnt[word] += 1
+...
+>>> cnt
+Counter({'blue': 3, 'red': 2, 'green': 1})
+>>> dict(cnt)
+{'blue': 3, 'green': 1, 'red': 2}
+>>> list(collections.Counter(a=4, b=2, c=3, d=0).elements()) # element 将其展开
+['a', 'a', 'a', 'a', 'c', 'c', 'c', 'b', 'b']
+>>> collections.Counter('aaabbbbcccccdddddd').most_common(2) # most_common 返回出现最多的 n 个元素及其个数
+[('d', 6), ('c', 5)]
+```
+
+> **`namedtuple(typename, field_names[, verbose=False][, rename=False])`** # 具备tuple的不变性，又可以根据属性来引用。用来表示数据表也很合适。
+```
+>>> Point = collections.namedtuple('Point', ['x', 'y'])
+>>> p = Point(1, 2)
+>>> p.x
+1
+>>> p.y
+2
+>>> p.x, p.y
+(1, 2)
+>>> isinstance(p, Point)
+True
+>>> isinstance(p, tuple)
+True
+>>> t = [11, 22]
+>>> Point._make(t)
+Point(x=11, y=22)
+```
+
+> **`deque([iterable[, maxlen]])`** # 高效实现插入和删除操作的双向列表，适合用于队列和栈。
+```
+>>> q = collections.deque(range(5))
+>>> q.append(5)  # deque([0, 1, 2, 3, 4, 5])
+>>> q.appendleft(-1)  # deque([-1, 0, 1, 2, 3, 4, 5])
+>>> q.extend(range(2))  # deque([-1, 0, 1, 2, 3, 4, 5, 0, 1])
+>>> q.count(1)
+2
+>>> q.extendleft(range(2,4))  # deque([3, 2, -1, 0, 1, 2, 3, 4, 5, 0, 1])
+>>> q.pop(); q
+1 deque([3, 2, -1, 0, 1, 2, 3, 4, 5, 0])
+>>> q.popleft(); q
+3 deque([2, -1, 0, 1, 2, 3, 4, 5, 0])
+>>> q.remove(-1)  # deque([2, 0, 1, 2, 3, 4, 5, 0])
+>>> q.reverse()  # deque([0, 5, 4, 3, 2, 1, 0, 2])
+>>> q.rotate(1)  # deque([2, 0, 5, 4, 3, 2, 1, 0])
+```
+
+> `defaultdict([default_factory[, ...]])` # 当 dict 的 key 不存在时，返回一个默认值。
+```
+>>> s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+>>> d = collections.defaultdict(list)  # 传入的参数为 dict 值的缺省类型，可以是函数
+>>> for k, v in s:
+...     d[k].append(v) # == d.setdefault(k, []).append(v) 前提 d = {}
+...
+>>> d.items()
+[('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]
+>>> d['black']
+[]
+```
+
+> `OrderedDict([items])` # 保持 dict 元素的添加顺序。
+```
+>>> od = collections.OrderedDict()
+>>> od['a'] = 1; od['b'] = 2; od['c'] = 3; od
+OrderedDict([('a', 1), ('b', 2), ('c', 3)])
+>>> collections.OrderedDict(sorted({'banana': 3, 'apple':4, 'pear': 1, 'orange': 2}.items(), key=lambda t: t[1]))
+OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
+>>> od.popitem(); od.popitem(); od.popitem() # LIFO
+('c', 3) ('b', 2) ('a', 1)
+```
+
 
 #####struct & array
 > struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
- - pack(fmt, v1, v2) 转换成 fmt 中描述的 struct类型的二进制形式
- - unpack(fmt, v1, v2) 将二进制形式的 struct 类型通过 fmt 格式转换成 Python 类型
+ - `pack(fmt, v1, v2)` # 转换成 fmt 中描述的 struct类型的二进制形式
+ - `unpack(fmt, v1, v2)` # 将二进制形式的 struct 类型通过 fmt 格式转换成 Python 类型
 
 > array： 将 Python 类型的数据（二进制、序列、文件内容）转换成给定类型的 C 数组
 
