@@ -611,6 +611,38 @@ Message          # 继承关系 #
  - [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
 
 ---
+#####Cookie & cookielib
+> **++Cookie++**
+ - `BaseCookie([input])` # 类 dict 对象，存储并管理着称为 Morsel 的 cookie 值集合。
+ - `SimpleCookie([input])` # 继承于 BaseCookie (另外两个子类SerialCookie/SmartCookie因安全问题已不赞成使用)。
+```
+>>> c = Cookie.SimpleCookie()
+>>> c['number'] = 80; c['number'].value
+'80'
+>>> c['string'] = 'eight'; c['string'].value
+'eight'
+>>> print c   #  print c.output() 与其一样
+Set-Cookie: number=80
+Set-Cookie: string=eight
+>>> c = Cookie.SimpleCookie()
+>>> c['rocky'] = 'road'
+>>> c['rocky']['path'] = '/cookie'
+>>> print c.output(attrs=[], header='Cookie:') # attrs 若设置为空，只显示第一个；header 设置开始字符
+Cookie: rocky=road
+>>> print c.output(attrs=['rocky', 'path'], header='Cookie:')
+Cookie:  rocky=road; Path=/cookie
+>>> c = Cookie.SimpleCookie()
+>>> c.load("chips=ahoy; vienna=finger") # 将字符串转化成 Morsel 形式
+>>> print c
+Set-Cookie: chips=ahoy
+Set-Cookie: vienna=finger
+```
+
+> **++cookielib++** 为存储和管理cookie提供客户端支持
+- `CookieJar(policy=None)` # 将 cookie 存在内存中
+- `FileCookieJar(filename, delayload=None, policy=None)` # 将 cookie 存在本地文件中，没有实现save函数。其子类实现了： MozillaCookieJar是为了创建与Mozilla浏览器cookies.txt兼容的FileCookieJar实例，LWPCookieJar是为了创建与libwww-perl的Set-Cookie3文件格式兼容的FileCookieJar实例，用LWPCookieJar保存的cookie文件易于人类阅读。
+
+---
 #####urlparse & urllib & urllib2
 >  **一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成**。
 ![如图](./Data/http1.png)
@@ -628,8 +660,8 @@ Message          # 继承关系 #
  - `urlopen(url[, data[, proxies]])` # 创建一个表示远程 url 的类文件对象，然后像本地文件一样操作这个类文件对象来获取远程数据。参数data表示以post方式提交到 url 的数据。
 ```
  >>> doc = urllib.urlopen("http://www.baidu.com/")
->>> doc.info()
-<httplib.HTTPMessage instance at 0x7f008dbf0710>
+>>> print doc.info()
+...<消息报头>...
 >>> doc.info().getheader('Content-Type')
 'text/html; charset=utf-8'
 ```
