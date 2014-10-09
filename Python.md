@@ -456,6 +456,20 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
  ```
 
 ---
+#####anydbm & shelve & pickle(cPickle)
+> **`anydbm.open(filename[, flag[, mode]])`** # 将一个磁盘上的文件与一个“dict-like”对象关联起来，像操作字典一样。flag 参数设置对文件的操作方式 [rwc(没有则创建)n(每次都建空文件)]， mode 是 *unix 上对文件的访问权限 [0777]。
+
+> **`shelve.open(filename, flag='c', protocol=None, writeback=False)`** # 高级版 anydbm，支持在"dict-like"对象中存储任何可以被pickle序列化的对象。wirteback 参数表示将数据存储与缓存中，调用 close(其调用sync) 后才写入硬盘。
+
+>**`pickle/cPickle`** # 在一个文件中储存任何Python对象。后者为 C 语言实现。
+ - `dump(obj, file[, protocol])` # 将序列化的对象写入文件。
+ - `load(file)` # 读取文件中的数据并反序列化。
+ - `dumps(obj[, protocol])` # 返回序列化的数据流。
+ - `load(obj)` # 反序列化数据流。
+ - `Pickler(file[, protocol])` # cPickle中为方法，拥有写入`dump(obj)`/ 清除pickler的记忆`clear_memo()`
+ - `Unpickler(file)` #cPickle中为方法，拥有读取`load()`/ `noload()`
+
+---
 #####hashlib & hmac & md5 & sha
 > **++hashlib++** 散列算法(支持md5 sha1 sha224 sha256 sha384 sha512)
 ```
@@ -643,6 +657,7 @@ Cookie:  rocky=road; Path=/cookie
 >>> print c
 Set-Cookie: chips=ahoy
 Set-Cookie: vienna=finger
+>>>c.lear() # 清除存储的 cookie 数据
 ```
 
 > **++cookielib++** 为存储和管理cookie提供客户端支持
@@ -723,8 +738,8 @@ Set-Cookie: vienna=finger
 ***
 ##==Web 开发==
  - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
- - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/)
- - PEP333  [英文](http://www.python.org/dev/peps/pep-0333) [中文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
+ - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [中文](http://www.xefan.com/archives/84004.html)
+ - PEP333  [英文](http://www.python.org/dev/peps/pep-0333) & [中文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
  - [42区.漫游指南](http://matrix.42qu.com/)
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
 
