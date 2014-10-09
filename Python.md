@@ -596,6 +596,13 @@ e17366f236084bdc8ed46ee5cdaddbe4
 ```
 
 ---
+#####threading
+> **Lock/RLock/Condition 实现了 Context Management Protocol 可以自动调用 acquire()/release()。[with]
+threading.local() 创建的对象会利用 thread-local storage (TLS) 为每个线程保存不同的数据。**
+
+ - [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
+
+---
 #####smtplib & email & poplib
  - email(mime,parser,header,utils...) 主要用于构造/解析邮件
 ```
@@ -714,7 +721,10 @@ Set-Cookie: vienna=finger
 
 ---
 ***
-##==网站开发==
+##==Web 开发==
+ - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
+ - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/)
+ - PEP333  [英文](http://www.python.org/dev/peps/pep-0333) [中文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
  - [42区.漫游指南](http://matrix.42qu.com/)
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
 
