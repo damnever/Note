@@ -1,3 +1,3 @@
 ##Personal learning note ...
 
-[Python](./Python.md)
+Python  [Markdown](./Python.md) & [Html](./Python.html)
