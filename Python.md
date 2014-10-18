@@ -38,10 +38,11 @@
  - [码农IO Python 精选](http://baoz.me/446252)
  - [官方文档](https://docs.python.org/3.4/)
  - [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
+ - [Python 书籍大全](http://www.pythontip.com/study/share_yunpan)
 
 ---
 ***
-##==编码==
+##==编码规范==
 #####注释
 ```
   Licensed Materials - Property of CorpA
@@ -56,6 +57,7 @@ Change Activity:
 ```
 ---
 #####参考
+ - [PEP-0008](http://www.Python.org/dev/peps/pep-0008/) & [中文](https://code.google.com/p/zhong-wiki/wiki/PEP8)
  - [符合语言习惯的 Python 编程](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
  - [10 个常见错误](http://blog.jobbole.com/68256/)
  - [30 个小技巧](http://blog.jobbole.com/63320/)
@@ -101,6 +103,28 @@ Change Activity:
 ---
 ***
 ##==援疑质理==
+#####解释器
+ - [Introduction to the Python Interpreter](http://akaptur.github.io/blog/categories/python-internals/)
+ - 中文翻译
+  - [函数对象](http://blog.jobbole.com/55327/)
+  - [代码对象](http://blog.jobbole.com/56300/)
+  - [理解字节码](http://blog.jobbole.com/56761/)
+  - [动态语言](http://blog.jobbole.com/57381/)
+
+---
+#####编码和解码
+> str 类型的其实是字节 (Python2)，unicode 才是我们理解中的字符
+**规则：字节用来解码，字符用来编码**
+```
+>>> s = '中文'
+>>> s; len(s)
+'\xe4\xb8\xad\xe6\x96\x87' 6
+>>> us = s.decode('utf-8')
+>>> us; len(us)
+u'\u4e2d\u6587' 2
+```
+
+---
 #####动态类型
 　**引用和对象**：对象是内存中储存数据的实体，引用指向对象。
  - 可变数据对象(**mutable** object)【列表，字典】，通过改变对象自身而改变对其的引用。
@@ -193,6 +217,7 @@ attribute:  __dict__
 
  - [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
  - [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
+ - [编写一个ORM框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba000)
 
 ---
 #####上下文与 with
@@ -203,6 +228,52 @@ attribute:  __dict__
 > 可以在一个 with 语句中使用用多个上下文对象,依次按照 *FILO* 顺序调用。
 
  - [理解 Python 的 with 语句](http://python.42qu.com/11155501)
+
+---
+#####闭包 (closure)
+>  **当函数离开创建环境后，依然持有其上下文状态。**
+一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
+```
+>>> def p_l(z):
+...     def f():
+...         print z
+...     return f
+...
+>>> z = [1, 2]
+>>> g = p_l(z)
+>>> g()
+[1, 2]
+>>> # z.append(3)时，g()内部的引用和z仍然指向一个变量，而z=[1]之后，两者就不再指向一个变量了。
+>>> z.append(3)
+>>> g()
+[1, 2, 3]
+>>> z = [1]
+>>> g()
+[1, 2, 3]
+>>> g.__closure__
+(<cell at 0x7ffd5fda7248: list object at 0x7ffd5fdaa680>,)
+>>> g.func_closure
+(<cell at 0x7ffd5fda7248: list object at 0x7ffd5fdaa680>,)
+>>> print [str(c.cell_contents) for c in g.__closure__]
+['[1, 2, 3]']
+>>> def dump_closure(f):
+...     if hasattr(f, '__closure__') and f.__closure__ is not None:
+...         print '- Dumping function closure for %s:' % f.__name__
+...         for i, c in enumerate(f.__closure__):
+...             print '-- cell %d = %s' % (i, c.cell_contents)
+...     else:
+...         print '- %s has no closure!' % f.__name__
+... 
+>>> dump_closure(g)
+- Dumping function closure for f:
+-- cell 0 = [1, 2, 3]
+```
+
+ - [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
+ - [闭包和后期绑定](http://shentar.me/%E5%85%B3%E4%BA%8Epython%E7%9A%84%E9%97%AD%E5%8C%85%E5%92%8C%E5%90%8E%E6%9C%9F%E7%BB%91%E5%AE%9A/)
+ - [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
+ - [Python闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
+ - [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
 
 ---
 #####装饰器"@" (decorator)
@@ -254,6 +325,7 @@ func = @decorator(func)
 #####yield (generator)
  - [Python yield 使用浅析](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
  - [生成器](http://sebug.net/paper/books/dive-into-python3/generators.html#generators)
+ - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
 
 ---
 #####协程
@@ -261,15 +333,6 @@ func = @decorator(func)
 子程序调用总是一个入口，一次返回，调用顺序是明确的。而协程的调用和子程序不同。协程看上去也是子程序，但执行过程中，在子程序内部可中断(不是函数调用，有点类似CPU的中断)，然后转而执行别的子程序，在适当的时候再返回来接着执行。**
 
  - [协程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000)
-
----
-#####闭包 (Closures)
-> **当函数离开创建环境后，依然持有其上下文状态。**
-
- - [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
- - [闭包和后期绑定](http://shentar.me/%E5%85%B3%E4%BA%8Epython%E7%9A%84%E9%97%AD%E5%8C%85%E5%92%8C%E5%90%8E%E6%9C%9F%E7%BB%91%E5%AE%9A/)
- - [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
- - [Python闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html) *脑大*
 
 ---
 #####数据结构和算法
@@ -300,7 +363,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
 
-
+- [Python 中的高级数据结构](http://blog.jobbole.com/65218/)
 - [导航](http://hujiaweibujidao.github.io/python/)
 
 ---
@@ -422,7 +485,13 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 ('c', 3) ('b', 2) ('a', 1)
 ```
 
+---
+#####itertools
+> **提供了一系列迭代器能够帮助用户轻松地使用排列、组合、笛卡尔积或其他组合结构。**
+ - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
+ - [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
 
+---
 #####struct & array
 > struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
  - `pack(fmt, v1, v2)` # 转换成 fmt 中描述的 struct类型的二进制形式
@@ -430,9 +499,10 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 
 > array： 将 Python 类型的数据（二进制、序列、文件内容）转换成给定类型的 C 数组
 
-#####Time 模块
+---
+#####time & datetime
  - **时间戳（timestamp）**的方式：通常来说，时间戳表示的是从 1970 年 1 月 1 日 00:00:00 开始按秒计算的偏移量（time.gmtime(0)）此模块中的函数无法处理 1970 纪元年以前的日期和时间或太遥远的未来（处理极限取决于 C 函数库，对于 32 位系统来说，是 2038 年）。
- - **UTC**（Coordinated Universal Time，世界协调时）也叫格林威治天文时间，是世界标准时间。在中国为 UTC+8。
+ - **UTC**（Coordinated Universal Time，世界协调时）也叫格林威治天文时间（Greenwich Astronomical Time，格林威治标准时间: Greenwich Mean Time），是世界标准时间。在中国为 UTC+8。
  - **DST**（Daylight Saving Time）即夏令时的意思。
  - [time模块详解](http://bbs.fishc.com/thread-51326-1-1.html)
  - [Python 时间和日期](http://www.yiibai.com/python/python_date_time.html#python_date_time)
@@ -730,7 +800,14 @@ Set-Cookie: vienna=finger
 ```
 
 ---
-#####网络【socket, socketserver, http.server】
+#####os
+
+---
+#####sys
+
+
+---
+#####socket
  - [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
 
 
@@ -740,8 +817,11 @@ Set-Cookie: vienna=finger
  - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
  - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [中文](http://www.xefan.com/archives/84004.html)
  - PEP333  [英文](http://www.python.org/dev/peps/pep-0333) & [中文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
+ - [Serving Static Content With WSGI](http://pwp.stevecassidy.net/wsgi/static.html)
+ - [jinja2](http://docs.jinkan.org/docs/jinja2/)
  - [42区.漫游指南](http://matrix.42qu.com/)
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
+ - [Werkzeug (WSGI工具库)](http://werkzeug-docs-cn.readthedocs.org/zh_CN/latest/index.html)
 
 ---
 ***
