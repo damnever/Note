@@ -131,6 +131,12 @@ u'\u4e2d\u6587' 2
  - 不可变数据对象(**immutable** object)【数字，字符串，元组...】，不能改变对象本身，只能改变引用的指向。
 
 ---
+#####默认参数值
+> **用对象作为函数中作为默认参数（添加自定义 Jinja2 的过滤器时遇到）**
+
+- [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
+
+---
 #####格式化
  - [关于格式化规范的迷你语言](https://docs.python.org/3.1/library/string.html#format-specification-mini-language)
 
@@ -514,7 +520,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 >>> time.sleep(1)
 # strftime: 将 struct_time 格式化为字符串。
 # strptime: 将字符串格式化为 struct_time。
-# %H 24小时制, %l 12小时制, %a/%A 简化（完整星期名称）
+# %H 24小时制, %l 12小时制, %a/%A 简化（完整星期名称）, %b/%B 简化（完整本地月份名称）
 >>> time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
 '2014-09-28 17:44:28'
 # timezone: 与 UTC 的时差
@@ -815,6 +821,7 @@ Set-Cookie: vienna=finger
 ***
 ##==Web 开发==
  - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
+ - [RFC 2109 (Cookie)](https://www.ietf.org/rfc/rfc2109.txt)
  - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [中文](http://www.xefan.com/archives/84004.html)
  - PEP333  [英文](http://www.python.org/dev/peps/pep-0333) & [中文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
  - [Serving Static Content With WSGI](http://pwp.stevecassidy.net/wsgi/static.html)
