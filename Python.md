@@ -39,7 +39,7 @@
  - [官方文档](https://docs.python.org/3.4/)
  - [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
  - [Python 书籍大全](http://www.pythontip.com/study/share_yunpan)
-
+ - [Python 日报](http://py.memect.com/)
 ---
 ***
 ##==编码规范==
@@ -369,7 +369,10 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
 
+- [二叉树扩展(BinaryTree/AVLTree/RBTree...)](https://bitbucket.org/mozman/bintrees/src)
+- [whoosh 索引查找](https://pythonhosted.org/Whoosh/quickstart.html#a-quick-introduction)
 - [Python 中的高级数据结构](http://blog.jobbole.com/65218/)
+- [老齐算法](https://github.com/qiwsir/algorithm/blob/master/README.md)
 - [导航](http://hujiaweibujidao.github.io/python/)
 
 ---
@@ -822,13 +825,15 @@ Set-Cookie: vienna=finger
 ##==Web 开发==
  - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
  - [RFC 2109 (Cookie)](https://www.ietf.org/rfc/rfc2109.txt)
- - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [中文](http://www.xefan.com/archives/84004.html)
- - PEP333  [英文](http://www.python.org/dev/peps/pep-0333) & [中文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
+ - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [译文](http://www.xefan.com/archives/84004.html)
+ -  [PEP333 (Python Web Server Gateway Interface v1.0)](http://www.python.org/dev/peps/pep-0333) & [译文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
  - [Serving Static Content With WSGI](http://pwp.stevecassidy.net/wsgi/static.html)
  - [jinja2](http://docs.jinkan.org/docs/jinja2/)
  - [42区.漫游指南](http://matrix.42qu.com/)
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
  - [Werkzeug (WSGI工具库)](http://werkzeug-docs-cn.readthedocs.org/zh_CN/latest/index.html)
+ - [ PEP 249 (Python Database API Specification v2.0)](http://legacy.python.org/dev/peps/pep-0249/) & [译文](http://blog.csdn.net/dajianshi/article/details/7482201)
+ - [MySQLdbz操作](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/304.md)
 
 ---
 ***
@@ -907,6 +912,7 @@ tornado.template.execute(add = add)
 
 > ++HTTP长轮询++在站点或特定用户状态的高度交互反馈通信中非常有用。
 
+ - [老齐](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/index.md#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E6%98%A8%E5%A4%9C%E8%A5%BF%E9%A3%8E%E4%BA%AD%E5%8F%B0%E8%B0%81%E7%99%BB)
  - [Introduction to Tornado](http://www.pythoner.com/tag/tornado)
  - [官方文档中译版](http://www.tornadoweb.cn/documentation#_13)
  - [官方文档4.0.1](http://www.tornadoweb.org/en/stable/)
