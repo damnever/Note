@@ -105,6 +105,7 @@ Change Activity:
 ##==援疑质理==
 #####其它
 - [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
+- [技能点扫盲](http://www.douban.com/group/topic/28872729/)
 
 #####解释器
  - [Introduction to the Python Interpreter](http://akaptur.github.io/blog/categories/python-internals/)
