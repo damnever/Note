@@ -826,7 +826,6 @@ Set-Cookie: vienna=finger
 
 ---
 #####select (synchronous I/O multiplexing)
-![](./Data/select.jpg)
 - [select I/O复用模型（一）](http://blog.csdn.net/orangleliu/article/details/8832708)
 - [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
 
