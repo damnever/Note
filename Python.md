@@ -821,8 +821,14 @@ Set-Cookie: vienna=finger
 
 ---
 #####socket
+ - [python网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
  - [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
 
+---
+#####select (synchronous I/O multiplexing)
+![](./Data/select.jpg)
+- [select I/O复用模型（一）](http://blog.csdn.net/orangleliu/article/details/8832708)
+- [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
 
 ---
 ***
