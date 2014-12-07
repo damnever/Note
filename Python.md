@@ -218,7 +218,7 @@ attribute:  __dict__
  - 仅有 `__get__` 方法的,称为 non-data descriptor
  - `__get__` 对 owner_class、owner_instance 访问有效
  - `__set__`、`__delete__` 仅对 owner_instance 访问有效
- - 更多详见 ./Data 下 python 笔记第十章
+ - 更多详见 [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
 
 - [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 
