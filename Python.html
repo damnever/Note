@@ -445,11 +445,12 @@ If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 </code></pre><p><a href="http://wiki.woodpecker.org.cn/moin/PythonZen">禅译</a></p><hr class="section"><h2 id="==资源列表=="><a name="==资源列表==" href="#==资源列表=="></a><strong class="highlight">资源列表</strong></h2><ul>
-<li><a href="http://baoz.me/446252">码农IO Python 精选</a></li>
 <li><a href="https://docs.python.org/3.4/">官方文档</a></li>
 <li><a href="https://github.com/justjavac/free-programming-books-zh_CN">免费的编程中文书籍索引</a></li>
+<li><a href="http://code.activestate.com/recipes/langs/python/">Popular Python recipes</a></li>
 <li><a href="http://www.pythontip.com/study/share_yunpan">Python 书籍大全</a></li>
 <li><a href="http://py.memect.com/">Python 日报</a></li>
+<li><a href="http://baoz.me/446252">码农IO Python 精选</a></li>
 </ul><hr class="section"><hr class="page"><h2 id="==编码规范=="><a name="==编码规范==" href="#==编码规范=="></a><strong class="highlight">编码规范</strong></h2><h5 id="注释"><a name="注释" href="#注释"></a>注释</h5><pre><code data-origin="&lt;pre&gt;&lt;code&gt;  Licensed Materials - Property of CorpA
   (C) Copyright A Corp. 1999, 2011 All Rights Reserved
   CopyRight statement and purpose...
@@ -470,11 +471,11 @@ Change Activity:
     list the change activity and time and author information.
 </code></pre><hr class="section"><h5 id="参考"><a name="参考" href="#参考"></a>参考</h5><ul>
 <li><a href="http://www.Python.org/dev/peps/pep-0008/">PEP-0008</a> &amp; <a href="https://code.google.com/p/zhong-wiki/wiki/PEP8">中文</a></li>
+<li><a href="http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/">Google Python 风格指南</a></li>
 <li><a href="http://xiaocong.github.io/slides/idiomatic-python-code/#/main">符合语言习惯的 Python 编程</a></li>
 <li><a href="http://blog.jobbole.com/68256/">10 个常见错误</a></li>
 <li><a href="http://blog.jobbole.com/63320/">30 个小技巧</a></li>
 <li><a href="http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html">Python 语言特性和技巧</a></li>
-<li><a href="https://www.ibm.com/developerworks/cn/views/linux/libraryview.jsp?type_by=%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0&amp;expand=&amp;sort_order=desc&amp;search_by=%E5%8F%AF%E7%88%B1%E7%9A%84+Python&amp;show_abstract=true&amp;sort_by=%E6%97%A5%E6%9C%9F&amp;view_by=search">IBM 文档库</a></li>
 </ul><hr class="section"><hr class="page"><h2 id="==正则表达式=="><a name="==正则表达式==" href="#==正则表达式=="></a><strong class="highlight">正则表达式</strong></h2><blockquote>
 <p><strong>方法:</strong></p>
 <ul>
@@ -516,6 +517,7 @@ Change Activity:
 </ul><hr class="section"><hr class="page"><h2 id="==援疑质理=="><a name="==援疑质理==" href="#==援疑质理=="></a><strong class="highlight">援疑质理</strong></h2><h5 id="其它"><a name="其它" href="#其它"></a>其它</h5><ul>
 <li><a href="http://segmentfault.com/blog/portal_qiniu_com/1190000001813992">Python中的进程,线程,协程,同步,异步,回调</a></li>
 <li><a href="http://www.douban.com/group/topic/28872729/">技能点扫盲</a></li>
+<li><a href="https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming">An introduction to functional programming</a></li>
 </ul><h5 id="解释器"><a name="解释器" href="#解释器"></a>解释器</h5><ul>
 <li><a href="http://akaptur.github.io/blog/categories/python-internals/">Introduction to the Python Interpreter</a></li>
 <li>中文翻译<ul>
@@ -739,6 +741,7 @@ attribute:  __dict__
 <li><a href="http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html">闭包</a></li>
 <li><a href="http://www.cnblogs.com/ChrisChen3121/p/3208119.html">Python闭包详解</a></li>
 <li><a href="http://blog.jobbole.com/66895/">Closures、Decorators 和 functools</a></li>
+<li><a href="http://code.activestate.com/recipes/578965-python-2-nonlocal/">Python 2 nonlocal</a></li>
 </ul><hr class="section"><h5 id="装饰器" @"-(decorator)"=""><a name="装饰器" @"-(decorator)"="" href="#装饰器"></a>装饰器”@” (decorator)</h5><blockquote>
 <p><strong>若需要增强某函数的功能，但又不希望修改该函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。</strong><br>装饰器不一定非得是个函数返回包装对象,也可以是个类,通过 <code>__call__</code> 完成目标调用。<br>装饰器不管被装饰函数有没有参数，都应该有接收参数的功能，这样才能完整的包装而不丢失信息。</p>
 <pre><code data-origin="&lt;pre&gt;&lt;code&gt;@decorator

@@ -35,11 +35,13 @@
 ---
 
 ##==资源列表==
- - [码农IO Python 精选](http://baoz.me/446252)
  - [官方文档](https://docs.python.org/3.4/)
  - [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
+ - [Popular Python recipes](http://code.activestate.com/recipes/langs/python/)
  - [Python 书籍大全](http://www.pythontip.com/study/share_yunpan)
  - [Python 日报](http://py.memect.com/)
+ - [码农IO Python 精选](http://baoz.me/446252)
+
 ---
 ***
 ##==编码规范==
@@ -58,11 +60,11 @@ Change Activity:
 ---
 #####参考
  - [PEP-0008](http://www.Python.org/dev/peps/pep-0008/) & [中文](https://code.google.com/p/zhong-wiki/wiki/PEP8)
+ - [Google Python 风格指南](http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/)
  - [符合语言习惯的 Python 编程](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
  - [10 个常见错误](http://blog.jobbole.com/68256/)
  - [30 个小技巧](http://blog.jobbole.com/63320/)
  - [Python 语言特性和技巧](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
- - [IBM 文档库](https://www.ibm.com/developerworks/cn/views/linux/libraryview.jsp?type_by=%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0&expand=&sort_order=desc&search_by=%E5%8F%AF%E7%88%B1%E7%9A%84+Python&show_abstract=true&sort_by=%E6%97%A5%E6%9C%9F&view_by=search)
 
 ---
 ***
@@ -106,6 +108,7 @@ Change Activity:
 #####其它
 - [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
 - [技能点扫盲](http://www.douban.com/group/topic/28872729/)
+- [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
 
 #####解释器
  - [Introduction to the Python Interpreter](http://akaptur.github.io/blog/categories/python-internals/)
@@ -284,6 +287,7 @@ attribute:  __dict__
  - [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
  - [Python闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
  - [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
+ - [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
 
 ---
 #####装饰器"@" (decorator)
