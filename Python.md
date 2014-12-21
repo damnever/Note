@@ -163,13 +163,13 @@ u'\u4e2d\u6587' 2
  - 必须通过类型和实例对象才能访问字段。
  - 以双下划线开头的 class 和 instance 成员视为私有,会被重命名为 `_<class>__<name>` 形式。(module 成员不变)
 
-> 某些时候,既想使用用私有字段,又又不想放弃外部访问权限。
- - 用用重命名后的格式访问。
+> 某些时候,既想使用私有字段,又不想放弃外部访问权限。
+ - 用重命名后的格式访问。
  - 只用一个下划线,仅提醒,不重命名。
 
 > **继承**
  - super 的类型参数决定了在 mro(多重继承成员搜索顺序) 列表中的搜索起始位置,总是返回该参数后续类型的成员。单继承时总是搜索该参数的基类型。
- - 在多重继承初始化方法中使用用 super 可能会引发一一些奇怪的状况。
+ - 在多重继承初始化方法中使用 super 可能会引发一些奇怪的状况。
 
 > **抽象类**
  - `from abc import ABCMeta, abstractmethod, abstractproperty` #创建抽象类的类型，抽象方法，抽象属性 ，`__metaclass__ = ABCMeta`标明此类为抽象类
@@ -194,7 +194,7 @@ u'\u4e2d\u6587' 2
 ...     def __getattribute__(self, name):
 ...         print "attribute: ", name
 ...         return object.__getattribute__(self, name)
-... 
+...
 >>> a = A(10)       # __init__ 里面的 self.x=x 会被 __setattr__ 捕获
 set:  x 10
 attribute:  __dict__
@@ -230,7 +230,16 @@ attribute:  __dict__
 
  - [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
  - [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
- - [编写一个ORM框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba000)
+ - [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba000)
+
+---
+#####Mix-In
+> 一种特殊的多继承，在不改变原对象的情况下对其进行扩展。
+1. You want to provide a lot of optional features for a class.
+2. You want to use one particular feature in a lot of different classes.
+
+- [Mixin 扫盲班](http://wiki.woodpecker.org.cn/moin/FlyintoMixin)
+- [Mix-in 技术介绍](http://wiki.woodpecker.org.cn/moin/IntroMixin)
 
 ---
 #####上下文与 with
@@ -276,7 +285,7 @@ attribute:  __dict__
 ...             print '-- cell %d = %s' % (i, c.cell_contents)
 ...     else:
 ...         print '- %s has no closure!' % f.__name__
-... 
+...
 >>> dump_closure(g)
 - Dumping function closure for f:
 -- cell 0 = [1, 2, 3]
@@ -285,7 +294,7 @@ attribute:  __dict__
  - [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
  - [闭包和后期绑定](http://shentar.me/%E5%85%B3%E4%BA%8Epython%E7%9A%84%E9%97%AD%E5%8C%85%E5%92%8C%E5%90%8E%E6%9C%9F%E7%BB%91%E5%AE%9A/)
  - [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
- - [Python闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
+ - [Python 闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
  - [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
  - [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
 
