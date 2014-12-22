@@ -44,27 +44,24 @@
 
 ---
 ***
-##==编码规范==
-#####注释
-```
-  Licensed Materials - Property of CorpA
-  (C) Copyright A Corp. 1999, 2011 All Rights Reserved
-  CopyRight statement and purpose...
---------------------------------------------------------------------------
-File Name : comments.py
-Description : description what the main function of this file
-Author: Author name
-Change Activity:
-    list the change activity and time and author information.
-```
----
-#####参考
+##==编码==
+#####规范
  - [PEP-0008](http://www.Python.org/dev/peps/pep-0008/) & [中文](https://code.google.com/p/zhong-wiki/wiki/PEP8)
  - [Google Python 风格指南](http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/)
+
+---
+#####技巧
  - [符合语言习惯的 Python 编程](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
  - [10 个常见错误](http://blog.jobbole.com/68256/)
  - [30 个小技巧](http://blog.jobbole.com/63320/)
  - [Python 语言特性和技巧](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
+
+---
+#####调试
+- [pdb](https://docs.python.org/2/library/pdb.html)
+- [logging](https://docs.python.org/2/library/logging.html)
+- [doctest](https://docs.python.org/2/library/doctest.html)
+- [unittest](https://docs.python.org/2/library/unittest.html)
 
 ---
 ***
