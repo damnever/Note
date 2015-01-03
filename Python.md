@@ -38,6 +38,7 @@
  - [官方文档](https://docs.python.org/3.4/)
  - [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
  - [Popular Python recipes](http://code.activestate.com/recipes/langs/python/)
+ - [Python 技术文章的收集](http://pyzh.readthedocs.org/en/latest/index.html)
  - [Python 书籍大全](http://www.pythontip.com/study/share_yunpan)
  - [Python 日报](http://py.memect.com/)
  - [码农IO Python 精选](http://baoz.me/446252)
@@ -345,6 +346,9 @@ func = @decorator(func)
 
 ---
 #####yield (generator)
+> **生成器**是可以迭代的，读取它的时候，并不把所有的值放在内存中，它是实时地生成数据。
+**yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。
+
  - [Python yield 使用浅析](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
  - [生成器](http://sebug.net/paper/books/dive-into-python3/generators.html#generators)
  - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
@@ -404,12 +408,11 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 ***
 ##==标准库==
 ```
-	如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
-	做 web，读 BaseHTTPServer、SimpleHTTPServer 和 CGIHTTPServer，读 cgi/cgitb，自己随意写框架，读cookielib，读 wsgiref，这时候自己写一个简便的 web framework 就 so easy 了，老板再也不担心你写 web 了，选择 flask/web.py/django/pyramid 都心中有数了。因为走的是 web 的路，所以难免要调用一下别人的 api，搞懂一下 httplib/urllib/urllib/urlparse。
-	引自：赖勇浩[http://laiyonghao.com/]
+  如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
+  做 web，读 BaseHTTPServer、SimpleHTTPServer 和 CGIHTTPServer，读 cgi/cgitb，自己随意写框架，读cookielib，读 wsgiref，这时候自己写一个简便的 web framework 就 so easy 了，老板再也不担心你写 web 了，选择 flask/web.py/django/pyramid 都心中有数了。因为走的是 web 的路，所以难免要调用一下别人的 api，搞懂一下 httplib/urllib/urllib/urlparse。
+   引自：赖勇浩[http://laiyonghao.com/]
 ```
 
-- [走马观花](http://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html)
 - [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
 
 ---
@@ -763,7 +766,6 @@ Set-Cookie: vienna=finger
 ---
 #####urlparse & urllib & urllib2
 >  **一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成**。
-![如图](./Data/http1.png)
  HTTP响应也由三个部分组成，分别是：状态行、消息报头、响应正文。
  - [爬虫教程](http://blog.csdn.net/column/details/why-bug.html)
 
@@ -831,16 +833,25 @@ Set-Cookie: vienna=finger
 ---
 #####sys
 
-
 ---
-#####socket
- - [python网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
+#####SocketServer & SimpleHTTPServer & etc.
+> `python -m SimpleHttpServer 8000` 可以在当前文件夹下创建一个HTTP Server，局域网内可以用来共享文件。
+
+ - [非常简单的Python HTTP服务](http://coolshell.cn/articles/1480.html)
+ - [python 网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
  - [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
 
 ---
-#####select (synchronous I/O multiplexing)
-- [select I/O复用模型（一）](http://blog.csdn.net/orangleliu/article/details/8832708)
+#####select & epoll
+> **异步管理多个 socket 连接，提高并发量。**
+select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
+当 event 可读时为奇数，可写时为偶数。边缘触发下被注册 socket 的 event 只被关注一次，需要一次完成 event 直到 socket.error 发生。
+水平触发模式常被用在移植使用select或者poll机制的应用程序时，而边沿触发模式可以用在当程序员不需要或不想要操作系统协助管理event状态时。
+
+- [关于C10K、异步回调、协程、同步阻塞](http://rango.swoole.com/archives/381)
 - [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
+- [Python中使用epoll开发服务端程序](http://www.oschina.net/question/54100_8940)
+- How To Use Linux epoll with Python [英文](http://scotdoyle.com/python-epoll-howto.html) & [译文](http://devres.zoomquiet.io/data/20100927213110/index.html)
 
 ---
 ***
