@@ -1,5 +1,6 @@
 #Python(2&3) Learning
 ***
+我是人肉搜索机器 …… 待学列表而已
 
 ---
 
@@ -413,6 +414,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
    引自：赖勇浩[http://laiyonghao.com/]
 ```
 
+- [Python(2.0) Standard Library](http://wiki.woodpecker.org.cn/moin/PythonStandardLib/)
+- [中文目录……](https://python-documentation-cn.readthedocs.org/en/latest/library/index.html)
 - [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
 
 ---
