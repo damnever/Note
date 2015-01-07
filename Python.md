@@ -43,6 +43,8 @@
  - [Python 书籍大全](http://www.pythontip.com/study/share_yunpan)
  - [Python 日报](http://py.memect.com/)
  - [码农IO Python 精选](http://baoz.me/446252)
+ - [python 模块文档汇总](http://automationtesting.sinaapp.com/blog/python_modules)
+ - [脚本学堂](http://www.jbxue.com/jb/python/)
 
 ---
 ***
@@ -340,7 +342,25 @@ func = @decorator(func)
 ---
 #####偏函数 (partial)
 >  **当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
-创建偏函数时，要从**右到左固定参数**，就是说，对于函数f(a1, a2, a3)，可以固定a3，也可以固定a3和a2，也可以固定a3，a2和a1，但不要跳着固定，比如只固定a1和a3，把a2漏下了
+固定参数时，若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数。
+```
+>>> def f(a, b, c):
+...     print 'a={}, b={}, c={}'.format(a, b, c)
+...
+>>> f(1, 2, 3)
+a=1, b=2, c=3
+>>> import functools
+>>> ff = functools.partial(f, a=1, c=3); ff(2) # 不能跳着固定
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: f() got multiple values for keyword argument 'a'
+>>> ff = functools.partial(f, b=2, c=3); ff(1)
+a=1, b=2, c=3
+>>> ff = functools.partial(f, 1, c=3); ff(2)
+a=1, b=2, c=3
+>>> ff = functools.partial(f, 1); ff(2, 3)
+a=1, b=2, c=3
+```
 
 ---
 #####@classmethod @staticmethod
@@ -417,8 +437,12 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 ```
 
 - [Python(2.0) Standard Library](http://wiki.woodpecker.org.cn/moin/PythonStandardLib/)
-- [中文目录……](https://python-documentation-cn.readthedocs.org/en/latest/library/index.html)
+- [不完全译版](https://python-documentation-cn.readthedocs.org/en/latest/library/index.html)
+- [德云社区不完全译版](http://digitser.net/python/2.7.8/zh-CN/library/index.html)
+- [又一刚开始译版](http://python.usyiyi.cn/python_278/library/index.html)
+- [一些模块](http://automationtesting.sinaapp.com/blog/category/python_module)
 - [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
+- [The Standard Python Library](http://effbot.org/librarybook/) 又是En
 
 ---
 #####unittest & doctest
@@ -859,6 +883,12 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 - How To Use Linux epoll with Python [英文](http://scotdoyle.com/python-epoll-howto.html) & [译文](http://devres.zoomquiet.io/data/20100927213110/index.html)
 
 ---
+#####asyncore & asynchat
+> 异步 socket 服务客户端和服务器的基础架构。
+
+- [asyncore 文档翻译](http://automationtesting.sinaapp.com/blog/m_asyncore)
+- [asynchat 文档翻译](http://automationtesting.sinaapp.com/blog/m_asynchat)
+
 ***
 ##==Web 开发==
  - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
