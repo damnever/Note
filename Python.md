@@ -8,7 +8,7 @@
 
 ---
 ***
-##==The Zen of Python==
+##The Zen of Python
 -- by Tim Peters
 
 	Beautiful is better than ugly.
@@ -34,8 +34,7 @@
 [禅译](http://wiki.woodpecker.org.cn/moin/PythonZen)
 
 ---
-
-##==资源列表==
+##资源列表
  - [官方文档](https://docs.python.org/3.4/)
  - [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
  - [Popular Python recipes](http://code.activestate.com/recipes/langs/python/)
@@ -44,32 +43,33 @@
  - [Python 日报](http://py.memect.com/)
  - [码农IO Python 精选](http://baoz.me/446252)
  - [python 模块文档汇总](http://automationtesting.sinaapp.com/blog/python_modules)
- - [脚本学堂](http://www.jbxue.com/jb/python/)
+ - [Top of 2014](http://pycoders.com/2014/)
 
 ---
 ***
-##==编码==
+##编码
 #####规范
  - [PEP-0008](http://www.Python.org/dev/peps/pep-0008/) & [中文](https://code.google.com/p/zhong-wiki/wiki/PEP8)
  - [Google Python 风格指南](http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/)
 
 ---
-#####技巧
- - [符合语言习惯的 Python 编程](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
- - [10 个常见错误](http://blog.jobbole.com/68256/)
- - [30 个小技巧](http://blog.jobbole.com/63320/)
- - [Python 语言特性和技巧](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
+#####调试
+ - [pdb](https://docs.python.org/2/library/pdb.html)
+ - [logging](https://docs.python.org/2/library/logging.html)
+ - [doctest](https://docs.python.org/2/library/doctest.html)
+ - [unittest](https://docs.python.org/2/library/unittest.html)
 
 ---
-#####调试
-- [pdb](https://docs.python.org/2/library/pdb.html)
-- [logging](https://docs.python.org/2/library/logging.html)
-- [doctest](https://docs.python.org/2/library/doctest.html)
-- [unittest](https://docs.python.org/2/library/unittest.html)
+##Python 技巧
+ - [符合语言习惯的 Python 编程 @xiaocong](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
+ - [Python 高级编程 @Dongweiming](http://dongweiming.github.io/Expert-Python/)
+ - [10 个常见错误](http://blog.jobbole.com/68256/)
+ - [30 Python Language Features and Tricks You May Not Know About](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
+
 
 ---
 ***
-##==正则表达式==
+##正则表达式
 > **方法:**
  - match(): 匹配字符串开始位置。(只匹配开头，有且一个)
  - search(): 扫描字符串,找到第一个位置。(匹配第一次出现的，有且一个)
@@ -99,13 +99,12 @@
 ['ABc', 'Dxc']
 ```
 
- - [正则表达式指南](http://blog.jobbole.com/75188/)
+ - [Python正则表达式操作指南](http://wiki.ubuntu.org.cn/Python%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97)
  - [高级正则表达式](http://blog.jobbole.com/65605/)
- - [正则表达式的 7 个使用范例](http://blog.jobbole.com/74844/)
 
 ---
 ***
-##==援疑质理==
+##援疑质理
 #####其它
 - [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
 - [技能点扫盲](http://www.douban.com/group/topic/28872729/)
@@ -121,15 +120,24 @@
 
 ---
 #####编码和解码
-> str 类型的其实是字节 (Python2)，unicode 才是我们理解中的字符
-**规则：字节用来解码，字符用来编码**
+> str 类型在 Python2 中是ASCII码，Python 3 中为 unicode。
+> **规则：unicode 作为中间态用来 encode，可以 decode 成 unicode.**
+> `from __future__ import unicode_literals` Python 3 中str是unicode。
 ```
 >>> s = '中文'
->>> s; len(s)
-'\xe4\xb8\xad\xe6\x96\x87' 6
+>>> s; len(s); type(s)
+'\xe4\xb8\xad\xe6\x96\x87'
+6
+<type 'str'>
 >>> us = s.decode('utf-8')
->>> us; len(us)
-u'\u4e2d\u6587' 2
+>>> us; len(us); type(us)
+u'\u4e2d\u6587'
+2
+<type 'unicode'>
+>>> from __future__ import unicode_literals # Python 3的特性
+>>> s = '中文'; s; len(s)
+u'\u4e2d\u6587'
+2
 ```
 
 ---
