@@ -12,6 +12,10 @@
     *   [调试](#code-debug)
 *   [Python 技巧](#python-trick)
 *   [正则表达式](#python-regex)
+    *   [概览](#regex-overview)
+    *   [方法](#regex-method)
+    *   [模式功能](#regex-pattern)
+    *   [编译标志](#regex-flag)
 *   [援疑质理](#faq)
     *   [其它](#faq-other)
     *   [解释器](#faq-interpreter)
@@ -132,23 +136,52 @@
 ***
 <h2 id="python-regex" style="color:#c0392b;">正则表达式</h2>
 
-> **方法:** （多使用编译对象 compile）
+<h3 id="regex-overview" style="color:#d35400;">概览</h3>
+
+> ![](./data/regex.png)
+
+<h3 id="regex-method" style="color:#d35400;">方法</h3>
+
+> 多使用编译对象 compile.
  - match(): 在字符串刚开始的位置匹配。(只匹配开头，有且一个)
  - search(): 扫描字符串,找到一个为止。(匹配第一次出现的，有且一个)
  - findall(): 找到全部匹配,以列表返回。
  - finditer(): 找到全部匹配,以迭代器返回
- - group(): 返回匹配的完整字符串;可接收多个参数,返回指定序号的分组。
+ - group(): 返回匹配的完整字符串;可接收多个参数,返回一个包含那些组所对应值的元组。
  - start(): 匹配的开始位置; 同样能接收分组序号。和 group() 一样,序号 0 表示整体匹配结果。
  - end(): 匹配的结束位置； 同上。
  - span(): 包含起始、结束位置的元组； 同上。
- - groups(): 返回分组信息。
+ - groups(): 返回所有分组信息，从第一组开始。
  - groupdict(): 返回命名分组信息
  - split(): 用 pattern 做分隔符切割字符串。如果用 "(pattern)",那么分隔符也会返回。
- - sub(): 替换子子串。可指定替换次数。sub(pattern, new, s, counts)。
+ - sub(): 替换子串。缺省次数是0表示替换所有的匹配。sub(pattern, new, s, counts)。
  - subn(): 和 sub() 差不多,不过返回 "(新字符串,替换次数)",可以将替换字符串改成函数,以便替换成不同的结果。
+```
+## 空匹配只有在它们没有紧挨着前一个匹配时才会被替换掉；‘p’后面的空匹配没被替换
+>>> p = re.compile('p*')
+>>> p.sub('-', 'abpd')
+'-a-b-d-'
+## 逆向引用，可以在替换后的字符串中插入原始文本的一部分
+## \1 表示匹配到的分组 1，①或者用\g<1>引用分组；②也可以通过 (?P<name>...) 指定分组名，然后通过 \g<name> 来引用匹配到的分组
+>>> p = re.compile('section{ ( [^}]* ) }', re.VERBOSE) # 忽略空格
+>>> p.sub(r'subsection{\1}', 'section{First} section{Second}')
+'subsection{First} subsection{Second}'
+## 使用函数作为替换规则；每次调用时，函数会被传入一个 `MatchObject` 的对象作为参数
+>>> hex_replace = lambda match: hex(int(match.group()))
+>>> p.sub(hex_replace, 'call 65490 for printing, 49152 for user code.')
+'call 0xffd2 for printing, 0xc000 for user code.'
+```
 
-> **编译标志:**
->
+<h3 id="regex-pattern" style="color:#d35400;">模式功能</h3>
+
+> 
+- 前向界定符
+  + (?=...) # 前向肯定符，当前位置有匹配时成功，否则失败，不再进行后续匹配。
+  + (?!...) # 前向否定符，当前位置不匹配时成功，尝试模式的的其余部分，否则失败。
+
+<h3 id="regex-flag" style="color:#d35400;">编译标志</h3>
+
+> 
 |标志 | 含义|
 |----|----|
 |DOTALL, S	|使 '.' 特殊字符匹配所有任意字符 (包括换行符) |
@@ -158,6 +191,7 @@
 |VERBOSE, X	|使表达式易读，忽略空格，注释等|
 |UNICODE, U |使 \w、\W、\b、\B, \d、\D、\s、\S 从属 Unicode 字符特性数据库|
 ```
+# 使用编译标识的另一种方法 (?iLmsux)
 >>> re.findall(r"(?i)[a-z]+", "123ABc123Dxc")
 ['ABc', 'Dxc']
 >>> re.findall(r"[a-z]+", "123ABc123Dxc", re.I)
@@ -336,7 +370,7 @@ attribute:  __dict__
 
 > **上下文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文环境。即便代码块发生异常,清理操作也会被执行。**
  + `__enter__`: 初始化环境,返回上下文对象。
- + `__exit__`: 执行行清理操作。返回 True 时,将阻止异常向外传递。
+ + `__exit__`: 执行清理操作。返回 True 时,将阻止异常向外传递。
 
 > 可以在一个 with 语句中使用用多个上下文对象,依次按照 *FILO* 顺序调用。
 
@@ -514,6 +548,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 ---
 <h3 id="faq-performance" style="color:#d35400;">性能和内存管理</h3>
 
+ + 大量字符串拼接，使用 `''.join(list)` 而不是 `str + str`
  + 对于频繁增删元素的大大型列表,应该考虑用用链表等数据结构代替。
  + 如果需要创建 "海量" 对象实例,优先考虑 `__slots__`(**`__slots__` 属性会阻止虚拟机创建实例 `__dict__`,仅为名单中的指定成员分配内存空间。这有助于减少内存占用,提升执行行性能,尤其是在需要大量此类对象的时候。**) 。其派生类同样必须用` __slots__` 为新增字段分配存储空间 (即便是空 `__slots__ = []`),否则依然会创建 __dict__,反而导致更慢的执行行效率。。
  - [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
