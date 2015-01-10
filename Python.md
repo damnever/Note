@@ -1,7 +1,7 @@
 <h1 style="color:#2bb24c;">Python(2&3) Learning</h1>
 
 ***
-我是人肉搜索机器 …… 待学列表而已
+待学列表而已 ... 悲哉！
 
 ---
 
@@ -157,7 +157,7 @@
  - split(): 用 pattern 做分隔符切割字符串。如果用 "(pattern)",那么分隔符也会返回。
  - sub(): 替换子串。缺省次数是0表示替换所有的匹配。sub(pattern, new, s, counts)。
  - subn(): 和 sub() 差不多,不过返回 "(新字符串,替换次数)",可以将替换字符串改成函数,以便替换成不同的结果。
-```
+```Python
 ## 空匹配只有在它们没有紧挨着前一个匹配时才会被替换掉；‘p’后面的空匹配没被替换
 >>> p = re.compile('p*')
 >>> p.sub('-', 'abpd')
@@ -194,7 +194,7 @@
 |MULTILINE, M	|多行匹配，影响 ^ 和 $|
 |VERBOSE, X	|使表达式易读，忽略空格，注释等|
 |UNICODE, U |使 \w、\W、\b、\B, \d、\D、\s、\S 从属 Unicode 字符特性数据库|
-```
+```Python
 # 使用编译标识的另一种方法 (?iLmsux)
 >>> re.findall(r"(?i)[a-z]+", "123ABc123Dxc")
 ['ABc', 'Dxc']
@@ -231,7 +231,7 @@
 > str 类型在 Python2 中是ASCII码，Python 3 中为 unicode。
 > **规则：unicode 作为中间态用来 encode，可以 decode 成 unicode.**
 > `from __future__ import unicode_literals` Python 3 中str是unicode。
-```
+```Python
 >>> s = '中文'
 >>> s; len(s); type(s)
 '\xe4\xb8\xad\xe6\x96\x87'
@@ -262,12 +262,43 @@ u'\u4e2d\u6587'
 
 > **用对象作为函数中作为默认参数**
 默认参数在函数被调用的时候仅仅被评估一次，以后都会使用第一次的评估结果。
+
 - [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
 
 ---
 <h3 id="faq-format" style="color:#d35400;">格式化</h3>
 
- - [关于格式化规范的迷你语言](https://docs.python.org/3.1/library/string.html#format-specification-mini-language)
+> `'{}, {}'.format('a', 'b')` 2.7+ only
+```Python
+>>> class Test:
+...     def __str__(self):
+...         return '__str__'
+...     def __repr__(self):
+...         return '__repr__'
+... 
+>>> 'str: {0!s}'.format(Test())       ## 调用了 str()
+'str: __str__'
+>>> 'repr: {key!r}'.format(key=Test())      ## 调用了 repr()
+'repr: __repr__'
+>>> '{2}, {1}, {0}'.format(*args)     ## 解包，list，dict
+'3, 2, 1'
+>>> import os; 'OS name: {.name}'.format(os)   ## 访问属性
+'OS name: posix'
+>>> 'One:{lst[0]}, Two:{lst[1]}, Three:{lst[2]}'.format(lst=[1, 2, 3])  ## 访问索引
+'One:1, Two:2, Three:3'
+>>> '[{0:<10}][{1:*^20}][{2:>10}]'.format('left', 'center|fill', 'right')   ## 对齐，填充
+'[left      ][****center|fill*****][     right]'
+>>> 'int:{0:d}, hex:{0:x}, oct:{0:o}, bin:{0:b}'.format(23) ## 进制转换
+'int:23, hex:17, oct:27, bin:10111'
+>>> 'int:{0:d}, hex:{0:#x}, oct:{0:#o}, bin:{0:#b}'.format(23) ## 显示前缀
+'int:23, hex:0x17, oct:0o27, bin:0b10111'
+>>> '{:,}'.format(1234567890)   ## 把‘,’作为千位分隔符
+'1,234,567,890'
+>>> import datetime; 'Now: {0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())  ##格式化时间
+'Now: 2015-01-10 21:04:42'
+```
+
+ - [关于格式化规范的迷你语言](http://digitser.net/python/2.7.8/zh-CN/library/string.html#format-string-syntax)
 
 ---
 <h3 id="faq-file" style="color:#d35400;">文件</h3>
@@ -302,7 +333,7 @@ u'\u4e2d\u6587'
 
 > **`__getattr__` (访问不存在的成员)，`__setattr__` (对任何成员的赋值操作), `__delattr__` (删除成员操作), `__getattribute__` (访问任何存在或不存在的成员,包括 __dict__)。**
 不要在这几个方法里直接访问对象成员,也不要用 hasattr/getattr/setattr/delattr 函数,因为它们会被再次拦截,形成无限循环。正确的做法是直接操作 `__dict__`。而 `__getattribute__` 连 `__dict__` 都会拦截,只能用基类的 `__getattribute__` 返回结果。
-```
+```Python
 >>> class A(object):
 ...     def __init__(self, x):
 ...         self.x = x
@@ -385,7 +416,7 @@ attribute:  __dict__
 
 >  **当函数离开创建环境后，依然持有其上下文状态。**
 一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
-```
+```Python
 >>> def p_l(z):
 ...     def f():
 ...         print z
@@ -434,7 +465,7 @@ attribute:  __dict__
 > **若需要增强某函数的功能，但又不希望修改该函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。**
 装饰器不一定非得是个函数返回包装对象,也可以是个类,通过 `__call__` 完成目标调用。
 装饰器不管被装饰函数有没有参数，都应该有接收参数的功能，这样才能完整的包装而不丢失信息。
-```
+```Python
 @decorator
 def func():
     pass
@@ -451,7 +482,7 @@ func = @decorator(func)
 <h3 id="faq-property" style="color:#d35400;">属性方法 @property</h3>
 
 > **将方法当成属性用**
-```
+```Python
 >>> class Name(object):
 ...     @property
 ...     def name(self):
@@ -471,7 +502,7 @@ func = @decorator(func)
 
 >  **当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
 固定参数时，若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数。
-```
+```Python
 >>> def f(a, b, c):
 ...     print 'a={}, b={}, c={}'.format(a, b, c)
 ...
@@ -604,7 +635,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 <h3 id="lib-collections" style="color:#d35400;">collections [Counter, deque, namedtuple, defaultdict, OrderedDict]</h3>
 
 > `Counter([iterable-or-mapping])` # 简单的计数器，dict 的一个子类，Key 不存在用返回0来代替 KeyError。并且支持集合形式的运算。
-```
+```Python
 >>> cnt = collections.Counter()
 >>> for word in ['red', 'blue', 'red', 'green', 'blue', 'blue']:
 ...     cnt[word] += 1
@@ -620,7 +651,7 @@ Counter({'blue': 3, 'red': 2, 'green': 1})
 ```
 
 > **`namedtuple(typename, field_names[, verbose=False][, rename=False])`** # 具备tuple的不变性，又可以根据属性来引用。用来表示数据表也很合适。
-```
+```Python
 >>> Point = collections.namedtuple('Point', ['x', 'y'])
 >>> p = Point(1, 2)
 >>> p.x
@@ -639,7 +670,7 @@ Point(x=11, y=22)
 ```
 
 > **`deque([iterable[, maxlen]])`** # 高效实现插入和删除操作的双向列表，适合用于队列和栈。
-```
+```Python
 >>> q = collections.deque(range(5))
 >>> q.append(5)  # deque([0, 1, 2, 3, 4, 5])
 >>> q.appendleft(-1)  # deque([-1, 0, 1, 2, 3, 4, 5])
@@ -657,7 +688,7 @@ Point(x=11, y=22)
 ```
 
 > `defaultdict([default_factory[, ...]])` # 当 dict 的 key 不存在时，返回一个默认值。
-```
+```Python
 >>> s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
 >>> d = collections.defaultdict(list)  # 传入的参数为 dict 值的缺省类型，可以是函数
 >>> for k, v in s:
@@ -670,7 +701,7 @@ Point(x=11, y=22)
 ```
 
 > `OrderedDict([items])` # 保持 dict 元素的添加顺序。
-```
+```Python
 >>> od = collections.OrderedDict()
 >>> od['a'] = 1; od['b'] = 2; od['c'] = 3; od
 OrderedDict([('a', 1), ('b', 2), ('c', 3)])
@@ -704,7 +735,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
  - **DST**（Daylight Saving Time）即夏令时的意思。
  - [time模块详解](http://bbs.fishc.com/thread-51326-1-1.html)
  - [Python 时间和日期](http://www.yiibai.com/python/python_date_time.html#python_date_time)
-```
+```Python
 # clock: 返回当前进程消耗的CPU时间 (秒)。
 # sleep: 暂停进程 (秒,可以是小小数,以便设置毫秒、微秒级暂停)。
 >>> time.clock()
@@ -742,7 +773,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 <h3 id="lib-encryption" style="color:#d35400;">hashlib & hmac & md5 & sha</h3>
 
 > **++hashlib++** 散列算法(支持md5 sha1 sha224 sha256 sha384 sha512)
-```
+```Python
 # 创建 md5 加密对象
 >>> m = hashlib.md5()
 # 加密文本，可追加
@@ -760,7 +791,7 @@ bb649c83dd1ea5c9d9dec9a18df0ffe9
 
 
 > **++hmac++** 签名(认证)加密算法(需要秘钥)
-```
+```Python
 # 创建一个新的 hmac 对象，new(key[, msg[, digestmod]])
 >>> m1 = hmac.new("MyKey", "I'm young.")
 # 输出被 hmac 加密后的十六进制数据。digest()非十六进制
@@ -784,7 +815,7 @@ aa0fb38cbe017bdb388fbfb9f9da1645
 ```
 
 > **++md5++**
-```
+```Python
 >>> m = md5.new()
 >>> m.update("Hello,")
 >>> m.update(" world!")
@@ -797,7 +828,7 @@ aa0fb38cbe017bdb388fbfb9f9da1645
 ```
 
 > **++sha++** sha1
-```
+```Python
 >>> s = sha.new()
 >>> s.update("Hello,")
 >>> s.update(" world!")
@@ -818,7 +849,7 @@ aa0fb38cbe017bdb388fbfb9f9da1645
   + 数组（在方括号中）
   + 对象（在花括号中）
   + null
-```
+```Python
 # Neither of these calls raises an exception, but the results are not valid JSON 【Infinity, -Infinity, NaN】
 >>> json.dumps(float('-inf'))
 '-Infinity'
@@ -837,7 +868,7 @@ nan
 
 > **++base64++** Base64编码会把3字节的二进制数据编码为4字节的文本数据，长度增加33%
 编码后的文本数据为 4 的倍数。若被编码的二进制数据不是 3 的倍数，会剩下 1～2个字节，base64用 \x00 字节在末尾补足后，再在编码的末尾加上 1~2 个 '='，表示补了多少字节，解码的时候自动去掉。
-```
+```Python
 >>> base64.b64encode('Hello, world!')
 'SGVsbG8sIHdvcmxkIQ=='
 >>> base64.b64decode('SGVsbG8sIHdvcmxkIQ==')
@@ -860,7 +891,7 @@ nan
  - `uuid4()` # 由伪随机数得到，有一定的重复概率。
  - `uuid5(namespace, name)` # 基于命名空间和名字的 SHA-1 hash。
  - `bytes/int/hex` # 把生成的 uuid 转化成相应的格式。
-```
+```Python
 >>> x = uuid.UUID('{00010203-0405-0607-0809-0a0b0c0d0e0f}')
 >>> str(x)
 '00010203-0405-0607-0809-0a0b0c0d0e0f'
@@ -892,7 +923,7 @@ threading.local() 创建的对象会利用 thread-local storage (TLS) 为每个�
 <h3 id="lib-email" style="color:#d35400;">smtplib & email & poplib</h3>
 
  - email(mime,parser,header,utils...) 主要用于构造/解析邮件
-```
+```Python
 Message          # 继承关系 #
     MIMEBase
         MIMEMultipart
@@ -910,7 +941,7 @@ Message          # 继承关系 #
 > **++Cookie++**
  - `BaseCookie([input])` # 类 dict 对象，存储并管理着称为 Morsel 的 cookie 值集合。
  - `SimpleCookie([input])` # 继承于 BaseCookie (另外两个子类SerialCookie/SmartCookie因安全问题已不赞成使用)。
-```
+```Python
 >>> c = Cookie.SimpleCookie()
 >>> c['number'] = 80; c['number'].value
 '80'
@@ -954,8 +985,8 @@ Set-Cookie: vienna=finger
 
 > **++urllib++**
  - `urlopen(url[, data[, proxies]])` # 创建一个表示远程 url 的类文件对象，然后像本地文件一样操作这个类文件对象来获取远程数据。参数data表示以post方式提交到 url 的数据。
-```
- >>> doc = urllib.urlopen("http://www.baidu.com/")
+```Python
+>>> doc = urllib.urlopen("http://www.baidu.com/")
 >>> print doc.info()
 ...<消息报头>...
 >>> doc.info().getheader('Content-Type')
@@ -968,7 +999,7 @@ Set-Cookie: vienna=finger
  - `unquote(string)` # 对字符串进行解码。
  - `unquote_plus(string)` # 同 unquote，但是将 + 替换成空格。
  - `urlencode(query[, doseq])` # 将 dict 或者包含两个元素的元组列表转换成url参数。如果某个键对应的值是一个序列，将 doseq 设置为 True，会生成用 & 分割开的多个值对应同一个键的形式。
-```
+```Python
  >>> urllib.urlencode({"name": ["user", "user2"], "age": 20})
 'age=20&name=%5B%27user%27%2C+%27user2%27%5D'
 >>> urllib.urlencode({"name": ["user", "user2"], "age": 20}, False)
@@ -977,12 +1008,12 @@ Set-Cookie: vienna=finger
 'age=20&name=user&name=user2'
 ```
  - `pathname2url(path)` # 将本地路径转换成url路径，返回值已用quote编码。
-```
+```Python
  >>> urllib.pathname2url("D:\home\lastd\Documents")
 'D%3A%5Chome%5Clastd%5CDocuments' # 不再被解析成路径
 ```
  - `url2pathname(path)` # 将 url 路径转换成本地路径，并用 unquote 解码。
-```
+```Python
  >>> urllib.url2pathname("D%3A%5Chome%5Clastd%5CDocuments")
 'D:\\home\\lastd\\Documents'   # \ 被转义, 同 /
 ```
@@ -997,7 +1028,7 @@ Set-Cookie: vienna=finger
  - `HTTPPasswordMgr()/HTTPPasswordMgrWithDefaultRealm(realm, uri, user, passwd)` # 使用一个密码管理的对象来处理 urls 和 realms 来映射用户名和密码。如果知道 realm (realm 是与验证相关联的名称或描述信息，取决于远程服务器)是什么,就能使用前者(通过add_password(realm, uri, user, passwd)设置密码)。后者(继承于前者)没有找到合适的，realm 为 None。
  - `ProxyBasicAuthHandler([password_mgr])` # 继承于(AbstractBasicAuthHandler, BaseHandler)，可选参数为一个 HTTPPasswordMgr 对象。可以用 add_password(realm,uri,user,passwd) 来代替设置密码。
  - `HTTPHandler /HTTPSHandler` # 可以打开 Debug Log，拥有对应的 *_open 方法。
-```
+```Python
 >>> hh = urllib2.HTTPHandler(debuglevel = 1)
 >>> opener = urllib2.build_opener(hh)
 >>> opener.open("http://www.baidu.com/")
@@ -1096,7 +1127,7 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 
 > **++模板++** (tornado.template)
  - 使用
-```
+```Python
 # 设置本地变量，执行函数
 {% set *x* = *y* %}
 {% apply *function* %} ... {% end %}    # 有待研究
