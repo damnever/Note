@@ -1089,13 +1089,16 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 ---
 ***
 <h2 id="flask" style="color:#c0392b;">Flask</h2>
-<h3 id="flask-use" style="color:#d35400;">使用</h2>
+
+<h3 id="flask-use" style="color:#d35400;">使用</h3>
+
  - [教程 En](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
  - [Jinja2 官方文档 2.7](http://docs.jinkan.org/docs/jinja2)
  - [Flask 官方文档 0.10.1](https://dormousehole.readthedocs.org/en/latest/)
 
 ---
 <h3 id="flask-plugin" style="color:#d35400;">插件扩展</h3>
+
  - [Flask-SQLALchemy](http://docs.jinkan.org/docs/flask-sqlalchemy/) or [SQLALchemy](http://docs.jinkan.org/docs/flask/patterns/sqlalchemy.html)
  - Flask-WTF 处理 Web 表单 [英文-0.95](https://flask-wtf.readthedocs.org/en/latest/quickstart.html) or [中文-0.93](http://docs.jinkan.org/docs/flask-wtf/form.html)
  - [Flask-Babel  i18n&l10n 支持](https://pythonhosted.org/Flask-Babel/)
