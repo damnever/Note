@@ -1,14 +1,69 @@
-#Python(2&3) Learning
+<h1 style="color:#2bb24c;">Python(2&3) Learning</h1>
+
 ***
 我是人肉搜索机器 …… 待学列表而已
 
 ---
 
-[TOC]
+*   [The Zen of Python](#python-zen)
+*   [资源列表](#python-resource)
+*   [编码](#python-code)
+    *   [规范](#code-standard)
+    *   [调试](#code-debug)
+*   [Python 技巧](#python-trick)
+*   [正则表达式](#python-regex)
+*   [援疑质理](#faq)
+    *   [其它](#faq-other)
+    *   [解释器](#faq-interpreter)
+    *   [编码和解码](#faq-encoding)
+    *   [可变对象和不可变对象](#faq-object)
+    *   [默认参数值](#faq-default-arg)
+    *   [格式化](#faq-format)
+    *   [文件](#faq-file)
+    *   [类](#faq-class)
+    *   [元类 (metaclass)](#faq-metaclass)
+    *   [MixIn](#faq-mixin)
+    *   [上下文与 with](#faq-with)
+    *   [闭包 (closure)](#faq-closure)
+    *   [装饰器"@" (decorator)](#faq-decorator)
+    *   [属性方法 @property](#faq-property)
+    *   [偏函数 (partial)](#faq-partial)
+    *   [@classmethod & @staticmethod](#faq-class-func)
+    *   [yield (generator)](#faq-yield)
+    *   [协程](#faq-coroutine)
+    *   [数据结构和算法](#faq-algorithm)
+    *   [性能和内存管理](#faq-performance)
+*   [标准库](#standard-library)
+    *   [unittest & doctest](#lib-test)
+    *   [collections [Counter, deque, namedtuple, defaultdict, OrderedDict]](#lib-collections)
+    *   [itertools](#lib-itertools)
+    *   [struct & array](#lib-struct)
+    *   [time & datetime](#lib-datetime)
+    *   [anydbm & shelve & pickle(cPickle)](#lib-serializable)
+    *   [hashlib & hmac & md5 & sha](#lib-encryption)
+    *   [json & base64 & uuid](#lib-json)
+    *   [threading](#lib-thread)
+    *   [smtplib & email & poplib](#lib-email)
+    *   [Cookie & cookielib](#lib-cookie)
+    *   [urlparse & urllib & urllib2](#lib-url)
+    *   [os](#lib-os)
+    *   [sys](#lib-sys)
+    *   [SocketServer & SimpleHTTPServer & etc.](#lib-socket)
+    *   [select & epoll](#lib-async-1)
+    *   [asyncore & asynchat](#lib-async-2)
+*   [Web 开发](#web-dev)
+*   [Flask](#flask)
+    *   [使用](#flask-use)
+    *   [插件扩展](#flask-plugin)
+*   [Tornado](#tornado)
+    *   [使用](#tornado-use)
+    *   [源码剖析](#tornado-source-code)
 
 ---
 ***
-##The Zen of Python
+
+<h2 id="python-zen" style="color:#c0392b;">The Zen of Python</h2>
+
 -- by Tim Peters
 
 	Beautiful is better than ugly.
@@ -34,7 +89,8 @@
 [禅译](http://wiki.woodpecker.org.cn/moin/PythonZen)
 
 ---
-##资源列表
+<h2 id="python-resource" style="color:#c0392b;">资源列表</h2>
+
  - [官方文档](https://docs.python.org/3.4/)
  - [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
  - [Popular Python recipes](http://code.activestate.com/recipes/langs/python/)
@@ -47,29 +103,35 @@
 
 ---
 ***
-##编码
-#####规范
+<h2 id="python-code" style="color:#c0392b;">编码</h2>
+
+<h3 id="code-standard" style="color:#d35400;">规范</h3>
+
  - [PEP-0008](http://www.Python.org/dev/peps/pep-0008/) & [中文](https://code.google.com/p/zhong-wiki/wiki/PEP8)
  - [Google Python 风格指南](http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/)
 
 ---
-#####调试
+<h3 id="code-debug" style="color:#d35400;">调试</h3>
+
  - [pdb](https://docs.python.org/2/library/pdb.html)
  - [logging](https://docs.python.org/2/library/logging.html)
  - [doctest](https://docs.python.org/2/library/doctest.html)
  - [unittest](https://docs.python.org/2/library/unittest.html)
 
 ---
-##Python 技巧
+<h2 id="python-trick" style="color:#c0392b;">Python 技巧</h2>
+
  - [符合语言习惯的 Python 编程 @xiaocong](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
  - [Python 高级编程 @Dongweiming](http://dongweiming.github.io/Expert-Python/)
  - [10 个常见错误](http://blog.jobbole.com/68256/)
  - [30 Python Language Features and Tricks You May Not Know About](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
+ - [Hidden features of Python](http://stackoverflow.com/questions/101268/hidden-features-of-python)
 
 
 ---
 ***
-##正则表达式
+<h2 id="python-regex" style="color:#c0392b;">正则表达式</h2>
+
 > **方法:** （多使用编译对象 compile）
  - match(): 在字符串刚开始的位置匹配。(只匹配开头，有且一个)
  - search(): 扫描字符串,找到一个为止。(匹配第一次出现的，有且一个)
@@ -107,13 +169,17 @@
 
 ---
 ***
-##援疑质理
-#####其它
+<h2 id="faq" style="color:#c0392b;">援疑质理</h2>
+
+<h3 id="faq-other" style="color:#d35400;">其它</h3>
+
 - [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
 - [技能点扫盲](http://www.douban.com/group/topic/28872729/)
 - [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
 
-#####解释器
+---
+<h3 id="faq-interpreter" style="color:#d35400;">解释器</h3>
+
  - [Introduction to the Python Interpreter](http://akaptur.github.io/blog/categories/python-internals/)
  - 中文翻译
   - [函数对象](http://blog.jobbole.com/55327/)
@@ -122,7 +188,8 @@
   - [动态语言](http://blog.jobbole.com/57381/)
 
 ---
-#####编码和解码
+<h3 id="faq-encoding" style="color:#d35400;">编码和解码</h3>
+
 > str 类型在 Python2 中是ASCII码，Python 3 中为 unicode。
 > **规则：unicode 作为中间态用来 encode，可以 decode 成 unicode.**
 > `from __future__ import unicode_literals` Python 3 中str是unicode。
@@ -144,7 +211,8 @@ u'\u4e2d\u6587'
 ```
 
 ---
-#####可变对象和不可变对象
+<h3 id="faq-object" style="color:#d35400;">可变对象和不可变对象</h3>
+
 >**引用和对象**：对象是内存中储存数据的实体，引用指向对象。`a = 1; b = 'str'`中`1`和`'str'`是对象， `a`和`b`是对其的引用，相当于一个标示。
 
  - 可变数据对象(*mutable* object)【列表，字典，字节数组】，可变对象的更改会直接影响原对象。list 的切片操作可以看做深拷贝，但重新生成一个对象。
@@ -152,23 +220,27 @@ u'\u4e2d\u6587'
 
 
 ---
-#####默认参数值
+<h3 id="faq-default-arg" style="color:#d35400;">默认参数值</h3>
+
 > **用对象作为函数中作为默认参数**
 默认参数在函数被调用的时候仅仅被评估一次，以后都会使用第一次的评估结果。
 - [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
 
 ---
-#####格式化
+<h3 id="faq-format" style="color:#d35400;">格式化</h3>
+
  - [关于格式化规范的迷你语言](https://docs.python.org/3.1/library/string.html#format-specification-mini-language)
 
 ---
-#####文件
+<h3 id="faq-file" style="color:#d35400;">文件</h3>
+
 > 如果要把数据写到磁盘上,除调用 `flush()` 外,还得用 `sync()`,以确保数据从系统缓冲区同步到磁盘。`close()` 总是会调用用这两个方法。
 读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
 通常建议用迭代器或 `xreadlines()` 代替 `readlines()`,后者默认一次性读取整个文件。
 
 ---
-#####类
+<h3 id="faq-class" style="color:#d35400;">类</h3>
+
 > **实例方法的特殊性**: 当用实例调用时,它是个 bound method,动态绑定到对象实例。而当用类型调用时,是 unbound method,必须显式传递 self 参数。
 
 > **字段 (Field) 和 属性 (Property) 是不同的。**
@@ -237,7 +309,8 @@ attribute:  __dict__
 - [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 
 ---
-#####元类 (metaclass)
+<h3 id="faq-metaclass" style="color:#d35400;">元类 (metaclass)</h3>
+
 > **类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
 当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
 **`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ -> type`**
@@ -247,7 +320,8 @@ attribute:  __dict__
  - [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba000)
 
 ---
-#####MixIn
+<h3 id="faq-mixin" style="color:#d35400;">MixIn</h3>
+
 > 一种特殊的多继承，在不改变原对象的情况下对其进行扩展。
 1. You want to provide a lot of optional features for a class.
 2. You want to use one particular feature in a lot of different classes.
@@ -258,7 +332,8 @@ attribute:  __dict__
 - [Mixins considered harmful/2](http://www.artima.com/weblogs/viewpost.jsp?thread=246483)
 
 ---
-#####上下文与 with
+<h3 id="faq-with" style="color:#d35400;">上下文与 with</h3>
+
 > **上下文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文环境。即便代码块发生异常,清理操作也会被执行。**
  + `__enter__`: 初始化环境,返回上下文对象。
  + `__exit__`: 执行行清理操作。返回 True 时,将阻止异常向外传递。
@@ -268,7 +343,8 @@ attribute:  __dict__
  - [理解 Python 的 with 语句](http://python.42qu.com/11155501)
 
 ---
-#####闭包 (closure)
+<h3 id="faq-closure" style="color:#d35400;">闭包 (closure)</h3>
+
 >  **当函数离开创建环境后，依然持有其上下文状态。**
 一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
 ```
@@ -315,7 +391,8 @@ attribute:  __dict__
  - [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
 
 ---
-#####装饰器"@" (decorator)
+<h3 id="faq-decorator" style="color:#d35400;">装饰器"@" (decorator)</h3>
+
 > **若需要增强某函数的功能，但又不希望修改该函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。**
 装饰器不一定非得是个函数返回包装对象,也可以是个类,通过 `__call__` 完成目标调用。
 装饰器不管被装饰函数有没有参数，都应该有接收参数的功能，这样才能完整的包装而不丢失信息。
@@ -333,7 +410,8 @@ func = @decorator(func)
  - [Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)
 
 ---
-#####@property
+<h3 id="faq-property" style="color:#d35400;">属性方法 @property</h3>
+
 > **将方法当成属性用**
 ```
 >>> class Name(object):
@@ -351,7 +429,8 @@ func = @decorator(func)
 ```
 
 ---
-#####偏函数 (partial)
+<h3 id="faq-partial" style="color:#d35400;">偏函数 (partial)</h3>
+
 >  **当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
 固定参数时，若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数。
 ```
@@ -374,28 +453,31 @@ a=1, b=2, c=3
 ```
 
 ---
-#####@classmethod @staticmethod
+<h3 id="faq-class-func" style="color:#d35400;">@classmethod & @staticmethod</h3>
+
 - [静态方法和类方法](http://www.libaoyin.com/2013/08/06/pyhton-staticmethod-classmethod/)
 - [它们的权限](http://zhuanlan.zhihu.com/guagua/19760452)
 
 ---
-#####yield (generator)
+<h3 id="faq-yield" style="color:#d35400;">yield (generator)</h3>
 > **生成器**是可以迭代的，读取它的时候，并不把所有的值放在内存中，它是实时地生成数据。
 **yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。
 
  - [Python yield 使用浅析](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
- - [生成器](http://sebug.net/paper/books/dive-into-python3/generators.html#generators)
+ - [生成器](http://sebug.net/paper/books/dive-intoxingn-python3/generators.html#generators)
  - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
 
 ---
-#####协程
+<h3 id="faq-coroutine" style="color:#d35400;">协程</h3>
+
 > **协程(Coroutine)，又称微线程，纤程。
 子程序调用总是一个入口，一次返回，调用顺序是明确的。而协程的调用和子程序不同。协程看上去也是子程序，但执行过程中，在子程序内部可中断(不是函数调用，有点类似CPU的中断)，然后转而执行别的子程序，在适当的时候再返回来接着执行。**
 
  - [协程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000)
 
 ---
-#####数据结构和算法
+<h3 id="faq-algorithm" style="color:#d35400;">数据结构和算法</h3>
+
 > **++bisect++** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
  - 只查找可插入位置，不插入
   + `bisect(l, a)` # 查找 a 在序列 l 中的合适插入位置,默认插入以存在元素右侧。
@@ -430,7 +512,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 - [导航](http://hujiaweibujidao.github.io/python/)
 
 ---
-#####性能和内存管理
+<h3 id="faq-performance" style="color:#d35400;">性能和内存管理</h3>
+
  + 对于频繁增删元素的大大型列表,应该考虑用用链表等数据结构代替。
  + 如果需要创建 "海量" 对象实例,优先考虑 `__slots__`(**`__slots__` 属性会阻止虚拟机创建实例 `__dict__`,仅为名单中的指定成员分配内存空间。这有助于减少内存占用,提升执行行性能,尤其是在需要大量此类对象的时候。**) 。其派生类同样必须用` __slots__` 为新增字段分配存储空间 (即便是空 `__slots__ = []`),否则依然会创建 __dict__,反而导致更慢的执行行效率。。
  - [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
@@ -438,9 +521,11 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
  - [内存管理](http://www.cnblogs.com/vamei/p/3232088.html)
 
+
 ---
 ***
-##==标准库==
+<h2 id="standard-library" style="color:#c0392b;">标准库</h2>
+
 ```
   如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
   做 web，读 BaseHTTPServer、SimpleHTTPServer 和 CGIHTTPServer，读 cgi/cgitb，自己随意写框架，读cookielib，读 wsgiref，这时候自己写一个简便的 web framework 就 so easy 了，老板再也不担心你写 web 了，选择 flask/web.py/django/pyramid 都心中有数了。因为走的是 web 的路，所以难免要调用一下别人的 api，搞懂一下 httplib/urllib/urllib/urlparse。
@@ -456,7 +541,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 - [The Standard Python Library](http://effbot.org/librarybook/) 又是En
 
 ---
-#####unittest & doctest
+<h3 id="lib-test" style="color:#d35400;">unittest & doctest</h3>
+
 > **++unittest++**
  - TestCase (以test开头的方法就是测试方法)常用方法(help(unittest.TestCase)):
   - `assertEqual(first, second[, msg]) == assertEquals` # 判断两个对象是否相同
@@ -476,7 +562,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - 文档中注释代码的异常必须和自定义异常一样。
 
 ---
-#####collections [Counter, deque, namedtuple, defaultdict, OrderedDict]
+<h3 id="lib-collections" style="color:#d35400;">collections [Counter, deque, namedtuple, defaultdict, OrderedDict]</h3>
+
 > `Counter([iterable-or-mapping])` # 简单的计数器，dict 的一个子类，Key 不存在用返回0来代替 KeyError。并且支持集合形式的运算。
 ```
 >>> cnt = collections.Counter()
@@ -555,13 +642,15 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 ```
 
 ---
-#####itertools
+<h3 id="lib-itertools" style="color:#d35400;">itertools</h3>
+
 > **提供了一系列迭代器能够帮助用户轻松地使用排列、组合、笛卡尔积或其他组合结构。**
  - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
  - [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
 
 ---
-#####struct & array
+<h3 id="lib-struct" style="color:#d35400;">struct & array</h3>
+
 > struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
  - `pack(fmt, v1, v2)` # 转换成 fmt 中描述的 struct类型的二进制形式
  - `unpack(fmt, v1, v2)` # 将二进制形式的 struct 类型通过 fmt 格式转换成 Python 类型
@@ -569,7 +658,8 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 > array： 将 Python 类型的数据（二进制、序列、文件内容）转换成给定类型的 C 数组
 
 ---
-#####time & datetime
+<h3 id="lib-datetime" style="color:#d35400;">time & datetime</h3>
+
  - **时间戳（timestamp）**的方式：通常来说，时间戳表示的是从 1970 年 1 月 1 日 00:00:00 开始按秒计算的偏移量（time.gmtime(0)）此模块中的函数无法处理 1970 纪元年以前的日期和时间或太遥远的未来（处理极限取决于 C 函数库，对于 32 位系统来说，是 2038 年）。
  - **UTC**（Coordinated Universal Time，世界协调时）也叫格林威治天文时间（Greenwich Astronomical Time，格林威治标准时间: Greenwich Mean Time），是世界标准时间。在中国为 UTC+8。
  - **DST**（Daylight Saving Time）即夏令时的意思。
@@ -595,7 +685,8 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
  ```
 
 ---
-#####anydbm & shelve & pickle(cPickle)
+<h3 id="lib-serializable" style="color:#d35400;">anydbm & shelve & pickle(cPickle)</h3>
+
 > **`anydbm.open(filename[, flag[, mode]])`** # 将一个磁盘上的文件与一个“dict-like”对象关联起来，像操作字典一样。flag 参数设置对文件的操作方式 [rwc(没有则创建)n(每次都建空文件)]， mode 是 *unix 上对文件的访问权限 [0777]。
 
 > **`shelve.open(filename, flag='c', protocol=None, writeback=False)`** # 高级版 anydbm，支持在"dict-like"对象中存储任何可以被pickle序列化的对象。wirteback 参数表示将数据存储与缓存中，调用 close(其调用sync) 后才写入硬盘。
@@ -609,7 +700,8 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
  - `Unpickler(file)` #cPickle中为方法，拥有读取`load()`/ `noload()`
 
 ---
-#####hashlib & hmac & md5 & sha
+<h3 id="lib-encryption" style="color:#d35400;">hashlib & hmac & md5 & sha</h3>
+
 > **++hashlib++** 散列算法(支持md5 sha1 sha224 sha256 sha384 sha512)
 ```
 # 创建 md5 加密对象
@@ -677,7 +769,8 @@ aa0fb38cbe017bdb388fbfb9f9da1645
 ```
 
 ---
-#####json & base64 & uuid
+<h3 id="lib-json" style="color:#d35400;">json & base64 & uuid</h3>
+
 > **++json++** JavaScript Object Notation(JavaScript 对象表示法)，用于存储和交换文本信息。
  - JSON 值可以是：
   + 数字（整数或浮点数）
@@ -749,14 +842,16 @@ e17366f236084bdc8ed46ee5cdaddbe4
 ```
 
 ---
-#####threading
+<h3 id="lib-thread" style="color:#d35400;">threading</h3>
+
 > **Lock/RLock/Condition 实现了 Context Management Protocol 可以自动调用 acquire()/release()。[with]
 threading.local() 创建的对象会利用 thread-local storage (TLS) 为每个线程保存不同的数据。**
 
  - [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
 
 ---
-#####smtplib & email & poplib
+<h3 id="lib-email" style="color:#d35400;">smtplib & email & poplib</h3>
+
  - email(mime,parser,header,utils...) 主要用于构造/解析邮件
 ```
 Message          # 继承关系 #
@@ -771,7 +866,8 @@ Message          # 继承关系 #
  - [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
 
 ---
-#####Cookie & cookielib
+<h3 id="lib-cookie" style="color:#d35400;">Cookie & cookielib</h3>
+
 > **++Cookie++**
  - `BaseCookie([input])` # 类 dict 对象，存储并管理着称为 Morsel 的 cookie 值集合。
  - `SimpleCookie([input])` # 继承于 BaseCookie (另外两个子类SerialCookie/SmartCookie因安全问题已不赞成使用)。
@@ -804,7 +900,8 @@ Set-Cookie: vienna=finger
 - `FileCookieJar(filename, delayload=None, policy=None)` # 将 cookie 存在本地文件中，没有实现save函数。其子类实现了： MozillaCookieJar是为了创建与Mozilla浏览器cookies.txt兼容的FileCookieJar实例，LWPCookieJar是为了创建与libwww-perl的Set-Cookie3文件格式兼容的FileCookieJar实例，用LWPCookieJar保存的cookie文件易于人类阅读。
 
 ---
-#####urlparse & urllib & urllib2
+<h3 id="lib-url" style="color:#d35400;">urlparse & urllib & urllib2</h3>
+
 >  **一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成**。
  HTTP响应也由三个部分组成，分别是：状态行、消息报头、响应正文。
  - [爬虫教程](http://blog.csdn.net/column/details/why-bug.html)
@@ -868,21 +965,25 @@ Set-Cookie: vienna=finger
 ```
 
 ---
-#####os
+<h3 id="lib-os" style="color:#d35400;">os</h3>
 
 ---
-#####sys
+<h3 id="lib-sys" style="color:#d35400;">sys</h3>
 
 ---
-#####SocketServer & SimpleHTTPServer & etc.
+<h3 id="lib-socket" style="color:#d35400;">SocketServer & SimpleHTTPServer & etc.</h3>
+
 > `python -m SimpleHttpServer 8000` 可以在当前文件夹下创建一个HTTP Server，局域网内可以用来共享文件。
 
  - [非常简单的Python HTTP服务](http://coolshell.cn/articles/1480.html)
  - [python 网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
  - [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
+ - [Python源码学习01.准备篇](http://defshine.github.io/python-source-learn01.html)
+ - [Python源码学习02.SocketServer](http://defshine.github.io/python-source-learn02.html)
 
 ---
-#####select & epoll
+<h3 id="lib-async-1" style="color:#d35400;">select & epoll</h3>
+
 > **异步管理多个 socket 连接，提高并发量。**
 select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 当 event 可读时为奇数，可写时为偶数。边缘触发下被注册 socket 的 event 只被关注一次，需要一次完成 event 直到 socket.error 发生。
@@ -894,14 +995,15 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 - How To Use Linux epoll with Python [英文](http://scotdoyle.com/python-epoll-howto.html) & [译文](http://devres.zoomquiet.io/data/20100927213110/index.html)
 
 ---
-#####asyncore & asynchat
+<h3 id="lib-async-2" style="color:#d35400;">asyncore & asynchat</h3>
+
 > 异步 socket 服务客户端和服务器的基础架构。
 
 - [asyncore 文档翻译](http://automationtesting.sinaapp.com/blog/m_asyncore)
 - [asynchat 文档翻译](http://automationtesting.sinaapp.com/blog/m_asynchat)
 
 ***
-##==Web 开发==
+<h2 id="web-dev" style="color:#c0392b;">Web 开发</h2>
  - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
  - [RFC 2109 (Cookie)](https://www.ietf.org/rfc/rfc2109.txt)
  - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [译文](http://www.xefan.com/archives/84004.html)
@@ -916,14 +1018,14 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 
 ---
 ***
-##==Flask==
-#####使用
+<h2 id="flask" style="color:#c0392b;">Flask</h2>
+<h3 id="flask-use" style="color:#d35400;">使用</h2>
  - [教程 En](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
  - [Jinja2 官方文档 2.7](http://docs.jinkan.org/docs/jinja2)
  - [Flask 官方文档 0.10.1](https://dormousehole.readthedocs.org/en/latest/)
 
 ---
-#####扩展
+<h3 id="flask-plugin" style="color:#d35400;">插件扩展</h3>
  - [Flask-SQLALchemy](http://docs.jinkan.org/docs/flask-sqlalchemy/) or [SQLALchemy](http://docs.jinkan.org/docs/flask/patterns/sqlalchemy.html)
  - Flask-WTF 处理 Web 表单 [英文-0.95](https://flask-wtf.readthedocs.org/en/latest/quickstart.html) or [中文-0.93](http://docs.jinkan.org/docs/flask-wtf/form.html)
  - [Flask-Babel  i18n&l10n 支持](https://pythonhosted.org/Flask-Babel/)
@@ -935,8 +1037,8 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 
 ---
 ***
-##==Tornado==
-#####使用
+<h2 id="tornado" style="color:#c0392b;">Tornado</h2>
+<h3 id="tornado-use" style="color:#d35400;">使用</h3>
 > **++HTTP状态码++** 可以使用 RequestHandler 类的`set_status()`方法显式地设置。在某些情况下，Tornado会自动地设置HTTP状态码。【如果你想使用自己的方法代替默认的错误响应，你可以重写`write_error`方法在你的 RequestHandler 类中】下面是一个常用情况的纲要：
  - **404 Not Found**
 	Tornado会在HTTP请求的路径无法匹配任何RequestHandler类相对应的模式时返回404（Not Found）响应码。
@@ -997,8 +1099,12 @@ tornado.template.execute(add = add)
  - [官方文档4.0.1](http://www.tornadoweb.org/en/stable/)
 
 ---
-#####源码剖析
+<h3 id="tornado-source-code" style="color:#d35400;">源码剖析</h3>
  - [Tornado 源码分析系列 (cnblogs.com)](http://www.cnblogs.com/Bozh/archive/2012/07/22/2603976.html)
  - [Tornado 源码解析篇 (nowamagic.net)](http://www.nowamagic.net/librarys/veda/detail/2566)
 
 ---
+
+<h2 id="" style="color:#c0392b;">H2</h2>
+<h3 id="" style="color:#d35400;">H3</h3>
+<h4 id="" style="color:#f39c12;">H4</h4>
