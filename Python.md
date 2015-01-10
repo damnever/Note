@@ -123,6 +123,7 @@
  - [unittest](https://docs.python.org/2/library/unittest.html)
 
 ---
+***
 <h2 id="python-trick" style="color:#c0392b;">Python 技巧</h2>
 
  - [符合语言习惯的 Python 编程 @xiaocong](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
@@ -143,8 +144,8 @@
 <h3 id="regex-method" style="color:#d35400;">方法</h3>
 
 > 多使用编译对象 compile.
- - match(): 在字符串刚开始的位置匹配。(只匹配开头，有且一个)
- - search(): 扫描字符串,找到一个为止。(匹配第一次出现的，有且一个)
+ - match(): 可指定位置段，默认从开头开始匹配；有且一个。
+ - search(): 可指定位置段，扫描字符串,找到一个为止；有且一个。
  - findall(): 找到全部匹配,以列表返回。
  - finditer(): 找到全部匹配,以迭代器返回
  - group(): 返回匹配的完整字符串;可接收多个参数,返回一个包含那些组所对应值的元组。
@@ -178,12 +179,15 @@
 - 前向界定符
   + (?=...) # 前向肯定符，当前位置有匹配时成功，否则失败，不再进行后续匹配。
   + (?!...) # 前向否定符，当前位置不匹配时成功，尝试模式的的其余部分，否则失败。
+- 条件模式
+  + (?(id/name)yes-pattern|no-pattern) # 条件为捕获到的分组 id 或名字。
 
 <h3 id="regex-flag" style="color:#d35400;">编译标志</h3>
 
 > 
 |标志 | 含义|
 |----|----|
+|DEBUG  |显示表达式编译调试的信息 |
 |DOTALL, S	|使 '.' 特殊字符匹配所有任意字符 (包括换行符) |
 |IGNORECASE, I	|使匹配对大小写不敏感 |
 |LOCALE, L	|使 \w、\W、\b、\B、\s、\S 依赖当前区域设置|
