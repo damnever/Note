@@ -1155,7 +1155,7 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 ```
  - 默认提供了一些方法: escape(), url_escape(), json_encode(), squeeze().
  - 可以添加任意自命名的方法 (在 tornado.web.RquestHandler 里, 可重写 get_template_namespace):
-```
+```Python
 # Python code
 def add(x ,y):
        return x + y
