@@ -6,7 +6,7 @@
 ---
 
 *   [The Zen of Python](#python-zen)
-*   [资源列表](#python-resource)
+*   [资源碎片](#python-resource)
 *   [编码](#python-code)
     *   [规范](#code-standard)
     *   [调试](#code-debug)
@@ -69,33 +69,35 @@
 <h2 id="python-zen" style="color:#c0392b;">The Zen of Python</h2>
 
 -- by Tim Peters
-
-	Beautiful is better than ugly.
-	Explicit is better than implicit.
-	Simple is better than complex.
-	Complex is better than complicated.
-	Flat is better than nested.
-	Sparse is better than dense.
-	Readability counts.
-	Special cases aren't special enough to break the rules.
-	Although practicality beats purity.
-	Errors should never pass silently.
-	Unless explicitly silenced.
-	In the face of ambiguity, refuse the temptation to guess.
-	There should be one-- and preferably only one --obvious way to do it.
-	Although that way may not be obvious at first unless you're Dutch.
-	Now is better than never.
-	Although never is often better than *right* now.
-	If the implementation is hard to explain, it's a bad idea.
-	If the implementation is easy to explain, it may be a good idea.
-	Namespaces are one honking great idea -- let's do more of those!
+```
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
 
 [禅译](http://wiki.woodpecker.org.cn/moin/PythonZen)
 
 ---
-<h2 id="python-resource" style="color:#c0392b;">资源列表</h2>
+<h2 id="python-resource" style="color:#c0392b;">资源碎片</h2>
 
- - [官方文档](https://docs.python.org/3.4/)
+ - [The Python(2.7+) Standard Library](https://docs.python.org/2/library/)
+ - [Python 标准库 - 德云](http://digitser.net/python/2.7.8/zh-CN/library/index.html)
  - [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
  - [Popular Python recipes](http://code.activestate.com/recipes/langs/python/)
  - [Python 技术文章的收集](http://pyzh.readthedocs.org/en/latest/index.html)
@@ -103,6 +105,7 @@
  - [Python 日报](http://py.memect.com/)
  - [码农IO Python 精选](http://baoz.me/446252)
  - [python 模块文档汇总](http://automationtesting.sinaapp.com/blog/python_modules)
+ - [ZQ's SCRAPBOOK](http://pythonic.zoomquiet.io/tree/index.html)
  - [Top of 2014](http://pycoders.com/2014/)
 
 ---
@@ -144,19 +147,19 @@
 <h3 id="regex-method" style="color:#d35400;">方法</h3>
 
 > 多使用编译对象 compile.
- - match(): 可指定位置段，默认从开头开始匹配；有且一个。
- - search(): 可指定位置段，扫描字符串,找到一个为止；有且一个。
- - findall(): 找到全部匹配,以列表返回。
- - finditer(): 找到全部匹配,以迭代器返回
- - group(): 返回匹配的完整字符串;可接收多个参数,返回一个包含那些组所对应值的元组。
- - start(): 匹配的开始位置; 同样能接收分组序号。和 group() 一样,序号 0 表示整体匹配结果。
- - end(): 匹配的结束位置； 同上。
- - span(): 包含起始、结束位置的元组； 同上。
- - groups(): 返回所有分组信息，从第一组开始。
- - groupdict(): 返回命名分组信息
- - split(): 用 pattern 做分隔符切割字符串。如果用 "(pattern)",那么分隔符也会返回。
- - sub(): 替换子串。缺省次数是0表示替换所有的匹配。sub(pattern, new, s, counts)。
- - subn(): 和 sub() 差不多,不过返回 "(新字符串,替换次数)",可以将替换字符串改成函数,以便替换成不同的结果。
+ - `match()` 可指定位置段，默认从开头开始匹配；有且一个。
+ - `search()` 可指定位置段，扫描字符串,找到一个为止；有且一个。
+ - `findall()` 找到全部匹配,以列表返回。
+ - `finditer()` 找到全部匹配,以迭代器返回
+ - `group()` 返回匹配的完整字符串;可接收多个参数,返回一个包含那些组所对应值的元组。
+ - `start()` 匹配的开始位置; 同样能接收分组序号。和 group() 一样,序号 0 表示整体匹配结果。
+ - `end()` 匹配的结束位置； 同上。
+ - `span()` 包含起始、结束位置的元组； 同上。
+ - `groups()` 返回所有分组信息，从第一组开始。
+ - `groupdict()` 返回命名分组信息
+ - `split()` 用 pattern 做分隔符切割字符串。如果用 "(pattern)",那么分隔符也会返回。
+ - `sub()` 替换子串。缺省次数是0表示替换所有的匹配。sub(pattern, new, s, counts)。
+ - `subn()` 和 sub() 差不多,不过返回 "(新字符串,替换次数)",可以将替换字符串改成函数,以便替换成不同的结果。
 ```Python
 ## 空匹配只有在它们没有紧挨着前一个匹配时才会被替换掉；‘p’后面的空匹配没被替换
 >>> p = re.compile('p*')
@@ -177,10 +180,10 @@
 
 > 
 - 前向界定符
-  + (?=...) # 前向肯定符，当前位置有匹配时成功，否则失败，不再进行后续匹配。
-  + (?!...) # 前向否定符，当前位置不匹配时成功，尝试模式的的其余部分，否则失败。
+  + `(?=...)` 前向肯定符，当前位置有匹配时成功，否则失败，不再进行后续匹配。
+  + `(?!...)` 前向否定符，当前位置不匹配时成功，尝试模式的的其余部分，否则失败。
 - 条件模式
-  + (?(id/name)yes-pattern|no-pattern) # 条件为捕获到的分组 id 或名字。
+  + `(?(id/name)yes-pattern|no-pattern)` 条件为捕获到的分组 id 或名字。
 
 <h3 id="regex-flag" style="color:#d35400;">编译标志</h3>
 
@@ -230,7 +233,7 @@
 
 > str 类型在 Python2 中是ASCII码，Python 3 中为 unicode。
 > **规则：unicode 作为中间态用来 encode，可以 decode 成 unicode.**
-> `from __future__ import unicode_literals` Python 3 中str是unicode。
+> `from __future__ import unicode_literals` 使用 Python 3 特性，把　str　变成　unicode.
 ```Python
 >>> s = '中文'
 >>> s; len(s); type(s)
@@ -242,7 +245,7 @@
 u'\u4e2d\u6587'
 2
 <type 'unicode'>
->>> from __future__ import unicode_literals # Python 3的特性
+>>> from __future__ import unicode_literals # Python 3 的特性
 >>> s = '中文'; s; len(s)
 u'\u4e2d\u6587'
 2
@@ -268,7 +271,7 @@ u'\u4e2d\u6587'
 ---
 <h3 id="faq-format" style="color:#d35400;">格式化</h3>
 
-> `'{}, {}'.format('a', 'b')` 2.7+ only
+> `'{}, {}'.format('a', 'b')` # 2.7+ only
 ```Python
 >>> class Test:
 ...     def __str__(self):
@@ -304,8 +307,8 @@ u'\u4e2d\u6587'
 <h3 id="faq-file" style="color:#d35400;">文件</h3>
 
 > 如果要把数据写到磁盘上,除调用 `flush()` 外,还得用 `sync()`,以确保数据从系统缓冲区同步到磁盘。`close()` 总是会调用用这两个方法。
-读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
-通常建议用迭代器或 `xreadlines()` 代替 `readlines()`,后者默认一次性读取整个文件。
+> 读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
+> 通常建议用迭代器或 `xreadlines()` 代替 `readlines()`，后者默认一次性读取整个文件。
 
 ---
 <h3 id="faq-class" style="color:#d35400;">类</h3>
@@ -322,15 +325,29 @@ u'\u4e2d\u6587'
  - 用重命名后的格式访问。
  - 只用一个下划线,仅提醒,不重命名。
 
-> **继承**
- - super 的类型参数决定了在 mro(多重继承成员搜索顺序) 列表中的搜索起始位置,总是返回该参数后续类型的成员。单继承时总是搜索该参数的基类型。
+**继承**
+> 
+ - super 的类型参数决定了在 mro( Method Resolution Order**多重继承成员搜索顺序，旧式类是深度优先搜索，新式类为广度优先搜索**) 列表中的搜索起始位置,总是返回该参数后续类型的成员。单继承时总是搜索该参数的基类型。
  - 在多重继承初始化方法中使用 super 可能会引发一些奇怪的状况。
 
-> **抽象类**
+- [Understanding Python MRO - Class search path](http://makina-corpus.com/blog/metier/2014/python-tutorial-understanding-python-mro-class-search-path)
+
+**抽象类**
+> 
  - `from abc import ABCMeta, abstractmethod, abstractproperty` #创建抽象类的类型，抽象方法，抽象属性 ，`__metaclass__ = ABCMeta`标明此类为抽象类
  - 抽象类 (Abstract Class) 无无法实例化,且派生类必须 "完整" 实现所有抽象成员才可创建实例。
  - 如果派生类也是抽象类型,那么可以部分实现或完全不实现基类抽象成员。
 
+**描述符**
+> 
+ - 实现 `__get__` 和 `__set__` 方法,称为 data descriptor
+ - 仅有 `__get__` 方法的,称为 non-data descriptor
+ - `__get__` 对 owner_class、owner_instance 访问有效
+ - `__set__`、`__delete__` 仅对 owner_instance 访问有效
+ - 详见 [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
+
+**自省（反射）**
+> **Python 里面一切皆对象，函数，方法，类，实例，代码块等都有自己的内置属性。**
 > **`__getattr__` (访问不存在的成员)，`__setattr__` (对任何成员的赋值操作), `__delattr__` (删除成员操作), `__getattribute__` (访问任何存在或不存在的成员,包括 __dict__)。**
 不要在这几个方法里直接访问对象成员,也不要用 hasattr/getattr/setattr/delattr 函数,因为它们会被再次拦截,形成无限循环。正确的做法是直接操作 `__dict__`。而 `__getattribute__` 连 `__dict__` 都会拦截,只能用基类的 `__getattribute__` 返回结果。
 ```Python
@@ -368,20 +385,13 @@ del:  y
 attribute:  __dict__
 ```
 
-> **描述符**
- - 实现 `__get__` 和 `__set__` 方法,称为 data descriptor
- - 仅有 `__get__` 方法的,称为 non-data descriptor
- - `__get__` 对 owner_class、owner_instance 访问有效
- - `__set__`、`__delete__` 仅对 owner_instance 访问有效
- - 更多详见 [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
-
 - [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 
 ---
 <h3 id="faq-metaclass" style="color:#d35400;">元类 (metaclass)</h3>
 
 > **类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
-当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
+> 当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
 **`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ -> type`**
 
  - [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
@@ -392,8 +402,8 @@ attribute:  __dict__
 <h3 id="faq-mixin" style="color:#d35400;">MixIn</h3>
 
 > 一种特殊的多继承，在不改变原对象的情况下对其进行扩展。
-1. You want to provide a lot of optional features for a class.
-2. You want to use one particular feature in a lot of different classes.
+> 1. You want to provide a lot of optional features for a class.
+> 2. You want to use one particular feature in a lot of different classes.
 
 - [Mixin 扫盲班](http://wiki.woodpecker.org.cn/moin/FlyintoMixin)
 - [Mix-in 技术介绍](http://wiki.woodpecker.org.cn/moin/IntroMixin)
@@ -415,27 +425,26 @@ attribute:  __dict__
 <h3 id="faq-closure" style="color:#d35400;">闭包 (closure)</h3>
 
 >  **当函数离开创建环境后，依然持有其上下文状态。**
-一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
+> 一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
 ```Python
->>> def p_l(z):
-...     def f():
-...         print z
-...     return f
+>>> def print_list(lst):
+...     def func():
+...         print lst
+...     return func
 ...
->>> z = [1, 2]
->>> g = p_l(z)
->>> g()
+>>> lst = [1, 2]
+>>> g = print_list(lst)
+>>> g()　　##　已经离开创建环境
 [1, 2]
->>> # z.append(3)时，g()内部的引用和z仍然指向一个变量，而z=[1]之后，两者就不再指向一个变量了。
->>> z.append(3)
+>>> ## lst.append(3)时，g()内部的引用和z仍然指向一个变量，而lst=[1]之后，两者就不再指向一个变量了。
+>>> lst.append(3)
 >>> g()
 [1, 2, 3]
->>> z = [1]
+>>> lst = [1]  ## lst 已经是一个新的对象了
 >>> g()
 [1, 2, 3]
->>> g.__closure__
+>>> g.__closure__ ;  g.func_closure
 (<cell at 0x7ffd5fda7248: list object at 0x7ffd5fdaa680>,)
->>> g.func_closure
 (<cell at 0x7ffd5fda7248: list object at 0x7ffd5fdaa680>,)
 >>> print [str(c.cell_contents) for c in g.__closure__]
 ['[1, 2, 3]']
@@ -448,12 +457,39 @@ attribute:  __dict__
 ...         print '- %s has no closure!' % f.__name__
 ...
 >>> dump_closure(g)
-- Dumping function closure for f:
+- Dumping function closure for func:
 -- cell 0 = [1, 2, 3]
 ```
 
+> **后期绑定机制**（late binding）
+> 这是指在闭包中使用的变量的值，是在内层函数被调用的时候查找的。
+```Python
+>>> def create_multipliers():
+...     return [lambda x: i*x for i in range(5)] # 列表解析
+... 
+>>> for multiplier in create_multipliers():
+...     print multiplier(2)
+... 
+8
+8
+8
+8
+8
+>>> ## 在上面的代码中，当任一返回函数被调用的时候，i的值是在它被调用时的周围作用域中查找（到那时，循环已经结束了，所以i已经被赋予了它最终的值4）。
+>>> def create_multipliers():
+...     return [lambda x, i=i: i*x for i in range(5)]
+... 
+>>> for multiplier in create_multipliers():
+...     print multiplier(2)
+... 
+0
+2
+4
+6
+8
+```
+
  - [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
- - [闭包和后期绑定](http://shentar.me/%E5%85%B3%E4%BA%8Epython%E7%9A%84%E9%97%AD%E5%8C%85%E5%92%8C%E5%90%8E%E6%9C%9F%E7%BB%91%E5%AE%9A/)
  - [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
  - [Python 闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
  - [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
@@ -472,7 +508,7 @@ def func():
 # 等价于
 def func():
     pass
-func = @decorator(func)
+func = decorator(func)
 ```
 
  - [装饰器](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819879946007bbf6ad052463ab18034f0254bf355000)
