@@ -6,7 +6,7 @@
 ---
 
 *   [The Zen of Python](#python-zen)
-*   [资源碎片](#python-resource)
+*   [资源列表](#python-resource)
 *   [编码](#python-code)
     *   [规范](#code-standard)
     *   [调试](#code-debug)
@@ -24,6 +24,7 @@
     *   [默认参数值](#faq-default-arg)
     *   [格式化](#faq-format)
     *   [文件](#faq-file)
+    *   [函数](#faq-functional-programing)
     *   [类](#faq-class)
     *   [元类 (metaclass)](#faq-metaclass)
     *   [MixIn](#faq-mixin)
@@ -311,6 +312,63 @@ u'\u4e2d\u6587'
 > 通常建议用迭代器或 `xreadlines()` 代替 `readlines()`，后者默认一次性读取整个文件。
 
 ---
+<h3 id="faq-functional-programing" style="color:#d35400;">函数</h3>
+
+> `lambda` 匿名函数，不显式地定义函数，不需要 return，返回值就是表达式的结果。
+
+> `map(function, sequence[, sequence, ...])` 将传入的函数行为映射到传入的序列的每个元素上，并返回一个 list。
+
+> `reduce(function, iterable[, initializer])` 传入的函数必须接收两个参数；把函数返回值和后一个列表元素传入函数，如此循环。可选参数`initializer`为一个初始值，没有的话为序列的第一项。
+
+> `filter(function, iterable)` 把传入的函数依次作用于每个元素，然后根据返回值是 True 还是 False 决定保留还是丢弃该元素。
+
+> `all(iterable)` 若可迭代序列的**所有**元素都为 True，或序列为空，返回 True。
+
+> `any(iterable)` 若可迭代序列**任一**元素为 True，返回 True；为空返回 False。
+
+> `iter(o[, sentinel])` 传入一个序列，返回可迭代对象，可选参数`sentinel`是一个终止标识。
+```Python
+# 一种有用形式，读取文件，直到readline()返回空字符串为止
+with open('mydata.txt') as fp:
+    for line in iter(fp.readline, ''):
+        process_line(line)
+```
+> 
+```Python
+>>> # 找出一个序列中的偶数并将它们乘以3(Functional Programing的一种例子)
+>>> def even_filter(nums):
+...     return filter(lambda x: x%2==0, nums)
+... 
+>>> def multiply_by_three(nums):
+...     return map(lambda x: x*3, nums)
+... 
+>>> def convert_to_string(nums):
+...     return map(lambda x: 'The number: %s' % x, nums)
+... 
+>>> def pipeline_func(data, fns):
+...     return reduce(lambda a, x: x(a), fns, data)
+... 
+>>> def print_result(pipeline):
+...     for each in pipeline:
+...         print each
+... 
+>>> print_result(pipeline_func(range(1, 11), (even_filter, multiply_by_three, convert_to_string)))
+The number: 6
+The number: 12
+The number: 18
+The number: 24
+The number: 30
+```
+
+- [Python 内置函数](https://docs.python.org/2/library/functions.html)
+
+> 关于**函数式编程**(Functional Programing)，一种抽象程度很高的编程范式，把运算过程尽量写成一系列嵌套的函数调用，函数仅接收输入并产生输出。
+
+- **[函数式编程](http://coolshell.cn/articles/10822.html)**
+- [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
+- [Python函数式编程指南（一）：概述](http://www.cnblogs.com/huxi/archive/2011/06/18/2084316.html)
+
+---
 <h3 id="faq-class" style="color:#d35400;">类</h3>
 
 > **实例方法的特殊性**: 当用实例调用时,它是个 bound method,动态绑定到对象实例。而当用类型调用时,是 unbound method,必须显式传递 self 参数。
@@ -391,8 +449,33 @@ attribute:  __dict__
 <h3 id="faq-metaclass" style="color:#d35400;">元类 (metaclass)</h3>
 
 > **类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
-> 当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
-**`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ -> type`**
+
+> 当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。
+> **`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ - type`**(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
+```Python
+>>> ## 使用 type() 动态创建类
+>>> def fn(self):
+...     print 'dynamic'
+...
+>>> Foo = type('Foo', (object,), dict(foo_say=fn))
+>>> Foo().foo_say()
+dynamic
+>>> type(Foo); type(Foo())
+<type 'type'>
+<class '__main__.Foo'>
+>>> ## 使用元类来定制类
+>>> class MyMetaclass(type):
+...     def __new__(cls, name, bases, attrs):
+...         # do sth.
+...         return type.__new__(cls, name, bases, attrs)
+... 
+>>> class MyClass(object):
+...     __metaclass__ = MyMetaclass # 指定元类
+... 
+>>> type(MyClass); type(MyClass())
+<class '__main__.MyMetaclass'>
+<class '__main__.MyClass'>
+```
 
  - [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
  - [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
@@ -517,20 +600,35 @@ func = decorator(func)
 ---
 <h3 id="faq-property" style="color:#d35400;">属性方法 @property</h3>
 
-> **将方法当成属性用**
+> `property([fget[, fset[, fdel[, doc]]]])` **将方法当成属性用**
 ```Python
 >>> class Name(object):
 ...     @property
 ...     def name(self):
+...         print 'Get:'
 ...         return self._name
 ...     @name.setter
 ...     def name(self, value):
+...         print 'Set: ', value
 ...         self._name = value
-...
+...     @name.deleter
+...     def name(self):
+...         print 'Del: name'
+...         del self._name
+... 
 >>> n = Name()
->>> n.name = "last"  # 转化成 n.set_name("last")
->>> n.name   # n.get_name()
-'last'
+>>> n.name = 'Damnever'
+Set: Damnever
+>>> n.name
+Get:
+'Damnever'
+>>> del n.name
+Del: name
+>>> n.name
+Get:
+Traceback (most recent call last):
+  ...
+AttributeError: 'Name' object has no attribute '_name'
 ```
 
 ---
@@ -565,8 +663,9 @@ a=1, b=2, c=3
 
 ---
 <h3 id="faq-yield" style="color:#d35400;">yield (generator)</h3>
+
 > **生成器**是可以迭代的，读取它的时候，并不把所有的值放在内存中，它是实时地生成数据。
-**yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。
+**yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。同时使用空的 return 可以终止迭代，否则出现异常。
 
  - [Python yield 使用浅析](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
  - [生成器](http://sebug.net/paper/books/dive-intoxingn-python3/generators.html#generators)
@@ -575,7 +674,7 @@ a=1, b=2, c=3
 ---
 <h3 id="faq-coroutine" style="color:#d35400;">协程</h3>
 
-> **协程(Coroutine)，又称微线程，纤程。
+> **协程(Coroutine 协同程序)，又称微线程，纤程。
 子程序调用总是一个入口，一次返回，调用顺序是明确的。而协程的调用和子程序不同。协程看上去也是子程序，但执行过程中，在子程序内部可中断(不是函数调用，有点类似CPU的中断)，然后转而执行别的子程序，在适当的时候再返回来接着执行。**
 
  - [协程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000)
@@ -954,6 +1053,7 @@ e17366f236084bdc8ed46ee5cdaddbe4
 threading.local() 创建的对象会利用 thread-local storage (TLS) 为每个线程保存不同的数据。**
 
  - [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
+ - [Python线程指南](http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html)
 
 ---
 <h3 id="lib-email" style="color:#d35400;">smtplib & email & poplib</h3>
