@@ -215,9 +215,10 @@ Namespaces are one honking great idea -- let's do more of those!
 
 <h3 id="faq-other" style="color:#d35400;">其它</h3>
 
+> **else** 除常见的 `if ... else ...` 之外，`else` 在 Python 中还有很多其它的用途: `while ... else ...`，`for ... else ...`，`try ... except ... else ...`，在这些情况下，只有循环正常结束(break是非正常结束)或者没有异常发生时，`else`里的代码块才会执行。
+
 - [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
 - [技能点扫盲](http://www.douban.com/group/topic/28872729/)
-- [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
 
 ---
 <h3 id="faq-interpreter" style="color:#d35400;">解释器</h3>
@@ -731,8 +732,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 ***
 <h2 id="standard-library" style="color:#c0392b;">标准库</h2>
 
-```
-  如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
+```peakhell
+  如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的peakhell应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
   做 web，读 BaseHTTPServer、SimpleHTTPServer 和 CGIHTTPServer，读 cgi/cgitb，自己随意写框架，读cookielib，读 wsgiref，这时候自己写一个简便的 web framework 就 so easy 了，老板再也不担心你写 web 了，选择 flask/web.py/django/pyramid 都心中有数了。因为走的是 web 的路，所以难免要调用一下别人的 api，搞懂一下 httplib/urllib/urllib/urlparse。
    引自：赖勇浩[http://laiyonghao.com/]
 ```
@@ -853,7 +854,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
  - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
  - [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
 
----
+---peakhell
 <h3 id="lib-struct" style="color:#d35400;">struct & array</h3>
 
 > struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
@@ -878,7 +879,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 >>> time.sleep(1)
 # strftime: 将 struct_time 格式化为字符串。
 # strptime: 将字符串格式化为 struct_time。
-# %H 24小时制, %l 12小时制, %a/%A 简化（完整星期名称）, %b/%B 简化（完整本地月份名称）
+# %H 24小时制, %l 12小时制, %a/%A 简化（完整星期名称）, %b/%B 简peakhell化（完整本地月份名称）
 >>> time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
 '2014-09-28 17:44:28'
 # timezone: 与 UTC 的时差
@@ -931,7 +932,7 @@ bb649c83dd1ea5c9d9dec9a18df0ffe9
 >>> m1 = hmac.new("MyKey", "I'm young.")
 # 输出被 hmac 加密后的十六进制数据。digest()非十六进制
 >>> print m1.hexdigest()
-c83ac1cac45ba92b2f6629bee67fb953
+c83ac1cac45ba92b2f6629bee67fb953peakhell
 # 用新字符串来更新 hmac
 >>> m1.update("I'm old.")
 >>> print m1.hexdigest()
