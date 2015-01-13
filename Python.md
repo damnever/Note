@@ -6,7 +6,7 @@
 ---
 
 *   [The Zen of Python](#python-zen)
-*   [资源列表](#python-resource)
+*   [资源碎片](#python-resource)
 *   [编码](#python-code)
     *   [规范](#code-standard)
     *   [调试](#code-debug)
@@ -32,8 +32,8 @@
     *   [闭包 (closure)](#faq-closure)
     *   [装饰器"@" (decorator)](#faq-decorator)
     *   [属性方法 @property](#faq-property)
-    *   [偏函数 (partial)](#faq-partial)
     *   [@classmethod & @staticmethod](#faq-class-func)
+    *   [偏函数 (partial)](#faq-partial)
     *   [yield (generator)](#faq-yield)
     *   [协程](#faq-coroutine)
     *   [数据结构和算法](#faq-algorithm)
@@ -135,6 +135,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [10 个常见错误](http://blog.jobbole.com/68256/)
  - [30 Python Language Features and Tricks You May Not Know About](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
  - [Hidden features of Python](http://stackoverflow.com/questions/101268/hidden-features-of-python)
+ - [《编写高质量代码：改善Python程序的91个建议》](http://book.douban.com/subject/25910544/)
 
 
 ---
@@ -498,11 +499,45 @@ dynamic
 <h3 id="faq-with" style="color:#d35400;">上下文与 with</h3>
 
 > **上下文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文环境。即便代码块发生异常,清理操作也会被执行。**
- + `__enter__`: 初始化环境,返回上下文对象。
- + `__exit__`: 执行清理操作。返回 True 时,将阻止异常向外传递。
+ + `__enter__()`: 进入 Runtime 上下文,返回上下文对象；该方法返回值会被绑定到使用这种上下文管理器的 with 语句 as 子句下的标示符。
+ + `__exit__(exc_type, exc_val, exc_tb)`: 退出 Runtime 上下文并返回 bool 指示标识，返回 True 会导致 with 语句抑制异常，并继续执行 with 语句后紧跟的语句；否则，执行完该方法后异常会继续传播。若 with 语句本体执行期间发生异常的话，自变量会包含异常类型、值、回溯信息。否则，三个自变量全为 None。
+> 
+```Python
+>>> class MyContext(object):
+...     def __init__(self, text):
+...         self._text = text
+...     def __enter__(self):
+...         print 'ENTER:', self.__class__.__name__
+...         return self
+...     def __exit__(self, exc_type, exc_val, exc_tb):
+...         print 'EXIT:', self.__class__.__name__
+...     def say(self):
+...         print '%s say: %s' % (self.__class__.__name__, self._text)
+... 
+>>> with MyContext('Hello!') as mc:
+...     mc.say()
+... 
+ENTER: MyContext
+MyContext say: Hello!
+EXIT: MyContext
+```
+> 可以在一个 with 语句中使用多个上下文对象,依次按照 *FILO* 顺序调用。
+```Python
+>>> import contextlib
+>>> with open('readfile', 'r') as reader,\
+...         open('writefile', 'w') as writer:
+...     writer.write(reader.read())
+... 
+>>> with contextlib.nested(open('readfile', 'r'), open('writefile', 'r'))\
+...         as (reader, writer):
+...     print writer.read(), reader.read()
+... 
+contextlib.nested
+contextlib.nested
+```
+> 另: threading 中的 Lock/RLock/Condition 实现了 Context Management Protocol。
 
-> 可以在一个 with 语句中使用用多个上下文对象,依次按照 *FILO* 顺序调用。
-
+ - [Python 中的上下文管理器](http://blog.jobbole.com/64175/)
  - [理解 Python 的 with 语句](http://python.42qu.com/11155501)
 
 ---
@@ -583,20 +618,46 @@ dynamic
 <h3 id="faq-decorator" style="color:#d35400;">装饰器"@" (decorator)</h3>
 
 > **若需要增强某函数的功能，但又不希望修改该函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。**
-装饰器不一定非得是个函数返回包装对象,也可以是个类,通过 `__call__` 完成目标调用。
-装饰器不管被装饰函数有没有参数，都应该有接收参数的功能，这样才能完整的包装而不丢失信息。
+
+> 装饰器不一定非得是个函数返回包装对象,也可以是个类,通过 `__call__` 完成目标调用；当给某个方法`@class_decorator`时，类调用`__init__()`，`__call__()`在调用目标方法时被调用。如果 decorator 有参数的话，`__init__()` 成员就不能传入 func 了，而 func 是在 `__call__()`的时候传入的。
 ```Python
-@decorator
-def func():
+@dec2
+@dec1(arg)
+def func(*args, **kwargs):
     pass
 # 等价于
-def func():
+def func(*args, **kwargs):
     pass
-func = decorator(func)
+func = dec2( dec1(arg)(func) )
+```
+> 利用缓存提高斐波拉契数例的递归算法的效率
+```Python
+>>> import functools
+>>> def memo(func):
+...     cache = {}
+...     miss = object()
+...     @functools.wraps(func)
+...     def wrapper(*args):
+...         result = cache.get(args, miss)
+...         if result is miss:
+...             result = func(*args)
+...             cache[args] = result
+...         return result
+...     return wrapper
+... 
+>>> @memo
+... def fib(n):
+...     if n < 2: return n
+...     return fib(n - 1) + fib(n - 2)
+... 
+>>> fib(2);  fib(5)
+1
+5
 ```
 
- - [装饰器](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819879946007bbf6ad052463ab18034f0254bf355000)
- - [Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)
+ - [Python 的闭包和装饰器](http://book42qu.readthedocs.org/en/latest/python/python-closures-and-decorators.html)
+ - **[Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)**
+ - [Python Decorator Library](https://wiki.python.org/moin/PythonDecoratorLibrary)
 
 ---
 <h3 id="faq-property" style="color:#d35400;">属性方法 @property</h3>
@@ -633,6 +694,64 @@ AttributeError: 'Name' object has no attribute '_name'
 ```
 
 ---
+<h3 id="faq-class-func" style="color:#d35400;">@classmethod & @staticmethod</h3>
+
+> classmethod 和 staticmethod 都可以通过实例和类名来调用。classmethod　只能访问类属性，staticmethod 都不能访问。
+
+> 这些方法可以用于某些不需要实例或两者都不需要的辅助函数。而又不至于减少**代码的可读性**。
+> 
+```Python
+>class MyClass(object):
+>
+>    class_field = 'class field'
+>
+>    def __init__(self):
+>        self.instance_field = 'instance_field'
+>
+>    def instance_method(*args):
+>        print 'bound method args:', args
+>        print 'I can get:', args[0].instance_field
+>
+>    @staticmethod
+>    def static_method(*args):
+>        print 'staticmethod args:', args
+>
+>    @classmethod
+>    def class_method(*args):
+>        print 'classmethod args:', args
+>        print 'I can get:', args[0].class_field
+>        # print 'cm call static method:', args[0].static_method('sm')
+>        # print 'cm call bound method:', args[0]().instance_method()
+>
+>if __name__ == '__main__':
+>    obj = MyClass()
+>    print '** Call classmethod:'
+>    obj.class_method()
+>    MyClass.class_method()
+>    print '** call staticmethod:'
+>    obj.static_method()
+>    MyClass.static_method()
+>    print '** call boundmethod:'
+>    obj.instance_method()
+```
+> 输出
+> ```
+** Call classmethod:
+classmethod args: (<class '__main__.MyClass'>,)
+I can get: class field
+classmethod args: (<class '__main__.MyClass'>,)
+I can get: class field
+** call staticmethod:
+staticmethod args: ()
+staticmethod args: ()
+** call boundmethod:
+bound method args: (<__main__.MyClass object at 0x7f7adbc89a90>,)
+I can get: instance_field
+```
+
+- [PYTHON中STATICMETHOD和CLASSMETHOD的差异](http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html)
+
+---
 <h3 id="faq-partial" style="color:#d35400;">偏函数 (partial)</h3>
 
 >  **当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
@@ -646,7 +765,7 @@ a=1, b=2, c=3
 >>> import functools
 >>> ff = functools.partial(f, a=1, c=3); ff(2) # 不能跳着固定
 Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
+  ...
 TypeError: f() got multiple values for keyword argument 'a'
 >>> ff = functools.partial(f, b=2, c=3); ff(1)
 a=1, b=2, c=3
@@ -655,12 +774,6 @@ a=1, b=2, c=3
 >>> ff = functools.partial(f, 1); ff(2, 3)
 a=1, b=2, c=3
 ```
-
----
-<h3 id="faq-class-func" style="color:#d35400;">@classmethod & @staticmethod</h3>
-
-- [静态方法和类方法](http://www.libaoyin.com/2013/08/06/pyhton-staticmethod-classmethod/)
-- [它们的权限](http://zhuanlan.zhihu.com/guagua/19760452)
 
 ---
 <h3 id="faq-yield" style="color:#d35400;">yield (generator)</h3>
@@ -1211,17 +1324,17 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 
 ***
 <h2 id="web-dev" style="color:#c0392b;">Web 开发</h2>
+
  - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
  - [RFC 2109 (Cookie)](https://www.ietf.org/rfc/rfc2109.txt)
  - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [译文](http://www.xefan.com/archives/84004.html)
  -  [PEP333 (Python Web Server Gateway Interface v1.0)](http://www.python.org/dev/peps/pep-0333) & [译文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
  - [Serving Static Content With WSGI](http://pwp.stevecassidy.net/wsgi/static.html)
  - [jinja2](http://docs.jinkan.org/docs/jinja2/)
- - [42区.漫游指南](http://matrix.42qu.com/)
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
- - [Werkzeug (WSGI工具库)](http://werkzeug-docs-cn.readthedocs.org/zh_CN/latest/index.html)
  - [ PEP 249 (Python Database API Specification v2.0)](http://legacy.python.org/dev/peps/pep-0249/) & [译文](http://blog.csdn.net/dajianshi/article/details/7482201)
- - [MySQLdbz操作](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/304.md)
+ - [MySQLdb操作](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/304.md)
+ -  [The Django Book](http://www.djangobook.com/en/2.0/index.html) & [译文](http://djangobook.py3k.cn/2.0/)
 
 ---
 ***
