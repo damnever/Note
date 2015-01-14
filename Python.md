@@ -269,8 +269,30 @@ u'\u4e2d\u6587'
 ---
 <h3 id="faq-default-arg" style="color:#d35400;">默认参数值</h3>
 
-> **用对象作为函数中作为默认参数**
-默认参数在函数被调用的时候仅仅被评估一次，以后都会使用第一次的评估结果。
+> **用 None 或不可变对象作为函数中的默认参数**
+
+> 默认参数在函数被调用的时候仅仅被评估一次，以后都会使用第一次的评估结果，如果使用可变对象会带来隐患(如list等)。
+```
+>>> def foo(a, b=[]):
+...     b.append(a)
+...     print b
+... 
+>>> foo(1)
+[1]
+>>> foo(2) 　# 不是[2]？丫的又不是全局变量
+[1, 2]
+>>> #＃ 改进一下
+>>> def bar(a, b=None):
+...     if b is None:
+...         b = []
+...     b.append(a)
+...     print b
+... 
+>>> bar(1)
+[1]
+>>> bar(2)
+[2]
+```
 
 - [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
 
