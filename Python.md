@@ -1,7 +1,7 @@
-<h1 style="color:#2bb24c;">Python(2&3) Learning</h1>
+<h1 style="color:#2bb24c;">Python Learning</h1>
 
 ***
-待学列表而已 ... 悲哉！
+待学列表而已 ... 悲哉？
 import antigravity
 
 ---
