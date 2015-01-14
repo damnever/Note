@@ -2,6 +2,7 @@
 
 ***
 待学列表而已 ... 悲哉！
+import antigravity
 
 ---
 
@@ -34,7 +35,7 @@
     *   [属性方法 @property](#faq-property)
     *   [@classmethod & @staticmethod](#faq-class-func)
     *   [偏函数 (partial)](#faq-partial)
-    *   [yield (generator)](#faq-yield)
+    *   [yield & generator](#faq-yield)
     *   [协程](#faq-coroutine)
     *   [数据结构和算法](#faq-algorithm)
     *   [性能和内存管理](#faq-performance)
@@ -217,6 +218,8 @@ Namespaces are one honking great idea -- let's do more of those!
 <h3 id="faq-other" style="color:#d35400;">其它</h3>
 
 > **else** 除常见的 `if ... else ...` 之外，`else` 在 Python 中还有很多其它的用途: `while ... else ...`，`for ... else ...`，`try ... except ... else ...`，在这些情况下，只有循环正常结束(break是非正常结束)或者没有异常发生时，`else`里的代码块才会执行。
+
+> **`Expression & statement`**: An `expression` is a combination of values, variables, and operators. A `statement` is a unit of code that the Python interpreter can execute.Technically an expression is also a statement, but it is probably simpler to think of them as different things. The important difference is that **`an expression has a value; a statement does not`**.
 
 - [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
 - [技能点扫盲](http://www.douban.com/group/topic/28872729/)
@@ -460,7 +463,7 @@ attribute:  __dict__
 ...     print 'dynamic'
 ...
 >>> Foo = type('Foo', (object,), dict(foo_say=fn))
->>> Foo().foo_say()
+>>> Foo().foo_say()**
 dynamic
 >>> type(Foo); type(Foo())
 <type 'type'>
@@ -481,7 +484,7 @@ dynamic
 
  - [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
  - [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
- - [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba000)
+ - [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba**000)
 
 ---
 <h3 id="faq-mixin" style="color:#d35400;">MixIn</h3>
@@ -755,7 +758,7 @@ I can get: instance_field
 <h3 id="faq-partial" style="color:#d35400;">偏函数 (partial)</h3>
 
 >  **当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
-固定参数时，若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数。
+固定参数时，(1)若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。(2)若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数(首先`args = (...)`然后`args += (...)`)。
 ```Python
 >>> def f(a, b, c):
 ...     print 'a={}, b={}, c={}'.format(a, b, c)
@@ -763,35 +766,126 @@ I can get: instance_field
 >>> f(1, 2, 3)
 a=1, b=2, c=3
 >>> import functools
->>> ff = functools.partial(f, a=1, c=3); ff(2) # 不能跳着固定
+>>> ff = functools.partial(f, a=1, c=3); ff(2) # (1)不能跳着固定
 Traceback (most recent call last):
   ...
 TypeError: f() got multiple values for keyword argument 'a'
->>> ff = functools.partial(f, b=2, c=3); ff(1)
+>>> ff = functools.partial(f, b=2, c=3); ff(1) # (1)
 a=1, b=2, c=3
->>> ff = functools.partial(f, 1, c=3); ff(2)
+>>> ff = functools.partial(f, 1, c=3); ff(2) # (2)
 a=1, b=2, c=3
->>> ff = functools.partial(f, 1); ff(2, 3)
+>>> ff = functools.partial(f, 1); ff(2, 3) # (2)
 a=1, b=2, c=3
 ```
 
 ---
-<h3 id="faq-yield" style="color:#d35400;">yield (generator)</h3>
+<h3 id="faq-yield" style="color:#d35400;">yield & generator</h3>
 
-> **生成器**是可以迭代的，读取它的时候，并不把所有的值放在内存中，它是实时地生成数据。
-**yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。同时使用空的 return 可以终止迭代，否则出现异常。
+> **生成器**是可以迭代的，读取它的时候只可以读取一次，因为它并不把所有的值放在内存中，它是实时地生成数据。
 
- - [Python yield 使用浅析](https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/)
- - [生成器](http://sebug.net/paper/books/dive-intoxingn-python3/generators.html#generators)
+> **yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。使用空的 return 语句可以终止迭代，否则出现异常(非StopIteration)。
+
+> If the yield-expression is a yield-statement, this returned value is ignored, similar to ignoring the value returned by a function call used as a statement.
+```Python
+>>> g1 = [x*x for x in range(3)]
+>>> g1
+[0, 1, 4]
+>>> g2 = (x*x for x in range(3)) # 这里变成了一个生成器
+>>> print g2
+<generator object <genexpr> at 0x7f45d219cd20>
+>>> ########## 一个比较常见的用途是读取文件 ##########
+>>> def read_file(fpath, block_size=1024):
+...     with open(fpath, 'rb') as f:
+...         while 1:
+...             block = f.read(block_size)
+...             if block:
+...                 yield block
+...             else:
+...                 return
+...
+>>> for block in read_file('apt-get'):
+...     print len(block)
+... 
+1024
+397
+```
+> 支持自定义的生成器需要实现`__iter__()`(返回迭代器对象本身)和`next()`(从容器返回下一项，没有下一项了的话需要引发StopIteration异常)。
+```Python
+>>> class MyIteration(object):
+...      def __init__(self, sequence):
+...          self._seq = sequence
+...          self._count = len(sequence)
+...      def __iter__(self):
+...          return self
+...      def next(self):
+...          if self._count:
+...             self._count -= 1
+...             return self._seq[-self._count-1]
+...          raise StopIteration
+... 
+>>> mi = MyIteration(range(4))
+>>> for each in mi:
+...     print each
+... 
+0
+1
+2
+3
+```
+
+ - [(译)Python关键字yield的解释(stackoverflow)](http://pyzh.readthedocs.org/en/latest/the-python-yield-keyword-explained.html)
  - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
 
 ---
 <h3 id="faq-coroutine" style="color:#d35400;">协程</h3>
 
-> **协程(Coroutine 协同程序)，又称微线程，纤程。
-子程序调用总是一个入口，一次返回，调用顺序是明确的。而协程的调用和子程序不同。协程看上去也是子程序，但执行过程中，在子程序内部可中断(不是函数调用，有点类似CPU的中断)，然后转而执行别的子程序，在适当的时候再返回来接着执行。**
+> **协程(Coroutine)，协同程序，又称微线程。**
+本质上讲还是单线程的程序。只不过将每个任务封装成一个子程序(函数)，然后通过调度程序按照一定的算法轮流调用这种子程序(将未完成的函数挂起，去执行另一个函数)，从而推进任务的进展。
+
+> Python 使用 yield expression 来实现简单的协程。yield 表达式可以看做是一个函数调用，send()的参数作为表达式的返回值；每次 yield 产生数据给另一个子程序后，yield 表达式就变成一个函数一样等待 send()/next()/throw()/close() 对它的下一次调用。
+
+> + 必须发送一个 None 来开启一个生成器，`send(None)`或`next()`。
+> + 无论生成器什么时候被一个 next() 唤醒，`yield` 表达式的值都为 None。
+> + `send(value)`唤醒一个生成器并且向其发送一个值，这个值被作为 yield 表达式的返回值。`send()`同时获取生成器产生的下一个值作为返回值，否则引发 StopItration　异常(当生成器不生产值退出了)。
+> + `throw(type, value=None, traceback=None)`可以给生成器发送一个异常，从生成器的内部引发异常从而控制生成器的执行。
+> + `close()`正常的（通过throw(GeneratorExit)并忽略GeneratorExit, StopIteration）关闭生成器。若生成器仍然返回了值，引发 RuntimeError。其它异常由解释器去处理。
+> 
+```Python
+>>> def gen():
+...     r = ''
+...     for n in range(5):
+...         print 'GEN:', r
+...         try:  # 可以使用 try/finally
+...             r = yield n
+...         finally:
+...             print '** generator exit'
+... 
+>>> g = gen()
+>>> g.send('') # 开启生成器必须发送 None，其余都不行
+Traceback (most recent call last):
+  ...
+TypeError: can't send non-None value to a just-started generator
+>>> g.next() # 或 g.send(None)
+GEN: 
+0
+>>> g.send('hi, gen')
+GEN: hi, gen
+1
+>>> g.throw(GeneratorExit) # g.close()也会执行finally块，不报异常(被pass)
+** generator exit
+Traceback (most recent call last):
+  ...
+GeneratorExit
+>>> g.send('Hello, gen?') # 生成器已经被异常终止
+Traceback (most recent call last):
+  ...
+StopIteration
+```
 
  - [协程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000)
+ - [PEP 342 -- Coroutines via Enhanced Generators](https://www.python.org/dev/peps/pep-0342/)
+ - [yield 之学习心得](http://wiki.woodpecker.org.cn/moin/Py25yieldNote)
+ - [A Curious Course on Coroutines and Concurrency](http://www.dabeaz.com/coroutines/index.html)
 
 ---
 <h3 id="faq-algorithm" style="color:#d35400;">数据结构和算法</h3>
