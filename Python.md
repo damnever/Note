@@ -217,7 +217,7 @@ Namespaces are one honking great idea -- let's do more of those!
 
 <h3 id="faq-other" style="color:#d35400;">其它</h3>
 
-> **else** 除常见的 `if ... else ...` 之外，`else` 在 Python 中还有很多其它的用途: `while ... else ...`，`for ... else ...`，`try ... except ... else ...`，在这些情况下，只有循环正常结束(break是非正常结束)或者没有异常发生时，`else`里的代码块才会执行。
+> **else** 除常见的 `if ... else ...` 之外，`else` 在 Python 中还有很多其它的用途: `while ... else ...`，`for ... else ...`，`try ... except ... else ...`，在这些情况下，只有循环正常结束(break是非正常结束)或者except没有捕获到异常时，`else`里的代码块才会执行。
 
 > **`Expression & statement`**: An `expression` is a combination of values, variables, and operators. A `statement` is a unit of code that the Python interpreter can execute.Technically an expression is also a statement, but it is probably simpler to think of them as different things. The important difference is that **`an expression has a value; a statement does not`**.
 
