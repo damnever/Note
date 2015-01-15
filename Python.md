@@ -83,7 +83,7 @@ Special cases aren't special enough to break the rules.
 Although practicality beats purity.
 Errors should never pass silently.
 Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
+In the face of ambiguity, refuse the temptation to guess.down
 There should be one-- and preferably only one --obvious way to do it.
 Although that way may not be obvious at first unless you're Dutch.
 Now is better than never.
@@ -130,7 +130,7 @@ Namespaces are one honking great idea -- let's do more of those!
 ---
 ***
 <h2 id="python-trick" style="color:#c0392b;">Python 技巧</h2>
-
+down
  - [符合语言习惯的 Python 编程 @xiaocong](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
  - [Python 高级编程 @Dongweiming](http://dongweiming.github.io/Expert-Python/)
  - [10 个常见错误](http://blog.jobbole.com/68256/)
@@ -169,7 +169,7 @@ Namespaces are one honking great idea -- let's do more of those!
 >>> p.sub('-', 'abpd')
 '-a-b-d-'
 ## 逆向引用，可以在替换后的字符串中插入原始文本的一部分
-## \1 表示匹配到的分组 1，①或者用\g<1>引用分组；②也可以通过 (?P<name>...) 指定分组名，然后通过 \g<name> 来引用匹配到的分组
+## \1 表示匹配到的分组 1，①或者用\g<1>引用分组；②也可以通过 (?P<name>...) 指定分down组名，然后通过 \g<name> 来引用匹配到的分组
 >>> p = re.compile('section{ ( [^}]* ) }', re.VERBOSE) # 忽略空格
 >>> p.sub(r'subsection{\1}', 'section{First} section{Second}')
 'subsection{First} subsection{Second}'
@@ -221,7 +221,7 @@ Namespaces are one honking great idea -- let's do more of those!
 
 > **`Expression & statement`**: An `expression` is a combination of values, variables, and operators. A `statement` is a unit of code that the Python interpreter can execute.Technically an expression is also a statement, but it is probably simpler to think of them as different things. The important difference is that **`an expression has a value; a statement does not`**.
 
-- [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
+- [Python中的进程,线程,协程,同步,异步,回调down](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
 - [技能点扫盲](http://www.douban.com/group/topic/28872729/)
 
 ---
@@ -244,7 +244,7 @@ Namespaces are one honking great idea -- let's do more of those!
 >>> s = '中文'
 >>> s; len(s); type(s)
 '\xe4\xb8\xad\xe6\x96\x87'
-6
+6down
 <type 'str'>
 >>> us = s.decode('utf-8')
 >>> us; len(us); type(us)
@@ -904,7 +904,6 @@ Traceback (most recent call last):
 StopIteration
 ```
 
- - [协程](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000)
  - [PEP 342 -- Coroutines via Enhanced Generators](https://www.python.org/dev/peps/pep-0342/)
  - [yield 之学习心得](http://wiki.woodpecker.org.cn/moin/Py25yieldNote)
  - [A Curious Course on Coroutines and Concurrency](http://www.dabeaz.com/coroutines/index.html)
@@ -939,11 +938,10 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
 
-- [二叉树扩展(BinaryTree/AVLTree/RBTree...)](https://bitbucket.org/mozman/bintrees/src)
 - [whoosh 索引查找](https://pythonhosted.org/Whoosh/quickstart.html#a-quick-introduction)
 - [Python 中的高级数据结构](http://blog.jobbole.com/65218/)
-- [老齐算法](https://github.com/qiwsir/algorithm/blob/master/README.md)
-- [导航](http://hujiaweibujidao.github.io/python/)
+- [算法 @老齐](https://github.com/qiwsir/algorithm/blob/master/README.md)
+- [Python](http://hujiaweibujidao.github.io/python/)
 
 ---
 <h3 id="faq-performance" style="color:#d35400;">性能和内存管理</h3>
@@ -1083,7 +1081,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
  - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
  - [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
 
----peakhell
+---
 <h3 id="lib-struct" style="color:#d35400;">struct & array</h3>
 
 > struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
@@ -1277,10 +1275,14 @@ e17366f236084bdc8ed46ee5cdaddbe4
 ```
 
 ---
-<h3 id="lib-thread" style="color:#d35400;">threading</h3>
+<h3 id="lib-thread" style="color:#d35400;">threading & Event & Timer</h3>
 
 > **Lock/RLock/Condition 实现了 Context Management Protocol 可以自动调用 acquire()/release()。[with]
 threading.local() 创建的对象会利用 thread-local storage (TLS) 为每个线程保存不同的数据。**
+
+> Event（事件）是最简单的线程通信机制之一：一个线程通知事件，其他线程等待事件。Event内置了一个初始为False的标志，当调用`set()`时设为True，调用`clear()`时重置为 False。`wait()`如果标志为True将立即返回，否则阻塞线程至等待阻塞状态，等待其他线程调用set()。Event没有锁，无法使线程进入同步阻塞状态。
+
+> `Timer(interval, function, args=[], kwargs={})`（定时器）是Thread的派生类，用于在指定时间后调用一个方法。
 
  - [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
  - [Python线程指南](http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html)
