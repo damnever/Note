@@ -221,7 +221,7 @@ Namespaces are one honking great idea -- let's do more of those!
 
 > **`Expression & statement`**: An `expression` is a combination of values, variables, and operators. A `statement` is a unit of code that the Python interpreter can execute.Technically an expression is also a statement, but it is probably simpler to think of them as different things. The important difference is that **`an expression has a value; a statement does not`**.
 
-- [Python中的进程,线程,协程,同步,异步,回调down](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
+- [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
 - [技能点扫盲](http://www.douban.com/group/topic/28872729/)
 
 ---
@@ -549,7 +549,7 @@ EXIT: MyContext
 > 可以在一个 with 语句中使用多个上下文对象,依次按照 *FILO* 顺序调用。
 ```Python
 >>> import contextlib
->>> with open('readfile', 'r') as reader,\gund
+>>> with open('readfile', 'r') as reader,\
 ...         open('writefile', 'w') as writer:
 ...     writer.write(reader.read())
 ... 
@@ -721,9 +721,10 @@ AttributeError: 'Name' object has no attribute '_name'
 ---
 <h3 id="faq-class-func" style="color:#d35400;">@classmethod & @staticmethod</h3>
 
-> classmethod 和 staticmethod 都可以通过实例和类名来调用。classmethod　只能访问类属性，staticmethod 都不能访问。
+> 都与实例无关。classmethod 至少需要一个类名作为参数；staticmethod 相当与一个普通函数。因为这两个方法一般不会其它代码用到，通过 decorator 的方式放在类里可以**代码的可读性**。
 
-> 这些方法可以用于某些不需要实例或两者都不需要的辅助函数。而又不至于减少**代码的可读性**。
+> classmethod 和 staticmethod 都可以通过实例和类名来调用。classmethod　只能访问类属性，staticmethod 即不能访问类属性也不能访问实例属性。
+
 > 
 ```Python
 >class MyClass(object):
