@@ -130,7 +130,7 @@ Namespaces are one honking great idea -- let's do more of those!
 ---
 ***
 <h2 id="python-trick" style="color:#c0392b;">Python 技巧</h2>
-down
+
  - [符合语言习惯的 Python 编程 @xiaocong](http://xiaocong.github.io/slides/idiomatic-python-code/#/main)
  - [Python 高级编程 @Dongweiming](http://dongweiming.github.io/Expert-Python/)
  - [10 个常见错误](http://blog.jobbole.com/68256/)
