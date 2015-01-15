@@ -48,7 +48,7 @@ import antigravity
     *   [anydbm & shelve & pickle(cPickle)](#lib-serializable)
     *   [hashlib & hmac & md5 & sha](#lib-encryption)
     *   [json & base64 & uuid](#lib-json)
-    *   [threading](#lib-thread)
+    *   [threading & Event & Timer](#lib-thread)
     *   [smtplib & email & poplib](#lib-email)
     *   [Cookie & cookielib](#lib-cookie)
     *   [urlparse & urllib & urllib2](#lib-url)
@@ -549,7 +549,7 @@ EXIT: MyContext
 > 可以在一个 with 语句中使用多个上下文对象,依次按照 *FILO* 顺序调用。
 ```Python
 >>> import contextlib
->>> with open('readfile', 'r') as reader,\
+>>> with open('readfile', 'r') as reader,\gund
 ...         open('writefile', 'w') as writer:
 ...     writer.write(reader.read())
 ... 
@@ -569,7 +569,7 @@ contextlib.nested
 <h3 id="faq-closure" style="color:#d35400;">闭包 (closure)</h3>
 
 >  **当函数离开创建环境后，依然持有其上下文状态。**
-> 一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
+> 一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被gund定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
 ```Python
 >>> def print_list(lst):
 ...     def func():
@@ -604,7 +604,7 @@ contextlib.nested
 - Dumping function closure for func:
 -- cell 0 = [1, 2, 3]
 ```
-
+gund
 > **后期绑定机制**（late binding）
 > 这是指在闭包中使用的变量的值，是在内层函数被调用的时候查找的。
 ```Python
