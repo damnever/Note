@@ -169,7 +169,7 @@ Namespaces are one honking great idea -- let's do more of those!
 >>> p.sub('-', 'abpd')
 '-a-b-d-'
 ## 逆向引用，可以在替换后的字符串中插入原始文本的一部分
-## \1 表示匹配到的分组 1，①或者用\g<1>引用分组；②也可以通过 (?P<name>...) 指定分down组名，然后通过 \g<name> 来引用匹配到的分组
+## \1 表示匹配到的分组 1，①或者用\g<1>引用分组；②也可以通过 (?P<name>...) 指定分组名，然后通过 \g<name> 来引用匹配到的分组
 >>> p = re.compile('section{ ( [^}]* ) }', re.VERBOSE) # 忽略空格
 >>> p.sub(r'subsection{\1}', 'section{First} section{Second}')
 'subsection{First} subsection{Second}'
@@ -478,14 +478,14 @@ attribute:  __dict__
 > **类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
 
 > 当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。
-> **`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ - type`**(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
+> **`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ -> type`**(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
 ```Python
 >>> ## 使用 type() 动态创建类
 >>> def fn(self):
 ...     print 'dynamic'
 ...
 >>> Foo = type('Foo', (object,), dict(foo_say=fn))
->>> Foo().foo_say()**
+>>> Foo().foo_say()
 dynamic
 >>> type(Foo); type(Foo())
 <type 'type'>
