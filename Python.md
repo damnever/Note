@@ -145,13 +145,13 @@ Namespaces are one honking great idea -- let's do more of those!
 ***
 <h2 id="python-regex" style="color:#c0392b;">正则表达式</h2>
 
-<h3 id="regex-overview" style="color:#d35400;">概览</h3>
+1. <h3 id="regex-overview" style="color:#d35400;">概览</h3>
 
-> ![](./data/regex.png)
+ ![](./data/regex.png)
 
-<h3 id="regex-method" style="color:#d35400;">方法</h3>
+2. <h3 id="regex-method" style="color:#d35400;">方法</h3>
 
-> 多使用编译对象 compile.
+ 多使用编译对象 compile.
  - `match()` 可指定位置段，默认从开头开始匹配；有且一个。
  - `search()` 可指定位置段，扫描字符串,找到一个为止；有且一个。
  - `findall()` 找到全部匹配,以列表返回。
@@ -181,19 +181,17 @@ Namespaces are one honking great idea -- let's do more of those!
 'call 0xffd2 for printing, 0xc000 for user code.'
 ```
 
-<h3 id="regex-pattern" style="color:#d35400;">模式功能</h3>
+3. <h3 id="regex-pattern" style="color:#d35400;">模式功能</h3>
 
-> 
-- 前向界定符
-  + `(?=...)` 前向肯定符，当前位置有匹配时成功，否则失败，不再进行后续匹配。
-  + `(?!...)` 前向否定符，当前位置不匹配时成功，尝试模式的的其余部分，否则失败。
-- 条件模式
-  + `(?(id/name)yes-pattern|no-pattern)` 条件为捕获到的分组 id 或名字。
+ - 前向界定符
+ 	+ `(?=...)` 前向肯定符，当前位置有匹配时成功，否则失败，不再进行后续匹配。
+    + `(?!...)` 前向否定符，当前位置不匹配时成功，尝试模式的的其余部分，否则失败。
+ - 条件模式
+  	+ `(?(id/name)yes-pattern|no-pattern)` 条件为捕获到的分组 id 或名字。
 
-<h3 id="regex-flag" style="color:#d35400;">编译标志</h3>
+4. <h3 id="regex-flag" style="color:#d35400;">编译标志</h3>
 
-> 
-|标志 | 含义|
+ |标志 | 含义|
 |----|----|
 |DEBUG  |显示表达式编译调试的信息 |
 |DOTALL, S	|使 '.' 特殊字符匹配所有任意字符 (包括换行符) |
@@ -210,14 +208,14 @@ Namespaces are one honking great idea -- let's do more of those!
 ['ABc', 'Dxc']
 ```
 
- - [Python正则表达式操作指南](http://wiki.ubuntu.org.cn/Python%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97)
- - [高级正则表达式](http://blog.jobbole.com/65605/)
+ -> [Python正则表达式操作指南](http://wiki.ubuntu.org.cn/Python%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97)
+ -> [高级正则表达式](http://blog.jobbole.com/65605/)
 
 ---
 ***
 <h2 id="faq" style="color:#c0392b;">援疑质理</h2>
 
- + [技能点扫盲](http://www.douban.com/group/topic/28872729/)
+ +> [技能点扫盲](http://www.douban.com/group/topic/28872729/)
 
 ---
 <h3 id="faq-other" style="color:#d35400;">其它</h3>
@@ -251,8 +249,8 @@ True
 ---
 <h3 id="faq-none-no" style="color:#d35400;">None 和 空</h3>
 
-> Python 通过获取`__nonzero__()`或者`__len__()`方法的调用结果来进行空值判断。
-> 
+Python 通过获取`__nonzero__()`或者`__len__()`方法的调用结果来进行空值判断。
+
 以下数据被当作空：
  - 常量 None
  - 常量 False
@@ -260,7 +258,7 @@ True
  - 空序列或字典，如 ''、()、set()、list()、[]、dict()、{}
  - 类中自定义了`__nonzero__()`方法或`__len__()`方法，并且该方法返回整数0或者False时。
 
-> None的类型是NoneType。None可以当作空来处理，但是空并不代表为None。
+None的类型是NoneType。None可以当作空来处理，但是空并不代表为None。
 ```Python
 >>> def mm(arg):
 ...     if arg is not None:
@@ -280,14 +278,14 @@ True
 ---
 <h3 id="faq-is-equal" style="color:#d35400;">is 和 ==</h3>
 
-> 判断对象(id 值)是否相等用 is，判断值是否相等用 ==。
-> 
+判断对象(id 值)是否相等用 is，判断值是否相等用 ==。
+
 | 操作符 | 意义 |
 |-------|------|
 | is | object identity |
 | == | equal |
 
-> Python 中的string interning(字符串驻留机制)：对于较小的字符串，为了提高系统性能会保留其值的一个副本，创建新的值相同的字符串时直接指向该副本即可。
+Python 中的string interning(字符串驻留机制)：对于较小的字符串，为了提高系统性能会保留其值的一个副本，创建新的值相同的字符串时直接指向该副本即可。
 ```Python
 >>> a = 'Hello'
 >>> b = 'Hello'
@@ -311,9 +309,11 @@ False
 ---
 <h3 id="faq-encoding" style="color:#d35400;">编码和解码</h3>
 
-> str 类型在 Python2 中是ASCII码，Python 3 中为 unicode。
-> **规则：unicode 作为中间态用来 encode，可以 decode 成 unicode.**
-> `from __future__ import unicode_literals` 使用 Python 3 特性，把　str　变成　unicode.
+str 类型在 Python2 中是ASCII码，Python 3 中为 unicode。
+
+**规则：unicode 作为中间态用来 encode，可以 decode 成 unicode.**
+
+`from __future__ import unicode_literals` 使用 Python 3 特性，把　str　变成　unicode.
 ```Python
 >>> s = '中文'
 >>> s; len(s); type(s)
@@ -334,10 +334,11 @@ u'\u4e2d\u6587'
 ---
 <h3 id="faq-object" style="color:#d35400;">可变对象和不可变对象</h3>
 
->**引用和对象**：对象是内存中储存数据的实体，引用指向对象。`a = 1; b = 'str'`中`1`和`'str'`是对象， `a`和`b`是对其的引用，相当于一个标示。
+**引用和对象**：对象是内存中储存数据的实体，引用指向对象。`a = 1; b = 'str'`中`1`和`'str'`是对象， `a`和`b`是对其的引用，相当于一个标示。
 
  - 可变数据对象(*mutable* object)【列表，字典，字节数组】，可变对象的更改会直接影响原对象。list 的切片操作可以看做深拷贝，但重新生成一个对象。
  - 不可变数据对象(*immutable* object)【数字，字符串，元组】，对不可变对象的操作会直接创造一个新的对象；字符串对象不允许以索引的方式赋值就是因为其不可变性。
+
 ```Python
 >>> s = 'Hello, world!'
 >>> s[7] = 'W'
@@ -349,9 +350,9 @@ TypeError: 'str' object does not support item assignment
 ---
 <h3 id="faq-default-arg" style="color:#d35400;">默认参数值</h3>
 
-> **用 None 或不可变对象作为函数中的默认参数**
+**用 None 或不可变对象作为函数中的默认参数**
 
-> 默认参数在函数被调用的时候仅仅被评估一次，以后都会使用第一次的评估结果，如果使用可变对象会带来隐患(如list等)。
+默认参数在函数被调用的时候仅仅被评估一次，以后都会使用第一次的评估结果，如果使用可变对象会带来隐患(如list等)。
 ```Python
 >>> def foo(a, b=[]):
 ...     b.append(a)
@@ -384,14 +385,14 @@ TypeError: 'str' object does not support item assignment
 0x7fd42d897ea8 -> [2]   # 仅仅被评估一次
 ```
 
-- [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
+-> [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
 
 ---
 <h3 id="faq-func-pass-value" style="color:#d35400;">传值还是传引用？</h3>
 
-> 传对象，不可变对象和可变对象有区别。
+传对象，不可变对象和可变对象有区别。
 
-> 函数参数在传递的过程中将整个对象传入，对可变对象的修改在函数外部以及内部都可见，调用者和被调用者之间共享这个对象；而对于不可变对象，由于并不能被改变，因此修改都是通过通过生成一个新的对象然后赋值来实现的。
+函数参数在传递的过程中将整个对象传入，对可变对象的修改在函数外部以及内部都可见，调用者和被调用者之间共享这个对象；而对于不可变对象，由于并不能被改变，因此修改都是通过通过生成一个新的对象然后赋值来实现的。
 ```Python
 >>> ##### 可变对象传引用
 >>> def foo(lst):
@@ -428,7 +429,7 @@ TypeError: 'str' object does not support item assignment
 ---
 <h3 id="faq-format" style="color:#d35400;">格式化</h3>
 
-> `'{}, {}'.format('a', 'b')` # 2.7+ only
+`'{}, {}'.format('a', 'b')` # 2.7+ only
 ```Python
 >>> class Test:
 ...     def __str__(self):
@@ -458,40 +459,46 @@ TypeError: 'str' object does not support item assignment
 'Now: 2015-01-10 21:04:42'
 ```
 
- - [关于格式化规范的迷你语言](http://digitser.net/python/2.7.8/zh-CN/library/string.html#format-string-syntax)
+-> [关于格式化规范的迷你语言](http://digitser.net/python/2.7.8/zh-CN/library/string.html#format-string-syntax)
 
 ---
 <h3 id="faq-file" style="color:#d35400;">文件</h3>
 
-> 如果要把数据写到磁盘上,除调用 `flush()` 外,还得用 `sync()`,以确保数据从系统缓冲区同步到磁盘。`close()` 总是会调用用这两个方法。
-> 读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
-> 通常建议用迭代器或 `xreadlines()` 代替 `readlines()`，后者默认一次性读取整个文件。
+如果要把数据写到磁盘上,除调用 `flush()` 外,还得用 `sync()`,以确保数据从系统缓冲区同步到磁盘。`close()` 总是会调用用这两个方法。
+
+读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
+
+通常建议用迭代器或 `xreadlines()` 代替 `readlines()`，后者默认一次性读取整个文件。
 
 ---
 <h3 id="faq-functional-programing" style="color:#d35400;">函数</h3>
 
-> `lambda` 匿名函数，不显式地定义函数，不需要 return，返回值就是表达式的结果。
+1. 内置函数
+ - `lambda` 匿名函数，不显式地定义函数，不需要 return，返回值就是表达式的结果。
 
-> `map(function, sequence[, sequence, ...])` 将传入的函数行为映射到传入的序列的每个元素上，并返回一个 list。
+ - `map(function, sequence[, sequence, ...])` 将传入的函数行为映射到传入的序列的每个元素上，并返回一个 list。
 
-> `reduce(function, iterable[, initializer])` 传入的函数必须接收两个参数；把函数返回值和后一个列表元素传入函数，如此循环。可选参数`initializer`为一个初始值，没有的话为序列的第一项。
+ - `reduce(function, iterable[, initializer])` 传入的函数必须接收两个参数；把函数返回值和后一个列表元素传入函数，如此循环。可选参数`initializer`为一个初始值，没有的话为序列的第一项。
 
-> `filter(function, iterable)` 把传入的函数依次作用于每个元素，然后根据返回值是 True 还是 False 决定保留还是丢弃该元素。
+ - `filter(function, iterable)` 把传入的函数依次作用于每个元素，然后根据返回值是 True 还是 False 决定保留还是丢弃该元素。
 
-> `all(iterable)` 若可迭代序列的**所有**元素都为 True，或序列为空，返回 True。
+ - `all(iterable)` 若可迭代序列的**所有**元素都为 True，或序列为空，返回 True。
 
-> `any(iterable)` 若可迭代序列**任一**元素为 True，返回 True；为空返回 False。
+ - `any(iterable)` 若可迭代序列**任一**元素为 True，返回 True；为空返回 False。
 
-> `iter(o[, sentinel])` 传入一个序列，返回可迭代对象，可选参数`sentinel`是一个终止标识。
-```Python
+ - `iter(o[, sentinel])` 传入一个序列，返回可迭代对象，可选参数`sentinel`是一个终止标识。
+
+ ```Python
 # 一种有用形式，读取文件，直到readline()返回空字符串为止
 with open('mydata.txt') as fp:
     for line in iter(fp.readline, ''):
         process_line(line)
 ```
-> 
+ -> [Python Built-in Functions](https://docs.python.org/2/library/functions.html)
+
+2. **函数式编程**(Functional Programing)，一种抽象程度很高的编程范式，把运算过程尽量写成一系列嵌套的函数调用，函数仅接收输入并产生输出。
 ```Python
->>> # 找出一个序列中的偶数并将它们乘以3(Functional Programing的一种例子)
+>>> # 找出一个序列中的偶数并将它们乘以3
 >>> def even_filter(nums):
 ...     return filter(lambda x: x%2==0, nums)
 ... 
@@ -515,55 +522,52 @@ The number: 18
 The number: 24
 The number: 30
 ```
-
-- [Python 内置函数](https://docs.python.org/2/library/functions.html)
-
-> 关于**函数式编程**(Functional Programing)，一种抽象程度很高的编程范式，把运算过程尽量写成一系列嵌套的函数调用，函数仅接收输入并产生输出。
-
-- **[函数式编程](http://coolshell.cn/articles/10822.html)**
-- [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
-- [Python函数式编程指南（一）：概述](http://www.cnblogs.com/huxi/archive/2011/06/18/2084316.html)
+ -> **[函数式编程](http://coolshell.cn/articles/10822.html)**
+ -> [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
+ -> [Python函数式编程指南（一）：概述](http://www.cnblogs.com/huxi/archive/2011/06/18/2084316.html)
 
 ---
 <h3 id="faq-class" style="color:#d35400;">类</h3>
 
-> **实例方法的特殊性**: 当用实例调用时,它是个 bound method,动态绑定到对象实例。而当用类型调用时,是 unbound method,必须显式传递 self 参数。
+> Python 2 中存在两种形式的类，1) New-Style Class，这种类需要显示的继承于object或设置文件的默认元类`__metaclass__=type`；2)Clasic Class，在 Python 3 中已经不存在了。
 
-> **字段 (Field) 和 属性 (Property) 是不同的。**
+1. **名称空间**
+ 类型(class)存储了所有的静态字段和方法(包含实例方法)，而实例(instance)仅存储实例字段。
+ **字段 (Field) 和 属性 (Property) 是不同的。**
  - 实例字段存储在 `instance.__dict__`,代表单个对象实体的状态。
  - 静态字段存储在 `class.__dict__`,为所有同类型实例共享。
  - 必须通过类型和实例对象才能访问字段。
- - 以双下划线开头的 class 和 instance 成员视为私有,会被重命名为 `_<class>__<name>` 形式。(module 成员不变)
+ - 以双下划线开头的 class/instance 成员视为私有,会被重命名为 `_<class>__<name>` 形式。(module 成员不变)
 
-> 某些时候,既想使用私有字段,又不想放弃外部访问权限。
+ 属性 (Property) 是由 getter、setter、deleter 几个方法构成的逻辑。属性可能直接返回字段值，也可能是动态逻辑运算的结果。
+
+ 某些时候,既想使用私有字段,又不想放弃外部访问权限。
  - 用重命名后的格式访问。
  - 只用一个下划线,仅提醒,不重命名。
 
-**继承**
-> 
- - super 的类型参数决定了在 mro( Method Resolution Order**多重继承成员搜索顺序，旧式类是深度优先搜索，新式类为广度优先搜索**) 列表中的搜索起始位置,总是返回该参数后续类型的成员。单继承时总是搜索该参数的基类型。
- - 在多重继承初始化方法中使用 super 可能会引发一些奇怪的状况。
+ 实例方法的特殊性: 当用实例调用时,它是个 bound method,动态绑定到对象实例。而当用类型调用时,是 unbound method,必须显式传递 self 参数。
 
-- [Understanding Python MRO - Class search path](http://makina-corpus.com/blog/metier/2014/python-tutorial-understanding-python-mro-class-search-path)
+2. **继承**
+ 多继承，基类顺序影响成员搜索顺序。
 
-**抽象类**
-> 
- - `from abc import ABCMeta, abstractmethod, abstractproperty` #创建抽象类的类型，抽象方法，抽象属性 ，`__metaclass__ = ABCMeta`标明此类为抽象类
- - 抽象类 (Abstract Class) 无无法实例化,且派生类必须 "完整" 实现所有抽象成员才可创建实例。
- - 如果派生类也是抽象类型,那么可以部分实现或完全不实现基类抽象成员。
+ 多重继承成员搜索顺序 mro(Method Resolution Order **旧式类是深度优先搜索，新式类为广度优先搜索**) 列表中的搜索起始位置,总是返回该参数后续类型的成员。单继承时总是搜索该参数的基类型。
 
-**描述符**
-> 
- - 实现 `__get__` 和 `__set__` 方法,称为 data descriptor
- - 仅有 `__get__` 方法的,称为 non-data descriptor
- - `__get__` 对 owner_class、owner_instance 访问有效
- - `__set__`、`__delete__` 仅对 owner_instance 访问有效
- - 详见 [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
+ 在多重继承初始化方法中使用 super 可能会引发一些奇怪的状况。
 
-**自省（反射）**
-> **Python 里面一切皆对象，函数，方法，类，实例，代码块等都有自己的内置属性。**
-> **`__getattr__` (访问不存在的成员)，`__setattr__` (对任何成员的赋值操作), `__delattr__` (删除成员操作), `__getattribute__` (访问任何存在或不存在的成员,包括 __dict__)。**
-不要在这几个方法里直接访问对象成员,也不要用 hasattr/getattr/setattr/delattr 函数,因为它们会被再次拦截,形成无限循环。正确的做法是直接操作 `__dict__`。而 `__getattribute__` 连 `__dict__` 都会拦截,只能用基类的 `__getattribute__` 返回结果。
+ -> [Understanding Python MRO - Class search path](http://makina-corpus.com/blog/metier/2014/python-tutorial-understanding-python-mro-class-search-path)
+
+3. **抽象类**
+ `from abc import ABCMeta, abstractmethod, abstractproperty` # 创建抽象类的类型，抽象方法，抽象属性 ，`__metaclass__ = ABCMeta`标明此类为抽象类。
+
+ 抽象类 (Abstract Class) 无法实例化,且派生类必须 "完整" 实现所有抽象成员才可创建实例。
+
+ 如果派生类也是抽象类型,那么可以部分实现或完全不实现基类抽象成员。
+
+4. **自省（反射）**
+ **Python 里面一切皆对象，函数，方法，类，实例，代码块等都有自己的内置属性。**
+ `__getattr__` (访问不存在的成员)，`__setattr__` (对任何成员的赋值操作), `__delattr__` (删除成员操作), `__getattribute__` (访问任何存在或不存在的成员,包括 __dict__)。
+
+ 不要在这几个方法里直接访问对象成员,也不要用 hasattr/getattr/setattr/delattr 函数,因为它们会被再次拦截,形成无限循环。正确的做法是直接操作 `__dict__`。而 `__getattribute__` 连 `__dict__` 都会拦截,只能用基类的 `__getattribute__` 返回结果。
 ```Python
 >>> class A(object):
 ...     def __init__(self, x):
@@ -598,16 +602,16 @@ attribute:  __dict__
 del:  y
 attribute:  __dict__
 ```
-
-- [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
+ -> [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
+ -> [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 
 ---
 <h3 id="faq-metaclass" style="color:#d35400;">元类 (metaclass)</h3>
 
-> **类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
+**类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
 
-> 当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。
-> **`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ -> type`**(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
+当解释器创建类型对象时,会按以下顺序查找` __metaclass__` 属性。
+**`class.__metaclass__ -> bases.__metaclass__ -> module.__metaclass__ -> type`**(这也是为什么在模块中可以用 `__metaclass__` 为所有类型指定默认元类的缘故。)
 ```Python
 >>> ## 使用 type() 动态创建类
 >>> def fn(self):
@@ -633,29 +637,29 @@ dynamic
 <class '__main__.MyClass'>
 ```
 
- - [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
- - [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
- - [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba**000)
+-> [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
+-> [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
+-> [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba**000)
 
 ---
 <h3 id="faq-mixin" style="color:#d35400;">MixIn</h3>
 
-> 一种特殊的多继承，在不改变原对象的情况下对其进行扩展。
-> 1. You want to provide a lot of optional features for a class.
-> 2. You want to use one particular feature in a lot of different classes.
+一种特殊的多继承，在不改变原对象的情况下对其进行扩展。
+ 1. You want to provide a lot of optional features for a class.
+ 2. You want to use one particular feature in a lot of different classes.
 
-- [Mixin 扫盲班](http://wiki.woodpecker.org.cn/moin/FlyintoMixin)
-- [Mix-in 技术介绍](http://wiki.woodpecker.org.cn/moin/IntroMixin)
-- [Mixins considered harmful/1](http://www.artima.com/weblogs/viewpost.jsp?thread=246341)
-- [Mixins considered harmful/2](http://www.artima.com/weblogs/viewpost.jsp?thread=246483)
+-> [Mixin 扫盲班](http://wiki.woodpecker.org.cn/moin/FlyintoMixin)
+-> [Mix-in 技术介绍](http://wiki.woodpecker.org.cn/moin/IntroMixin)
+-> [Mixins considered harmful/1](http://www.artima.com/weblogs/viewpost.jsp?thread=246341)
+-> [Mixins considered harmful/2](http://www.artima.com/weblogs/viewpost.jsp?thread=246483)
 
 ---
 <h3 id="faq-with" style="color:#d35400;">上下文与 with</h3>
 
-> **上下文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文环境。即便代码块发生异常,清理操作也会被执行。**
+**上下文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文环境。即便代码块发生异常,清理操作也会被执行。**
  + `__enter__()`: 进入 Runtime 上下文,返回上下文对象；该方法返回值会被绑定到使用这种上下文管理器的 with 语句 as 子句下的标示符。
  + `__exit__(exc_type, exc_val, exc_tb)`: 退出 Runtime 上下文并返回 bool 指示标识，返回 True 会导致 with 语句抑制异常，并继续执行 with 语句后紧跟的语句；否则，执行完该方法后异常会继续传播。若 with 语句本体执行期间发生异常的话，自变量会包含异常类型、值、回溯信息。否则，三个自变量全为 None。
-> 
+
 ```Python
 >>> class MyContext(object):
 ...     def __init__(self, text):
@@ -675,7 +679,7 @@ ENTER: MyContext
 MyContext say: Hello!
 EXIT: MyContext
 ```
-> 可以在一个 with 语句中使用多个上下文对象,依次按照 *FILO* 顺序调用。
+可以在一个 with 语句中使用多个上下文对象,依次按照 *FILO* 顺序调用。
 ```Python
 >>> import contextlib
 >>> with open('readfile', 'r') as reader,\
@@ -689,16 +693,17 @@ EXIT: MyContext
 contextlib.nested
 contextlib.nested
 ```
-> 另: threading 中的 Lock/RLock/Condition 实现了 Context Management Protocol。
+另: threading 中的 Lock/RLock/Condition 实现了 Context Management Protocol。
 
- - [Python 中的上下文管理器](http://blog.jobbole.com/64175/)
- - [理解 Python 的 with 语句](http://python.42qu.com/11155501)
+-> [Python 中的上下文管理器](http://blog.jobbole.com/64175/)
+-> [理解 Python 的 with 语句](http://python.42qu.com/11155501)
 
 ---
 <h3 id="faq-closure" style="color:#d35400;">闭包 (closure)</h3>
 
->  **当函数离开创建环境后，依然持有其上下文状态。**
-> 一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被gund定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
+**当函数离开创建环境后，依然持有其上下文状态。**
+
+一个函数闭包是一个函数和一个引用集合的组合，这个引用集合指向这个函数被gund定义的作用域的变量。后者通常指向一个引用环境 (referencing environment)，这使得函数能够在它被定义的区域之外执行。在 Python 中，这个引用环境被存储在一个 cell 的 tuple 中。你能够通过 `func_closure` 或 `__closure__` 属性访问它。要铭记的一点是**引用及是引用，而不是对象的深度拷贝**。当然了，对于不可变对象而言，这并不是问题，然而对可变对象(list)这点就必须注意。
 ```Python
 >>> def print_list(lst):
 ...     def func():
@@ -733,9 +738,9 @@ contextlib.nested
 - Dumping function closure for func:
 -- cell 0 = [1, 2, 3]
 ```
-gund
-> **后期绑定机制**（late binding）
-> 这是指在闭包中使用的变量的值，是在内层函数被调用的时候查找的。
+**后期绑定机制**（late binding）
+
+这是指在闭包中使用的变量的值，是在内层函数被调用的时候查找的。
 ```Python
 >>> def create_multipliers():
 ...     return [lambda x: i*x for i in range(5)] # 列表解析
@@ -762,18 +767,18 @@ gund
 8
 ```
 
- - [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
- - [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
- - [Python 闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
- - [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
- - [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
+-> [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
+-> [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
+-> [Python 闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
+-> [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
+-> [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
 
 ---
 <h3 id="faq-decorator" style="color:#d35400;">装饰器"@" (decorator)</h3>
 
-> **若需要增强某函数的功能，但又不希望修改该函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。**
+**若需要增强某函数的功能，但又不希望修改该函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。**
 
-> 装饰器不一定非得是个函数返回包装对象,也可以是个类,通过 `__call__` 完成目标调用；当给某个方法`@class_decorator`时，类调用`__init__()`，`__call__()`在调用目标方法时被调用。如果 decorator 有参数的话，`__init__()` 成员就不能传入 func 了，而 func 是在 `__call__()`的时候传入的。
+装饰器不一定非得是个函数返回包装对象,也可以是个类,通过 `__call__` 完成目标调用；当给某个方法`@class_decorator`时，类调用`__init__()`，`__call__()`在调用目标方法时被调用。如果 decorator 有参数的话，`__init__()` 成员就不能传入 func 了，而 func 是在 `__call__()`的时候传入的。
 ```Python
 @dec2
 @dec1(arg)
@@ -784,7 +789,7 @@ def func(*args, **kwargs):
     pass
 func = dec2( dec1(arg)(func) )
 ```
-> 利用缓存提高斐波拉契数例的递归算法的效率
+利用缓存提高斐波拉契数例的递归算法的效率
 ```Python
 >>> import functools
 >>> def memo(func):
@@ -809,14 +814,16 @@ func = dec2( dec1(arg)(func) )
 5
 ```
 
- - [Python 的闭包和装饰器](http://book42qu.readthedocs.org/en/latest/python/python-closures-and-decorators.html)
- - **[Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)**
- - [Python Decorator Library](https://wiki.python.org/moin/PythonDecoratorLibrary)
+-> [Python 的闭包和装饰器](http://book42qu.readthedocs.org/en/latest/python/python-closures-and-decorators.html)
+-> **[Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)**
+-> [Python Decorator Library](https://wiki.python.org/moin/PythonDecoratorLibrary)
 
 ---
 <h3 id="faq-property" style="color:#d35400;">属性方法 @property</h3>
 
-> `property([fget[, fset[, fdel[, doc]]]])` **将方法当成属性用**
+`property([fget[, fset[, fdel[, doc]]]])` **将方法当成属性用**
+
+可以通过函数的形式使用，也可以通过装饰器的形式来使用
 ```Python
 >>> class Name(object):
 ...     @property
@@ -850,47 +857,46 @@ AttributeError: 'Name' object has no attribute '_name'
 ---
 <h3 id="faq-class-func" style="color:#d35400;">@classmethod & @staticmethod</h3>
 
-> 都与实例无关。classmethod 至少需要一个类名作为参数；staticmethod 相当与一个普通函数。因为这两个方法一般不会其它代码用到，通过 decorator 的方式放在类里可以**代码的可读性**。
+都与实例无关。classmethod 至少需要一个类名作为参数；staticmethod 相当与一个普通函数。因为这两个方法一般不会其它代码用到，通过 decorator 的方式放在类里可以**代码的可读性**。
 
-> classmethod 和 staticmethod 都可以通过实例和类名来调用。classmethod　只能访问类属性，staticmethod 即不能访问类属性也不能访问实例属性。
+classmethod 和 staticmethod 都可以通过实例和类名来调用。classmethod　只能访问类属性，staticmethod 即不能访问类属性也不能访问实例属性。
 
-> 
 ```Python
->class MyClass(object):
->
->    class_field = 'class field'
->
->    def __init__(self):
->        self.instance_field = 'instance_field'
->
->    def instance_method(*args):
->        print 'bound method args:', args
->        print 'I can get:', args[0].instance_field
->
->    @staticmethod
->    def static_method(*args):
->        print 'staticmethod args:', args
->
->    @classmethod
->    def class_method(*args):
->        print 'classmethod args:', args
->        print 'I can get:', args[0].class_field
->        # print 'cm call static method:', args[0].static_method('sm')
->        # print 'cm call bound method:', args[0]().instance_method()
->
->if __name__ == '__main__':
->    obj = MyClass()
->    print '** Call classmethod:'
->    obj.class_method()
->    MyClass.class_method()
->    print '** call staticmethod:'
->    obj.static_method()
->    MyClass.static_method()
->    print '** call boundmethod:'
->    obj.instance_method()
+class MyClass(object):
+
+    class_field = 'class field'
+
+    def __init__(self):
+        self.instance_field = 'instance_field'
+
+    def instance_method(*args):
+        print 'bound method args:', args
+        print 'I can get:', args[0].instance_field
+
+    @staticmethod
+    def static_method(*args):
+        print 'staticmethod args:', args
+
+    @classmethod
+    def class_method(*args):
+        print 'classmethod args:', args
+        print 'I can get:', args[0].class_field
+        # print 'cm call static method:', args[0].static_method('sm')
+        # print 'cm call bound method:', args[0]().instance_method()
+
+if __name__ == '__main__':
+    obj = MyClass()
+    print '** Call classmethod:'
+    obj.class_method()
+    MyClass.class_method()
+    print '** call staticmethod:'
+    obj.static_method()
+    MyClass.static_method()
+    print '** call boundmethod:'
+    obj.instance_method()
 ```
-> 输出
-> ```
+输出
+```
 ** Call classmethod:
 classmethod args: (<class '__main__.MyClass'>,)
 I can get: class field
@@ -904,12 +910,13 @@ bound method args: (<__main__.MyClass object at 0x7f7adbc89a90>,)
 I can get: instance_field
 ```
 
-- [PYTHON中STATICMETHOD和CLASSMETHOD的差异](http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html)
+-> [PYTHON中STATICMETHOD和CLASSMETHOD的差异](http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html)
 
 ---
 <h3 id="faq-partial" style="color:#d35400;">偏函数 (partial)</h3>
 
->  **当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
+**当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
+
 固定参数时，(1)若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。(2)若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数(首先`args = (...)`然后`args += (...)`)。
 ```Python
 >>> def f(a, b, c):
@@ -933,11 +940,11 @@ a=1, b=2, c=3
 ---
 <h3 id="faq-yield" style="color:#d35400;">yield & generator</h3>
 
-> **生成器**是可以迭代的，读取它的时候只可以读取一次，因为它并不把所有的值放在内存中，它是实时地生成数据。
+**生成器**是可以迭代的，读取它的时候只可以读取一次，因为它并不把所有的值放在内存中，它是实时地生成数据。
 
-> **yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。使用空的 return 语句可以终止迭代，否则出现异常(非StopIteration)。
+**yield** 是一个类似 return 的关键字，只是这个函数返回的是个生成器。使用空的 return 语句可以终止迭代，否则出现异常(非StopIteration)。
 
-> If the yield-expression is a yield-statement, this returned value is ignored, similar to ignoring the value returned by a function call used as a statement.
+If the yield-expression is a yield-statement, this returned value is ignored, similar to ignoring the value returned by a function call used as a statement.
 ```Python
 >>> g1 = [x*x for x in range(3)]
 >>> g1
@@ -961,7 +968,7 @@ a=1, b=2, c=3
 1024
 397
 ```
-> 支持自定义的生成器需要实现`__iter__()`(返回迭代器对象本身)和`next()`(从容器返回下一项，没有下一项了的话需要引发StopIteration异常)。
+支持自定义的生成器需要实现`__iter__()`(返回迭代器对象本身)和`next()`(从容器返回下一项，没有下一项了的话需要引发StopIteration异常)。
 ```Python
 >>> class MyIteration(object):
 ...      def __init__(self, sequence):
@@ -985,23 +992,23 @@ a=1, b=2, c=3
 3
 ```
 
- - [(译)Python关键字yield的解释(stackoverflow)](http://pyzh.readthedocs.org/en/latest/the-python-yield-keyword-explained.html)
- - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
+-> [(译)Python关键字yield的解释(stackoverflow)](http://pyzh.readthedocs.org/en/latest/the-python-yield-keyword-explained.html)
+-> [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
 
 ---
 <h3 id="faq-coroutine" style="color:#d35400;">协程</h3>
 
-> **协程(Coroutine)，协同程序，又称微线程。**
+**协程(Coroutine)，协同程序，又称微线程。**
 本质上讲还是单线程的程序。只不过将每个任务封装成一个子程序(函数)，然后通过调度程序按照一定的算法轮流调用这种子程序(将未完成的函数挂起，去执行另一个函数)，从而推进任务的进展。
 
-> Python 使用 yield expression 来实现简单的协程。yield 表达式可以看做是一个函数调用，send()的参数作为表达式的返回值；每次 yield 产生数据给另一个子程序后，yield 表达式就变成一个函数一样等待 send()/next()/throw()/close() 对它的下一次调用。
+Python 使用 yield expression 来实现简单的协程。yield 表达式可以看做是一个函数调用，send()的参数作为表达式的返回值；每次 yield 产生数据给另一个子程序后，yield 表达式就变成一个函数一样等待 send()/next()/throw()/close() 对它的下一次调用。
 
-> + 必须发送一个 None 来开启一个生成器，`send(None)`或`next()`。
-> + 无论生成器什么时候被一个 next() 唤醒，`yield` 表达式的值都为 None。
-> + `send(value)`唤醒一个生成器并且向其发送一个值，这个值被作为 yield 表达式的返回值。`send()`同时获取生成器产生的下一个值作为返回值，否则引发 StopItration　异常(当生成器不生产值退出了)。
-> + `throw(type, value=None, traceback=None)`可以给生成器发送一个异常，从生成器的内部引发异常从而控制生成器的执行。
-> + `close()`正常的（通过throw(GeneratorExit)并忽略GeneratorExit, StopIteration）关闭生成器。若生成器仍然返回了值，引发 RuntimeError。其它异常由解释器去处理。
-> 
++ 必须发送一个 None 来开启一个生成器，`send(None)`或`next()`。
++ 无论生成器什么时候被一个 next() 唤醒，`yield` 表达式的值都为 None。
++ `send(value)`唤醒一个生成器并且向其发送一个值，这个值被作为 yield 表达式的返回值。`send()`同时获取生成器产生的下一个值作为返回值，否则引发 StopItration　异常(当生成器不生产值退出了)。
++ `throw(type, value=None, traceback=None)`可以给生成器发送一个异常，从生成器的内部引发异常从而控制生成器的执行。
++ `close()`正常的（通过throw(GeneratorExit)并忽略GeneratorExit, StopIteration）关闭生成器。若生成器仍然返回了值，引发 RuntimeError。其它异常由解释器去处理。
+
 ```Python
 >>> def gen():
 ...     r = ''
@@ -1034,14 +1041,14 @@ Traceback (most recent call last):
 StopIteration
 ```
 
- - [PEP 342 -- Coroutines via Enhanced Generators](https://www.python.org/dev/peps/pep-0342/)
- - [yield 之学习心得](http://wiki.woodpecker.org.cn/moin/Py25yieldNote)
- - [A Curious Course on Coroutines and Concurrency](http://www.dabeaz.com/coroutines/index.html)
+-> [PEP 342 -- Coroutines via Enhanced Generators](https://www.python.org/dev/peps/pep-0342/)
+-> [yield 之学习心得](http://wiki.woodpecker.org.cn/moin/Py25yieldNote)
+-> [A Curious Course on Coroutines and Concurrency](http://www.dabeaz.com/coroutines/index.html)
 
 ---
 <h3 id="faq-algorithm" style="color:#d35400;">数据结构和算法</h3>
 
-> **++bisect++** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
+**bisect** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
  - 只查找可插入位置，不插入
   + `bisect(l, a)` # 查找 a 在序列 l 中的合适插入位置,默认插入以存在元素右侧。
   + `bisect_left(l, a)` # 如果待查找元素在列表中存在,则返回左侧插入位置。
@@ -1052,7 +1059,7 @@ StopIteration
   + `insort_right(l, a)` # 同理，但直接插入
 
 
-> **++heapq++** 最小堆 (完全平衡二叉树，每个父节点小于等于其左右子节点)
+**heapq** 最小堆 (完全平衡二叉树，每个父节点小于等于其左右子节点)
  - `heappush(heap, item)` # 将 item 压入堆中
  - `heappop(heap)` # 总是弹出最小 item（堆顶）
  - `heappushpop(heap, item)` # 先push , 再pop, 弹出值小于等于 item
@@ -1060,7 +1067,7 @@ StopIteration
  - `heapify(list)` # 将序列转换成堆
  - `nlargest/nsmallest(n, l)` # 从列表(不一定是堆)有序返回最大(最小)的 n 个元素
 
-> **++Queue++** 队列（在 Python3 里为 queue）
+**Queue** 队列（在 Python3 里为 queue）
 Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： 优先级队列，级别低先出
  - `put(item, [, block[, timeout]]) / get([, block[, timeout]])` # 压入/取出元素。**put**：如果 block 为 True，timeout 不为 None，在等待时间 timeout 内队列一直为满，引发 Queue.Full 异常；如果 block 为 False，则timeout被忽略，只要入队的时候队列为满，立即引发 Queue.Full 异常。**get**： 同理引发 Queue.Empty 异常。
  - `put_nowait(item) / get_nowait()` # 相当于 `put(item, False) / get(False)`
@@ -1068,10 +1075,10 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
 
-- [whoosh 索引查找](https://pythonhosted.org/Whoosh/quickstart.html#a-quick-introduction)
-- [Python 中的高级数据结构](http://blog.jobbole.com/65218/)
-- [算法 @老齐](https://github.com/qiwsir/algorithm/blob/master/README.md)
-- [Python](http://hujiaweibujidao.github.io/python/)
+-> [算法 @老齐](https://github.com/qiwsir/algorithm/blob/master/README.md)
+-> [Python @hujiaweibujidao](http://hujiaweibujidao.github.io/python/)
+-> [Python 中的高级数据结构](http://blog.jobbole.com/65218/)
+-> [whoosh 索引查找](https://pythonhosted.org/Whoosh/quickstart.html#a-quick-introduction)
 
 ---
 <h3 id="faq-performance" style="color:#d35400;">性能和内存管理</h3>
@@ -1080,10 +1087,10 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  + 对于频繁增删元素的大大型列表,应该考虑用用链表等数据结构代替。
  + 如果需要创建 "海量" 对象实例,优先考虑 `__slots__`(**`__slots__` 属性会阻止虚拟机创建实例 `__dict__`,仅为名单中的指定成员分配内存空间。这有助于减少内存占用,提升执行行性能,尤其是在需要大量此类对象的时候。**) 。其派生类同样必须用` __slots__` 为新增字段分配存储空间 (即便是空 `__slots__ = []`),否则依然会创建 __dict__,反而导致更慢的执行行效率。
 
- - [Python 内置数据结构各种操作效率](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
- - [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
- - [Python 代码优化指南](http://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/)
- - [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
+-> [Python 内置数据结构各种操作效率](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
+-> [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
+-> [Python 代码优化指南](http://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/)
+-> [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
 
 
 ---
@@ -1096,18 +1103,18 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
    引自：赖勇浩[http://laiyonghao.com/]
 ```
 
-- [Python(2.0) Standard Library](http://wiki.woodpecker.org.cn/moin/PythonStandardLib/)
-- [不完全译版](https://python-documentation-cn.readthedocs.org/en/latest/library/index.html)
-- [德云社区不完全译版](http://digitser.net/python/2.7.8/zh-CN/library/index.html)
-- [又一刚开始译版](http://python.usyiyi.cn/python_278/library/index.html)
-- [一些模块](http://automationtesting.sinaapp.com/blog/category/python_module)
-- [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
-- [The Standard Python Library](http://effbot.org/librarybook/) 又是En
+-> [Python(2.0) Standard Library](http://wiki.woodpecker.org.cn/moin/PythonStandardLib/)
+-> [不完全译版](https://python-documentation-cn.readthedocs.org/en/latest/library/index.html)
+-> [德云社区不完全译版](http://digitser.net/python/2.7.8/zh-CN/library/index.html)
+-> [又一刚开始译版](http://python.usyiyi.cn/python_278/library/index.html)
+-> [一些模块](http://automationtesting.sinaapp.com/blog/category/python_module)
+-> [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
+-> [The Standard Python Library](http://effbot.org/librarybook/) 又是En
 
 ---
 <h3 id="lib-test" style="color:#d35400;">unittest & doctest</h3>
 
-> **++unittest++**
+**++unittest++**
  - TestCase (以test开头的方法就是测试方法)常用方法(help(unittest.TestCase)):
   - `assertEqual(first, second[, msg]) == assertEquals` # 判断两个对象是否相同
   - `assertTrue(expr[, msg]) / assertFalse` # 验证条件是否为 True/False
@@ -1116,9 +1123,10 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
   - `unittest.main()` # 启动测试，可以用命令行参数代替。
   - ```suite = unittest.TestLoader().loadTestsFromTestCase(TestObj)
   unittest.TextTestRunner(verbosity=2).run(suite)``` # 可用来代替main()。
- - [单元测试](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00140137128705556022982cfd844b38d050add8565dcb9000)
 
-> **++doctest++** 直接提取注释中的代码并执行测试
+ -> [单元测试](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00140137128705556022982cfd844b38d050add8565dcb9000)
+
+**++doctest++** 直接提取注释中的代码并执行测试
  - `doctest.testmod()` # 开始文档测试
  - `python doc_test.py -v` # 如果没有错误什么都不会输出，加上参数 'v' 可以得到更详细的信息。
  - `python -m doctest -v example.py` # 导入标准库中的 example 模块并进行测试。
@@ -1128,7 +1136,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 ---
 <h3 id="lib-collections" style="color:#d35400;">collections [Counter, deque, namedtuple, defaultdict, OrderedDict]</h3>
 
-> `Counter([iterable-or-mapping])` # 简单的计数器，dict 的一个子类，Key 不存在用返回0来代替 KeyError。并且支持集合形式的运算。
+- `Counter([iterable-or-mapping])` # 简单的计数器，dict 的一个子类，Key 不存在用返回0来代替 KeyError。并且支持集合形式的运算。
 ```Python
 >>> cnt = collections.Counter()
 >>> for word in ['red', 'blue', 'red', 'green', 'blue', 'blue']:
@@ -1144,7 +1152,7 @@ Counter({'blue': 3, 'red': 2, 'green': 1})
 [('d', 6), ('c', 5)]
 ```
 
-> **`namedtuple(typename, field_names[, verbose=False][, rename=False])`** # 具备tuple的不变性，又可以根据属性来引用。用来表示数据表也很合适。
+- **`namedtuple(typename, field_names[, verbose=False][, rename=False])`** # 具备tuple的不变性，又可以根据属性来引用。用来表示数据表也很合适。
 ```Python
 >>> Point = collections.namedtuple('Point', ['x', 'y'])
 >>> p = Point(1, 2)
@@ -1163,7 +1171,7 @@ True
 Point(x=11, y=22)
 ```
 
-> **`deque([iterable[, maxlen]])`** # 高效实现插入和删除操作的双向列表，适合用于队列和栈。
+- **`deque([iterable[, maxlen]])`** # 高效实现插入和删除操作的双向列表，适合用于队列和栈。
 ```Python
 >>> q = collections.deque(range(5))
 >>> q.append(5)  # deque([0, 1, 2, 3, 4, 5])
@@ -1181,7 +1189,7 @@ Point(x=11, y=22)
 >>> q.rotate(1)  # deque([2, 0, 5, 4, 3, 2, 1, 0])
 ```
 
-> `defaultdict([default_factory[, ...]])` # 当 dict 的 key 不存在时，返回一个默认值。
+- `defaultdict([default_factory[, ...]])` # 当 dict 的 key 不存在时，返回一个默认值。
 ```Python
 >>> s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
 >>> d = collections.defaultdict(list)  # 传入的参数为 dict 值的缺省类型，可以是函数
@@ -1194,7 +1202,7 @@ Point(x=11, y=22)
 []
 ```
 
-> `OrderedDict([items])` # 保持 dict 元素的添加顺序。
+- `OrderedDict([items])` # 保持 dict 元素的添加顺序。
 ```Python
 >>> od = collections.OrderedDict()
 >>> od['a'] = 1; od['b'] = 2; od['c'] = 3; od
@@ -1208,18 +1216,19 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 ---
 <h3 id="lib-itertools" style="color:#d35400;">itertools</h3>
 
-> **提供了一系列迭代器能够帮助用户轻松地使用排列、组合、笛卡尔积或其他组合结构。**
- - [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
- - [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
+**提供了一系列迭代器能够帮助用户轻松地使用排列、组合、笛卡尔积或其他组合结构。**
+
+-> [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
+-> [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
 
 ---
 <h3 id="lib-struct" style="color:#d35400;">struct & array</h3>
 
-> struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
+struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
  - `pack(fmt, v1, v2)` # 转换成 fmt 中描述的 struct类型的二进制形式
  - `unpack(fmt, v1, v2)` # 将二进制形式的 struct 类型通过 fmt 格式转换成 Python 类型
 
-> array： 将 Python 类型的数据（二进制、序列、文件内容）转换成给定类型的 C 数组
+array： 将 Python 类型的数据（二进制、序列、文件内容）转换成给定类型的 C 数组
 
 ---
 <h3 id="lib-datetime" style="color:#d35400;">time & datetime</h3>
@@ -1251,11 +1260,11 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 ---
 <h3 id="lib-serializable" style="color:#d35400;">anydbm & shelve & pickle(cPickle)</h3>
 
-> **`anydbm.open(filename[, flag[, mode]])`** # 将一个磁盘上的文件与一个“dict-like”对象关联起来，像操作字典一样。flag 参数设置对文件的操作方式 [rwc(没有则创建)n(每次都建空文件)]， mode 是 *unix 上对文件的访问权限 [0777]。
+**`anydbm.open(filename[, flag[, mode]])`** # 将一个磁盘上的文件与一个“dict-like”对象关联起来，像操作字典一样。flag 参数设置对文件的操作方式 [rwc(没有则创建)n(每次都建空文件)]， mode 是 *unix 上对文件的访问权限 [0777]。
 
-> **`shelve.open(filename, flag='c', protocol=None, writeback=False)`** # 高级版 anydbm，支持在"dict-like"对象中存储任何可以被pickle序列化的对象。wirteback 参数表示将数据存储与缓存中，调用 close(其调用sync) 后才写入硬盘。
+**`shelve.open(filename, flag='c', protocol=None, writeback=False)`** # 高级版 anydbm，支持在"dict-like"对象中存储任何可以被pickle序列化的对象。wirteback 参数表示将数据存储与缓存中，调用 close(其调用sync) 后才写入硬盘。
 
->**`pickle/cPickle`** # 在一个文件中储存任何Python对象。后者为 C 语言实现。
+**`pickle/cPickle`** # 在一个文件中储存任何Python对象。后者为 C 语言实现。
  - `dump(obj, file[, protocol])` # 将序列化的对象写入文件。
  - `load(file)` # 读取文件中的数据并反序列化。
  - `dumps(obj[, protocol])` # 返回序列化的数据流。
@@ -1266,7 +1275,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 ---
 <h3 id="lib-encryption" style="color:#d35400;">hashlib & hmac & md5 & sha</h3>
 
-> **++hashlib++** 散列算法(支持md5 sha1 sha224 sha256 sha384 sha512)
+- **hashlib** 散列算法(支持md5 sha1 sha224 sha256 sha384 sha512)
 ```Python
 # 创建 md5 加密对象
 >>> m = hashlib.md5()
@@ -1284,7 +1293,7 @@ bb649c83dd1ea5c9d9dec9a18df0ffe9
 ```
 
 
-> **++hmac++** 签名(认证)加密算法(需要秘钥)
+- **hmac** 签名(认证)加密算法(需要秘钥)
 ```Python
 # 创建一个新的 hmac 对象，new(key[, msg[, digestmod]])
 >>> m1 = hmac.new("MyKey", "I'm young.")
@@ -1308,7 +1317,7 @@ c83ac1cac45ba92b2f6629bee67fb953peakhell
 aa0fb38cbe017bdb388fbfb9f9da1645
 ```
 
-> **++md5++**
+- **md5**
 ```Python
 >>> m = md5.new()
 >>> m.update("Hello,")
@@ -1321,7 +1330,7 @@ aa0fb38cbe017bdb388fbfb9f9da1645
 '6cd3556deb0da54bca060b4c39479839'
 ```
 
-> **++sha++** sha1
+- **sha** sha1
 ```Python
 >>> s = sha.new()
 >>> s.update("Hello,")
@@ -1335,15 +1344,16 @@ aa0fb38cbe017bdb388fbfb9f9da1645
 ---
 <h3 id="lib-json" style="color:#d35400;">json & base64 & uuid</h3>
 
-> **++json++** JavaScript Object Notation(JavaScript 对象表示法)，用于存储和交换文本信息。
- - JSON 值可以是：
-  + 数字（整数或浮点数）
-  + 字符串（在双引号中）
-  + 逻辑值（true 或 false）
-  + 数组（在方括号中）
-  + 对象（在花括号中）
-  + null
-```Python
+- **json** JavaScript Object Notation(JavaScript 对象表示法)，用于存储和交换文本信息。
+JSON 值可以是：
+ + 数字（整数或浮点数）
+ + 字符串（在双引号中）
+ + 逻辑值（true 或 false）
+ + 数组（在方括号中）
+ + 对象（在花括号中）
+ + null
+
+ ```Python
 # Neither of these calls raises an exception, but the results are not valid JSON 【Infinity, -Infinity, NaN】
 >>> json.dumps(float('-inf'))
 '-Infinity'
@@ -1360,7 +1370,7 @@ nan
  # dump()/load() 可传入文件对象
 ```
 
-> **++base64++** Base64编码会把3字节的二进制数据编码为4字节的文本数据，长度增加33%
+- **base64** Base64编码会把3字节的二进制数据编码为4字节的文本数据，长度增加33%
 编码后的文本数据为 4 的倍数。若被编码的二进制数据不是 3 的倍数，会剩下 1～2个字节，base64用 \x00 字节在末尾补足后，再在编码的末尾加上 1~2 个 '='，表示补了多少字节，解码的时候自动去掉。
 ```Python
 >>> base64.b64encode('Hello, world!')
@@ -1369,7 +1379,7 @@ nan
 'Hello, world!'
 ```
 在 URL 中字符 ‘+/-’ 可能引起歧义，必须用 'url_safe' 的 base64 来编码
-```
+```Python
 >>> base64.b64encode('i\xb7\x1d\xfb\xef\xff')
 'abcd++//'
 >>> base64.urlsafe_b64encode('i\xb7\x1d\xfb\xef\xff')
@@ -1378,14 +1388,15 @@ nan
 'i\xb7\x1d\xfb\xef\xff'
 ```
 
-> **++uuid++** 一种唯一标识
+- **uuid** 一种唯一标识
  - `UUID([hex[, bytes[, bytes_le[, fields[, int[, version]]]]]])` # 得到原始的数据
  - `uuid1([node[, clock_seq]])` # 由 MAC 地址、当前时间戳、随机数生成。(有安全性问题)
  - `uuid3(namespace, name)` # 基于命名空间和名字的MD5散列值。namespace 是给定的(参见官方文档)。
  - `uuid4()` # 由伪随机数得到，有一定的重复概率。
  - `uuid5(namespace, name)` # 基于命名空间和名字的 SHA-1 hash。
  - `bytes/int/hex` # 把生成的 uuid 转化成相应的格式。
-```Python
+
+ ```Python
 >>> x = uuid.UUID('{00010203-0405-0607-0809-0a0b0c0d0e0f}')
 >>> str(x)
 '00010203-0405-0607-0809-0a0b0c0d0e0f'
@@ -1408,20 +1419,20 @@ e17366f236084bdc8ed46ee5cdaddbe4
 ---
 <h3 id="lib-thread" style="color:#d35400;">threading & Event & Timer</h3>
 
-> **Lock/RLock/Condition 实现了 Context Management Protocol 可以自动调用 acquire()/release()。[with]
+**Lock/RLock/Condition 实现了 Context Management Protocol 可以自动调用 acquire()/release()。[with]
 threading.local() 创建的对象会利用 thread-local storage (TLS) 为每个线程保存不同的数据。**
 
-> Event（事件）是最简单的线程通信机制之一：一个线程通知事件，其他线程等待事件。Event内置了一个初始为False的标志，当调用`set()`时设为True，调用`clear()`时重置为 False。`wait()`如果标志为True将立即返回，否则阻塞线程至等待阻塞状态，等待其他线程调用set()。Event没有锁，无法使线程进入同步阻塞状态。
+Event（事件）是最简单的线程通信机制之一：一个线程通知事件，其他线程等待事件。Event内置了一个初始为False的标志，当调用`set()`时设为True，调用`clear()`时重置为 False。`wait()`如果标志为True将立即返回，否则阻塞线程至等待阻塞状态，等待其他线程调用set()。Event没有锁，无法使线程进入同步阻塞状态。
 
-> `Timer(interval, function, args=[], kwargs={})`（定时器）是Thread的派生类，用于在指定时间后调用一个方法。
+`Timer(interval, function, args=[], kwargs={})`（定时器）是Thread的派生类，用于在指定时间后调用一个方法。
 
- - [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
- - [Python线程指南](http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html)
+-> [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
+-> [Python线程指南](http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html)
 
 ---
 <h3 id="lib-email" style="color:#d35400;">smtplib & email & poplib</h3>
 
- - email(mime,parser,header,utils...) 主要用于构造/解析邮件
+email(mime,parser,header,utils...) 主要用于构造/解析邮件
 ```Python
 Message          # 继承关系 #
     MIMEBase
@@ -1431,16 +1442,18 @@ Message          # 继承关系 #
             MIMEText
             MIMEImage
 ```
- - [SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
- - [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
+
+-> [SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
+-> [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
 
 ---
 <h3 id="lib-cookie" style="color:#d35400;">Cookie & cookielib</h3>
 
-> **++Cookie++**
+- **Cookie**
  - `BaseCookie([input])` # 类 dict 对象，存储并管理着称为 Morsel 的 cookie 值集合。
  - `SimpleCookie([input])` # 继承于 BaseCookie (另外两个子类SerialCookie/SmartCookie因安全问题已不赞成使用)。
-```Python
+
+ ```Python
 >>> c = Cookie.SimpleCookie()
 >>> c['number'] = 80; c['number'].value
 '80'
@@ -1464,27 +1477,28 @@ Set-Cookie: vienna=finger
 >>>c.lear() # 清除存储的 cookie 数据
 ```
 
-> **++cookielib++** 为存储和管理cookie提供客户端支持
-- `CookieJar(policy=None)` # 将 cookie 存在内存中
-- `FileCookieJar(filename, delayload=None, policy=None)` # 将 cookie 存在本地文件中，没有实现save函数。其子类实现了： MozillaCookieJar是为了创建与Mozilla浏览器cookies.txt兼容的FileCookieJar实例，LWPCookieJar是为了创建与libwww-perl的Set-Cookie3文件格式兼容的FileCookieJar实例，用LWPCookieJar保存的cookie文件易于人类阅读。
+- **cookielib** 为存储和管理cookie提供客户端支持
+ - `CookieJar(policy=None)` # 将 cookie 存在内存中
+ - `FileCookieJar(filename, delayload=None, policy=None)` # 将 cookie 存在本地文件中，没有实现save函数。其子类实现了： MozillaCookieJar是为了创建与Mozilla浏览器cookies.txt兼容的FileCookieJar实例，LWPCookieJar是为了创建与libwww-perl的Set-Cookie3文件格式兼容的FileCookieJar实例，用LWPCookieJar保存的cookie文件易于人类阅读。
 
 ---
 <h3 id="lib-url" style="color:#d35400;">urlparse & urllib & urllib2</h3>
 
->  **一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成**。
+> **一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成**。
  HTTP响应也由三个部分组成，分别是：状态行、消息报头、响应正文。
- - [爬虫教程](http://blog.csdn.net/column/details/why-bug.html)
 
-> **++urlparse++** 解析 URL 并进行拆分或拼接
+> -> [爬虫教程](http://blog.csdn.net/column/details/why-bug.html)
+
+- **urlparse** 解析 URL 并进行拆分或拼接
  - `urlparse(urlstring[, scheme[, allow_fragments]])` # 拆分成六元素元组
  - `urlunparse(parts)` # 拼接通过 urlparse 拆分 url 的返回对象
  - `urlsplit(urlstring[, scheme[, allow_fragments]])` # 拆分成五元素元组，空格/空参数/请求/片段标示符将被舍弃
  - `urlunsplit(parts)` # 拼接通过 urlsplit 拆分 url 的返回对象
  - `urljoin(base, url[, allow_fragments])` # 拼接相对的 url
 
-> **++urllib++**
+- **urllib**
  - `urlopen(url[, data[, proxies]])` # 创建一个表示远程 url 的类文件对象，然后像本地文件一样操作这个类文件对象来获取远程数据。参数data表示以post方式提交到 url 的数据。
-```Python
+ ```Python
 >>> doc = urllib.urlopen("http://www.baidu.com/")
 >>> print doc.info()
 ...<消息报头>...
@@ -1517,7 +1531,7 @@ Set-Cookie: vienna=finger
 'D:\\home\\lastd\\Documents'   # \ 被转义, 同 /
 ```
 
-> **++urllib2++**
+- **urllib2**
  - `urlopen(url[, data][, timeout])` # url 可以是 Request 对象。如果 *_proxy 环境变量被检测到，将会默认使用代理。
  - `build_opener([handler, ...])` # 创建自定义 opener 对象，支持验证、cookie等HTTP高级功能。参数 handler 是 Handler 实例。返回对象(**OpenerDirector**其**addheaders[不能为 dict]**属性可以用来设置 header)具有 open() (类同urlopen())方法。
  - `install_opener(opener)` # 使用此方法仅当想要通过 urlopen() 来使用 opener 对象。
@@ -1542,34 +1556,37 @@ Set-Cookie: vienna=finger
 ---
 <h3 id="lib-socket" style="color:#d35400;">SocketServer & SimpleHTTPServer & etc.</h3>
 
-> `python -m SimpleHttpServer 8000` 可以在当前文件夹下创建一个HTTP Server，局域网内可以用来共享文件。
+`python -m SimpleHttpServer 8000` 可以在当前文件夹下创建一个HTTP Server，局域网内可以用来共享文件。
 
- - [非常简单的Python HTTP服务](http://coolshell.cn/articles/1480.html)
- - [python 网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
- - [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
- - [Python源码学习01.准备篇](http://defshine.github.io/python-source-learn01.html)
- - [Python源码学习02.SocketServer](http://defshine.github.io/python-source-learn02.html)
+-> [非常简单的Python HTTP服务](http://coolshell.cn/articles/1480.html)
+-> [python 网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
+-> [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
+-> [Python源码学习01.准备篇](http://defshine.github.io/python-source-learn01.html)
+-> [Python源码学习02.SocketServer](http://defshine.github.io/python-source-learn02.html)
 
 ---
 <h3 id="lib-async-1" style="color:#d35400;">select & epoll</h3>
 
-> **异步管理多个 socket 连接，提高并发量。**
+**异步管理多个 socket 连接，提高并发量。**
+
 select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
+
 当 event 可读时为奇数，可写时为偶数。边缘触发下被注册 socket 的 event 只被关注一次，需要一次完成 event 直到 socket.error 发生。
+
 水平触发模式常被用在移植使用select或者poll机制的应用程序时，而边沿触发模式可以用在当程序员不需要或不想要操作系统协助管理event状态时。
 
-- [关于C10K、异步回调、协程、同步阻塞](http://rango.swoole.com/archives/381)
-- [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
-- [Python中使用epoll开发服务端程序](http://www.oschina.net/question/54100_8940)
-- How To Use Linux epoll with Python [英文](http://scotdoyle.com/python-epoll-howto.html) & [译文](http://devres.zoomquiet.io/data/20100927213110/index.html)
+-> [关于C10K、异步回调、协程、同步阻塞](http://rango.swoole.com/archives/381)
+-> [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
+-> [Python中使用epoll开发服务端程序](http://www.oschina.net/question/54100_8940)
+-> How To Use Linux epoll with Python [英文](http://scotdoyle.com/python-epoll-howto.html) & [译文](http://devres.zoomquiet.io/data/20100927213110/index.html)
 
 ---
 <h3 id="lib-async-2" style="color:#d35400;">asyncore & asynchat</h3>
 
-> 异步 socket 服务客户端和服务器的基础架构。
+**异步 socket 服务客户端和服务器的基础架构。**
 
-- [asyncore 文档翻译](http://automationtesting.sinaapp.com/blog/m_asyncore)
-- [asynchat 文档翻译](http://automationtesting.sinaapp.com/blog/m_asynchat)
+-> [asyncore 文档翻译](http://automationtesting.sinaapp.com/blog/m_asyncore)
+-> [asynchat 文档翻译](http://automationtesting.sinaapp.com/blog/m_asynchat)
 
 ***
 <h2 id="web-dev" style="color:#c0392b;">Web 开发</h2>
@@ -1611,24 +1628,12 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 ***
 <h2 id="tornado" style="color:#c0392b;">Tornado</h2>
 <h3 id="tornado-use" style="color:#d35400;">使用</h3>
-> **++HTTP状态码++** 可以使用 RequestHandler 类的`set_status()`方法显式地设置。在某些情况下，Tornado会自动地设置HTTP状态码。【如果你想使用自己的方法代替默认的错误响应，你可以重写`write_error`方法在你的 RequestHandler 类中】下面是一个常用情况的纲要：
- - **404 Not Found**
-	Tornado会在HTTP请求的路径无法匹配任何RequestHandler类相对应的模式时返回404（Not Found）响应码。
- - **400 Bad Request**
-	如果你调用了一个没有默认值的get_argument函数，并且没有发现给定名称的参数，Tornado将自动返回一个400（Bad Request）响应码。
- - **405 Method Not Allowed**
-	如果传入的请求使用了RequestHandler中没有定义的HTTP方法（比如，一个POST请求，但是处理函数中只有定义了get方法），Tornado将返回一个405（Methos Not Allowed）响应码。
- - **500 Internal Server Error**
-	当程序遇到任何不能让其退出的错误时，Tornado将返回500（Internal Server Error）响应码。你代码中任何没有捕获的异常也会导致500响应码。
- - **200 OK**
-	如果响应成功，并且没有其他返回码被设置，Tornado将默认返回一个200（OK）响应码。
 
-> **++`static_url`++**的疑惑， 为什么不在你的模板中硬编码？有如下几个原因。其一，`static_url`函数创建了一个基于文件内容的 hash 值，并将其添加到 URL 末尾（查询字符串的参数v）。这个 hash 值确保浏览器总是加载一个文件的最新版而不是之前的缓存版本。无论是在你应用的开发阶段，还是在部署到生产环境使用时，都非常有用，因为你的用户不必再为了看到你的静态内容而清除浏览器缓存了。
+- Tornado 是一个 Web 框架和异步，无阻塞 I/O 的网络库。
 
-> **UI模块**是封装模板中包含的标记、样式以及行为的可复用组件。它所定义的元素通常用于多个模板交叉复用或在同一个模板中重复使用。模块本身是一个继承自Tornado的UIModule类的简单Python类，并定义了一个render方法。当一个模板使用{% module Foo(...) %}标签引用一个模块时，Tornado的模板引擎调用模块的render方法，然后返回一个字符串来替换模板中的模块标签。UI模块也可以在渲染后的页面中嵌入自己的JavaScript和CSS文件，或指定额外包含的JavaScript或CSS文件。你可以定义可选的embedded_javascript、embedded_css、javascript_files和css_files方法来实现这一方法。
+- **UI模块**是封装模板中包含的标记、样式以及行为的可复用组件。它所定义的元素通常用于多个模板交叉复用或在同一个模板中重复使用。模块本身是一个继承自Tornado的UIModule类的简单Python类，并定义了一个render方法。当一个模板使用{% module Foo(...) %}标签引用一个模块时，Tornado的模板引擎调用模块的render方法，然后返回一个字符串来替换模板中的模块标签。UI模块也可以在渲染后的页面中嵌入自己的JavaScript和CSS文件，或指定额外包含的JavaScript或CSS文件。你可以定义可选的embedded_javascript、embedded_css、javascript_files和css_files方法来实现这一方法。
 
-> **++模板++** (tornado.template)
- - 使用
+- **模板** (tornado.template)
 ```Python
 # 设置本地变量，执行函数
 {% set *x* = *y* %}
@@ -1652,8 +1657,8 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 {% while *condition* %} ... {% end %}
 {% try %} ... {% except %} ... {% else %} ... {% finally %} ... {% end %}
 ```
- - 默认提供了一些方法: escape(), url_escape(), json_encode(), squeeze().
- - 可以添加任意自命名的方法 (在 tornado.web.RquestHandler 里, 可重写 get_template_namespace):
+默认提供了一些方法: escape(), url_escape(), json_encode(), squeeze().
+可以添加任意自命名的方法 (在 tornado.web.RquestHandler 里, 可重写 get_template_namespace):
 ```Python
 # Python code
 def add(x ,y):
@@ -1663,17 +1668,16 @@ tornado.template.execute(add = add)
 {{ add(1, 2) }}
 ```
 
-> ++HTTP长轮询++在站点或特定用户状态的高度交互反馈通信中非常有用。
-
- - [老齐](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/index.md#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E6%98%A8%E5%A4%9C%E8%A5%BF%E9%A3%8E%E4%BA%AD%E5%8F%B0%E8%B0%81%E7%99%BB)
- - [Introduction to Tornado](http://www.pythoner.com/tag/tornado)
- - [官方文档中译版](http://www.tornadoweb.cn/documentation#_13)
- - [官方文档4.0.1](http://www.tornadoweb.org/en/stable/)
+-> [老齐](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/index.md#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E6%98%A8%E5%A4%9C%E8%A5%BF%E9%A3%8E%E4%BA%AD%E5%8F%B0%E8%B0%81%E7%99%BB)
+-> [Introduction to Tornado](http://www.pythoner.com/tag/tornado)
+-> [官方文档中译版](http://www.tornadoweb.cn/documentation#_13)
+-> [官方文档4.0.1](http://www.tornadoweb.org/en/stable/)
 
 ---
 <h3 id="tornado-source-code" style="color:#d35400;">源码剖析</h3>
- - [Tornado 源码分析系列 (cnblogs.com)](http://www.cnblogs.com/Bozh/archive/2012/07/22/2603976.html)
- - [Tornado 源码解析篇 (nowamagic.net)](http://www.nowamagic.net/librarys/veda/detail/2566)
+
+-> [Tornado 源码分析系列 (cnblogs.com)](http://www.cnblogs.com/Bozh/archive/2012/07/22/2603976.html)
+-> [Tornado 源码解析篇 (nowamagic.net)](http://www.nowamagic.net/librarys/veda/detail/2566)
 
 ---
 
