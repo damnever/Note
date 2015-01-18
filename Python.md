@@ -145,11 +145,11 @@ Namespaces are one honking great idea -- let's do more of those!
 ***
 <h2 id="python-regex" style="color:#c0392b;">正则表达式</h2>
 
-1. <h3 id="regex-overview" style="color:#d35400;">概览</h3>
+- <h3 id="regex-overview" style="color:#d35400;">概览</h3>
 
  ![](./data/regex.png)
 
-2. <h3 id="regex-method" style="color:#d35400;">方法</h3>
+- <h3 id="regex-method" style="color:#d35400;">方法</h3>
 
  多使用编译对象 compile.
  - `match()` 可指定位置段，默认从开头开始匹配；有且一个。
@@ -181,7 +181,7 @@ Namespaces are one honking great idea -- let's do more of those!
 'call 0xffd2 for printing, 0xc000 for user code.'
 ```
 
-3. <h3 id="regex-pattern" style="color:#d35400;">模式功能</h3>
+- <h3 id="regex-pattern" style="color:#d35400;">模式功能</h3>
 
  - 前向界定符
  	+ `(?=...)` 前向肯定符，当前位置有匹配时成功，否则失败，不再进行后续匹配。
@@ -189,7 +189,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - 条件模式
   	+ `(?(id/name)yes-pattern|no-pattern)` 条件为捕获到的分组 id 或名字。
 
-4. <h3 id="regex-flag" style="color:#d35400;">编译标志</h3>
+- <h3 id="regex-flag" style="color:#d35400;">编译标志</h3>
 
  |标志 | 含义|
 |----|----|
@@ -208,14 +208,15 @@ Namespaces are one honking great idea -- let's do more of those!
 ['ABc', 'Dxc']
 ```
 
- -> [Python正则表达式操作指南](http://wiki.ubuntu.org.cn/Python%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97)
- -> [高级正则表达式](http://blog.jobbole.com/65605/)
+ :link:  [Python正则表达式操作指南](http://wiki.ubuntu.org.cn/Python%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97)
+
+ :link:  [高级正则表达式](http://blog.jobbole.com/65605/)
 
 ---
 ***
 <h2 id="faq" style="color:#c0392b;">援疑质理</h2>
 
- +> [技能点扫盲](http://www.douban.com/group/topic/28872729/)
+ :+1:  [技能点扫盲](http://www.douban.com/group/topic/28872729/)
 
 ---
 <h3 id="faq-other" style="color:#d35400;">其它</h3>
@@ -385,7 +386,7 @@ TypeError: 'str' object does not support item assignment
 0x7fd42d897ea8 -> [2]   # 仅仅被评估一次
 ```
 
--> [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
+:link: [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
 
 ---
 <h3 id="faq-func-pass-value" style="color:#d35400;">传值还是传引用？</h3>
@@ -459,7 +460,7 @@ TypeError: 'str' object does not support item assignment
 'Now: 2015-01-10 21:04:42'
 ```
 
--> [关于格式化规范的迷你语言](http://digitser.net/python/2.7.8/zh-CN/library/string.html#format-string-syntax)
+:link: [关于格式化规范的迷你语言](http://digitser.net/python/2.7.8/zh-CN/library/string.html#format-string-syntax)
 
 ---
 <h3 id="faq-file" style="color:#d35400;">文件</h3>
@@ -494,7 +495,7 @@ with open('mydata.txt') as fp:
     for line in iter(fp.readline, ''):
         process_line(line)
 ```
- -> [Python Built-in Functions](https://docs.python.org/2/library/functions.html)
+ :link: [Python Built-in Functions](https://docs.python.org/2/library/functions.html)
 
 2. **函数式编程**(Functional Programing)，一种抽象程度很高的编程范式，把运算过程尽量写成一系列嵌套的函数调用，函数仅接收输入并产生输出。
 ```Python
@@ -522,9 +523,11 @@ The number: 18
 The number: 24
 The number: 30
 ```
- -> **[函数式编程](http://coolshell.cn/articles/10822.html)**
- -> [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
- -> [Python函数式编程指南（一）：概述](http://www.cnblogs.com/huxi/archive/2011/06/18/2084316.html)
+ :link: **[函数式编程](http://coolshell.cn/articles/10822.html)**
+
+ :link: [An introduction to functional programming](https://codewords.hackerschool.com/issues/one/an-introduction-to-functional-programming)
+
+ :link: [Python函数式编程指南（一）：概述](http://www.cnblogs.com/huxi/archive/2011/06/18/2084316.html)
 
 ---
 <h3 id="faq-class" style="color:#d35400;">类</h3>
@@ -554,7 +557,7 @@ The number: 30
 
  在多重继承初始化方法中使用 super 可能会引发一些奇怪的状况。
 
- -> [Understanding Python MRO - Class search path](http://makina-corpus.com/blog/metier/2014/python-tutorial-understanding-python-mro-class-search-path)
+ :link: [Understanding Python MRO - Class search path](http://makina-corpus.com/blog/metier/2014/python-tutorial-understanding-python-mro-class-search-path)
 
 3. **抽象类**
  `from abc import ABCMeta, abstractmethod, abstractproperty` # 创建抽象类的类型，抽象方法，抽象属性 ，`__metaclass__ = ABCMeta`标明此类为抽象类。
@@ -602,8 +605,10 @@ attribute:  __dict__
 del:  y
 attribute:  __dict__
 ```
- -> [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
- -> [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
+
+ :link: [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
+
+ :link: [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 
 ---
 <h3 id="faq-metaclass" style="color:#d35400;">元类 (metaclass)</h3>
@@ -637,9 +642,11 @@ dynamic
 <class '__main__.MyClass'>
 ```
 
--> [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
--> [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
--> [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba**000)
+:link: [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
+
+:link: [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
+
+:link: [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba**000)
 
 ---
 <h3 id="faq-mixin" style="color:#d35400;">MixIn</h3>
@@ -648,10 +655,13 @@ dynamic
  1. You want to provide a lot of optional features for a class.
  2. You want to use one particular feature in a lot of different classes.
 
--> [Mixin 扫盲班](http://wiki.woodpecker.org.cn/moin/FlyintoMixin)
--> [Mix-in 技术介绍](http://wiki.woodpecker.org.cn/moin/IntroMixin)
--> [Mixins considered harmful/1](http://www.artima.com/weblogs/viewpost.jsp?thread=246341)
--> [Mixins considered harmful/2](http://www.artima.com/weblogs/viewpost.jsp?thread=246483)
+:link: [Mixin 扫盲班](http://wiki.woodpecker.org.cn/moin/FlyintoMixin)
+
+:link: [Mix-in 技术介绍](http://wiki.woodpecker.org.cn/moin/IntroMixin)
+
+:link: [Mixins considered harmful/1](http://www.artima.com/weblogs/viewpost.jsp?thread=246341)
+
+:link: [Mixins considered harmful/2](http://www.artima.com/weblogs/viewpost.jsp?thread=246483)
 
 ---
 <h3 id="faq-with" style="color:#d35400;">上下文与 with</h3>
@@ -695,8 +705,9 @@ contextlib.nested
 ```
 另: threading 中的 Lock/RLock/Condition 实现了 Context Management Protocol。
 
--> [Python 中的上下文管理器](http://blog.jobbole.com/64175/)
--> [理解 Python 的 with 语句](http://python.42qu.com/11155501)
+:link: [Python 中的上下文管理器](http://blog.jobbole.com/64175/)
+
+:link: [理解 Python 的 with 语句](http://python.42qu.com/11155501)
 
 ---
 <h3 id="faq-closure" style="color:#d35400;">闭包 (closure)</h3>
@@ -767,11 +778,15 @@ contextlib.nested
 8
 ```
 
--> [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
--> [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
--> [Python 闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
--> [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
--> [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
+:link: [有趣的 Python 闭包](http://feilong.me/2012/06/interesting-python-closures)
+
+:link: [闭包](http://www.cnblogs.com/vamei/archive/2012/12/15/2772451.html)
+
+:link: [Python 闭包详解](http://www.cnblogs.com/ChrisChen3121/p/3208119.html)
+
+:link: [Closures、Decorators 和 functools](http://blog.jobbole.com/66895/)
+
+:link: [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
 
 ---
 <h3 id="faq-decorator" style="color:#d35400;">装饰器"@" (decorator)</h3>
@@ -814,9 +829,11 @@ func = dec2( dec1(arg)(func) )
 5
 ```
 
--> [Python 的闭包和装饰器](http://book42qu.readthedocs.org/en/latest/python/python-closures-and-decorators.html)
--> **[Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)**
--> [Python Decorator Library](https://wiki.python.org/moin/PythonDecoratorLibrary)
+:link: [Python 的闭包和装饰器](http://book42qu.readthedocs.org/en/latest/python/python-closures-and-decorators.html)
+
+:link: **[Python 修饰器的函数式编程](http://coolshell.cn/articles/11265.html)**
+
+:link: [Python Decorator Library](https://wiki.python.org/moin/PythonDecoratorLibrary)
 
 ---
 <h3 id="faq-property" style="color:#d35400;">属性方法 @property</h3>
@@ -910,7 +927,7 @@ bound method args: (<__main__.MyClass object at 0x7f7adbc89a90>,)
 I can get: instance_field
 ```
 
--> [PYTHON中STATICMETHOD和CLASSMETHOD的差异](http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html)
+:link: [PYTHON中STATICMETHOD和CLASSMETHOD的差异](http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html)
 
 ---
 <h3 id="faq-partial" style="color:#d35400;">偏函数 (partial)</h3>
@@ -992,8 +1009,9 @@ If the yield-expression is a yield-statement, this returned value is ignored, si
 3
 ```
 
--> [(译)Python关键字yield的解释(stackoverflow)](http://pyzh.readthedocs.org/en/latest/the-python-yield-keyword-explained.html)
--> [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
+:link: [(译)Python关键字yield的解释(stackoverflow)](http://pyzh.readthedocs.org/en/latest/the-python-yield-keyword-explained.html)
+
+:link: [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
 
 ---
 <h3 id="faq-coroutine" style="color:#d35400;">协程</h3>
@@ -1041,9 +1059,11 @@ Traceback (most recent call last):
 StopIteration
 ```
 
--> [PEP 342 -- Coroutines via Enhanced Generators](https://www.python.org/dev/peps/pep-0342/)
--> [yield 之学习心得](http://wiki.woodpecker.org.cn/moin/Py25yieldNote)
--> [A Curious Course on Coroutines and Concurrency](http://www.dabeaz.com/coroutines/index.html)
+:link: [PEP 342 -- Coroutines via Enhanced Generators](https://www.python.org/dev/peps/pep-0342/)
+
+:link: [yield 之学习心得](http://wiki.woodpecker.org.cn/moin/Py25yieldNote)
+
+:link: [A Curious Course on Coroutines and Concurrency](http://www.dabeaz.com/coroutines/index.html)
 
 ---
 <h3 id="faq-algorithm" style="color:#d35400;">数据结构和算法</h3>
@@ -1075,10 +1095,13 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
 
--> [算法 @老齐](https://github.com/qiwsir/algorithm/blob/master/README.md)
--> [Python @hujiaweibujidao](http://hujiaweibujidao.github.io/python/)
--> [Python 中的高级数据结构](http://blog.jobbole.com/65218/)
--> [whoosh 索引查找](https://pythonhosted.org/Whoosh/quickstart.html#a-quick-introduction)
+:link: [算法 @老齐](https://github.com/qiwsir/algorithm/blob/master/README.md)
+
+:link: [Python @hujiaweibujidao](http://hujiaweibujidao.github.io/python/)
+
+:link: [Python 中的高级数据结构](http://blog.jobbole.com/65218/)
+
+:link: [whoosh 索引查找](https://pythonhosted.org/Whoosh/quickstart.html#a-quick-introduction)
 
 ---
 <h3 id="faq-performance" style="color:#d35400;">性能和内存管理</h3>
@@ -1087,10 +1110,13 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  + 对于频繁增删元素的大大型列表,应该考虑用用链表等数据结构代替。
  + 如果需要创建 "海量" 对象实例,优先考虑 `__slots__`(**`__slots__` 属性会阻止虚拟机创建实例 `__dict__`,仅为名单中的指定成员分配内存空间。这有助于减少内存占用,提升执行行性能,尤其是在需要大量此类对象的时候。**) 。其派生类同样必须用` __slots__` 为新增字段分配存储空间 (即便是空 `__slots__ = []`),否则依然会创建 __dict__,反而导致更慢的执行行效率。
 
--> [Python 内置数据结构各种操作效率](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
--> [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
--> [Python 代码优化指南](http://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/)
--> [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
+:link: [Python 内置数据结构各种操作效率](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
+
+:link: [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
+
+:link: [Python 代码优化指南](http://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/)
+
+:link: [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
 
 
 ---
@@ -1103,13 +1129,19 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
    引自：赖勇浩[http://laiyonghao.com/]
 ```
 
--> [Python(2.0) Standard Library](http://wiki.woodpecker.org.cn/moin/PythonStandardLib/)
--> [不完全译版](https://python-documentation-cn.readthedocs.org/en/latest/library/index.html)
--> [德云社区不完全译版](http://digitser.net/python/2.7.8/zh-CN/library/index.html)
--> [又一刚开始译版](http://python.usyiyi.cn/python_278/library/index.html)
--> [一些模块](http://automationtesting.sinaapp.com/blog/category/python_module)
--> [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
--> [The Standard Python Library](http://effbot.org/librarybook/) 又是En
+:link: [Python(2.0) Standard Library](http://wiki.woodpecker.org.cn/moin/PythonStandardLib/)
+
+:link: [不完全译版](https://python-documentation-cn.readthedocs.org/en/latest/library/index.html)
+
+:link: [德云社区不完全译版](http://digitser.net/python/2.7.8/zh-CN/library/index.html)
+
+:link: [又一刚开始译版](http://python.usyiyi.cn/python_278/library/index.html)
+
+:link: [一些模块](http://automationtesting.sinaapp.com/blog/category/python_module)
+
+:link: [官方文档 2.78](https://docs.python.org/2/library/) 硬伤
+
+:link: [The Standard Python Library](http://effbot.org/librarybook/) 又是En
 
 ---
 <h3 id="lib-test" style="color:#d35400;">unittest & doctest</h3>
@@ -1124,7 +1156,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
   - ```suite = unittest.TestLoader().loadTestsFromTestCase(TestObj)
   unittest.TextTestRunner(verbosity=2).run(suite)``` # 可用来代替main()。
 
- -> [单元测试](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00140137128705556022982cfd844b38d050add8565dcb9000)
+ :link: [单元测试](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00140137128705556022982cfd844b38d050add8565dcb9000)
 
 **++doctest++** 直接提取注释中的代码并执行测试
  - `doctest.testmod()` # 开始文档测试
@@ -1218,8 +1250,9 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 
 **提供了一系列迭代器能够帮助用户轻松地使用排列、组合、笛卡尔积或其他组合结构。**
 
--> [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
--> [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
+:link: [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
+
+:link: [官方文档 Functions creating iterators for efficient looping](https://docs.python.org/2/library/itertools.html)
 
 ---
 <h3 id="lib-struct" style="color:#d35400;">struct & array</h3>
@@ -1426,8 +1459,9 @@ Event（事件）是最简单的线程通信机制之一：一个线程通知事
 
 `Timer(interval, function, args=[], kwargs={})`（定时器）是Thread的派生类，用于在指定时间后调用一个方法。
 
--> [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
--> [Python线程指南](http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html)
+:link: [Python多线程相关方法详解](http://www.mjix.com/archives/228.html)
+
+:link: [Python线程指南](http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html)
 
 ---
 <h3 id="lib-email" style="color:#d35400;">smtplib & email & poplib</h3>
@@ -1443,8 +1477,9 @@ Message          # 继承关系 #
             MIMEImage
 ```
 
--> [SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
--> [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
+:link: [SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
+
+:link: [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
 
 ---
 <h3 id="lib-cookie" style="color:#d35400;">Cookie & cookielib</h3>
@@ -1487,7 +1522,7 @@ Set-Cookie: vienna=finger
 > **一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成**。
  HTTP响应也由三个部分组成，分别是：状态行、消息报头、响应正文。
 
-> -> [爬虫教程](http://blog.csdn.net/column/details/why-bug.html)
+> :link: [爬虫教程](http://blog.csdn.net/column/details/why-bug.html)
 
 - **urlparse** 解析 URL 并进行拆分或拼接
  - `urlparse(urlstring[, scheme[, allow_fragments]])` # 拆分成六元素元组
@@ -1558,11 +1593,15 @@ Set-Cookie: vienna=finger
 
 `python -m SimpleHttpServer 8000` 可以在当前文件夹下创建一个HTTP Server，局域网内可以用来共享文件。
 
--> [非常简单的Python HTTP服务](http://coolshell.cn/articles/1480.html)
--> [python 网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
--> [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
--> [Python源码学习01.准备篇](http://defshine.github.io/python-source-learn01.html)
--> [Python源码学习02.SocketServer](http://defshine.github.io/python-source-learn02.html)
+:link: [非常简单的Python HTTP服务](http://coolshell.cn/articles/1480.html)
+
+:link: [python 网络编程](http://www.cnblogs.com/cacique/tag/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/)
+
+:link: [Python socket 网络服务器](http://www.cnblogs.com/vamei/archive/2012/10/30/2744955.html)
+
+:link: [Python源码学习01.准备篇](http://defshine.github.io/python-source-learn01.html)
+
+:link: [Python源码学习02.SocketServer](http://defshine.github.io/python-source-learn02.html)
 
 ---
 <h3 id="lib-async-1" style="color:#d35400;">select & epoll</h3>
@@ -1575,18 +1614,22 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 
 水平触发模式常被用在移植使用select或者poll机制的应用程序时，而边沿触发模式可以用在当程序员不需要或不想要操作系统协助管理event状态时。
 
--> [关于C10K、异步回调、协程、同步阻塞](http://rango.swoole.com/archives/381)
--> [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
--> [Python中使用epoll开发服务端程序](http://www.oschina.net/question/54100_8940)
--> How To Use Linux epoll with Python [英文](http://scotdoyle.com/python-epoll-howto.html) & [译文](http://devres.zoomquiet.io/data/20100927213110/index.html)
+:link: [关于C10K、异步回调、协程、同步阻塞](http://rango.swoole.com/archives/381)
+
+:link: [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
+
+:link: [Python中使用epoll开发服务端程序](http://www.oschina.net/question/54100_8940)
+
+:link: How To Use Linux epoll with Python [英文](http://scotdoyle.com/python-epoll-howto.html) & [译文](http://devres.zoomquiet.io/data/20100927213110/index.html)
 
 ---
 <h3 id="lib-async-2" style="color:#d35400;">asyncore & asynchat</h3>
 
 **异步 socket 服务客户端和服务器的基础架构。**
 
--> [asyncore 文档翻译](http://automationtesting.sinaapp.com/blog/m_asyncore)
--> [asynchat 文档翻译](http://automationtesting.sinaapp.com/blog/m_asynchat)
+:link: [asyncore 文档翻译](http://automationtesting.sinaapp.com/blog/m_asyncore)
+
+:link: [asynchat 文档翻译](http://automationtesting.sinaapp.com/blog/m_asynchat)
 
 ***
 <h2 id="web-dev" style="color:#c0392b;">Web 开发</h2>
@@ -1668,16 +1711,20 @@ tornado.template.execute(add = add)
 {{ add(1, 2) }}
 ```
 
--> [老齐](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/index.md#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E6%98%A8%E5%A4%9C%E8%A5%BF%E9%A3%8E%E4%BA%AD%E5%8F%B0%E8%B0%81%E7%99%BB)
--> [Introduction to Tornado](http://www.pythoner.com/tag/tornado)
--> [官方文档中译版](http://www.tornadoweb.cn/documentation#_13)
--> [官方文档4.0.1](http://www.tornadoweb.org/en/stable/)
+:link: [Python 教程 @老齐](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/index.md#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E6%98%A8%E5%A4%9C%E8%A5%BF%E9%A3%8E%E4%BA%AD%E5%8F%B0%E8%B0%81%E7%99%BB)
+
+:link: [Introduction to Tornado](http://www.pythoner.com/tag/tornado)
+
+:link: [官方文档中译版](http://www.tornadoweb.cn/documentation#_13)
+
+:link: [官方文档4.0.1](http://www.tornadoweb.org/en/stable/)
 
 ---
 <h3 id="tornado-source-code" style="color:#d35400;">源码剖析</h3>
 
--> [Tornado 源码分析系列 (cnblogs.com)](http://www.cnblogs.com/Bozh/archive/2012/07/22/2603976.html)
--> [Tornado 源码解析篇 (nowamagic.net)](http://www.nowamagic.net/librarys/veda/detail/2566)
+:link: [Tornado 源码分析系列 (cnblogs.com)](http://www.cnblogs.com/Bozh/archive/2012/07/22/2603976.html)
+
+:link: [Tornado 源码解析篇 (nowamagic.net)](http://www.nowamagic.net/librarys/veda/detail/2566)
 
 ---
 
