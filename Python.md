@@ -67,6 +67,7 @@ import antigravity
 *   [Tornado](#tornado)
     *   [使用](#tornado-use)
     *   [源码剖析](#tornado-source-code)
+
 ---
 ***
 
@@ -386,7 +387,7 @@ TypeError: 'str' object does not support item assignment
 0x7fd42d897ea8 -> [2]   # 仅仅被评估一次
 ```
 
-:link: [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
+=> [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
 
 ---
 <h3 id="faq-func-pass-value" style="color:#d35400;">传值还是传引用？</h3>
@@ -469,7 +470,7 @@ TypeError: 'str' object does not support item assignment
 
 读方法总能判断不同平台的换行标记,但写方法不会添加任何换行字符,包括 `writelines`。(如必须按不同平台写入换行标记,可使用 `os.linesep`。)
 
-通常建议用迭代器或 `xreadlines()` 代替 `readlines()`，后者默认一次性读取整个文件。
+通常建议用迭代器或 `xreadlines()` 代替 `readlines()`，后者默认一次性读取整个文件。d#tornado-source-code
 
 ---
 <h3 id="faq-functional-programing" style="color:#d35400;">函数</h3>
