@@ -20,9 +20,12 @@ import antigravity
 *   [援疑质理](#faq)
     *   [其它](#faq-other)
     *   [解释器](#faq-interpreter)
+    *   [None 和 空](#faq-none-no)
+    *   [is 和 ==](#faq-is-equal)
     *   [编码和解码](#faq-encoding)
     *   [可变对象和不可变对象](#faq-object)
     *   [默认参数值](#faq-default-arg)
+    *   [传值还是传引用](#faq-func-pass-value)
     *   [格式化](#faq-format)
     *   [文件](#faq-file)
     *   [函数](#faq-functional-programing)
@@ -64,7 +67,6 @@ import antigravity
 *   [Tornado](#tornado)
     *   [使用](#tornado-use)
     *   [源码剖析](#tornado-source-code)
-
 ---
 ***
 
@@ -215,14 +217,26 @@ Namespaces are one honking great idea -- let's do more of those!
 ***
 <h2 id="faq" style="color:#c0392b;">援疑质理</h2>
 
+ + [技能点扫盲](http://www.douban.com/group/topic/28872729/)
+
+---
 <h3 id="faq-other" style="color:#d35400;">其它</h3>
 
-> **else** 除常见的 `if ... else ...` 之外，`else` 在 Python 中还有很多其它的用途: `while ... else ...`，`for ... else ...`，`try ... except ... else ...`，在这些情况下，只有循环正常结束(break是非正常结束)或者except没有捕获到异常时，`else`里的代码块才会执行。
+1. **`Expression & statement`**: An `expression` is a combination of values, variables, and operators. A `statement` is a unit of code that the Python interpreter can execute.Technically an expression is also a statement, but it is probably simpler to think of them as different things. The important difference is that **`an expression has a value; a statement does not`**.
 
-> **`Expression & statement`**: An `expression` is a combination of values, variables, and operators. A `statement` is a unit of code that the Python interpreter can execute.Technically an expression is also a statement, but it is probably simpler to think of them as different things. The important difference is that **`an expression has a value; a statement does not`**.
+2. **else** 除常见的 `if ... else ...` 之外，`else` 在 Python 中还有很多其它的用途: `while ... else ...`，`for ... else ...`，`try ... except ... else ...`，在这些情况下，只有循环正常结束(break是非正常结束)或者except没有捕获到异常时，`else`里的代码块才会执行。
 
-- [Python中的进程,线程,协程,同步,异步,回调](http://segmentfault.com/blog/portal_qiniu_com/1190000001813992)
-- [技能点扫盲](http://www.douban.com/group/topic/28872729/)
+3. **浮点数** 运算有陷阱。不要直接比较小数是否相等，最好判断它们是否近似相等，或者使用精准性高的 decimal 模块。
+```Python
+>>> sum(0.1 for i in range(10)) == 1.0
+False
+>>> fequal = lambda x, y, places=7: round(abs(x-y), places) == 0
+>>> fequal(sum(0.1 for i in range(10)), 1.0)
+True
+>>> from decimal import Decimal
+>>> sum(Decimal('0.1') for i in range(10)) == Decimal('1.0')
+True
+```
 
 ---
 <h3 id="faq-interpreter" style="color:#d35400;">解释器</h3>
@@ -233,6 +247,66 @@ Namespaces are one honking great idea -- let's do more of those!
   - [代码对象](http://blog.jobbole.com/56300/)
   - [理解字节码](http://blog.jobbole.com/56761/)
   - [动态语言](http://blog.jobbole.com/57381/)
+
+---
+<h3 id="faq-none-no" style="color:#d35400;">None 和 空</h3>
+
+> Python 通过获取`__nonzero__()`或者`__len__()`方法的调用结果来进行空值判断。
+> 
+以下数据被当作空：
+ - 常量 None
+ - 常量 False
+ - 数值 0、0L、0.0、0j
+ - 空序列或字典，如 ''、()、set()、list()、[]、dict()、{}
+ - 类中自定义了`__nonzero__()`方法或`__len__()`方法，并且该方法返回整数0或者False时。
+
+> None的类型是NoneType。None可以当作空来处理，但是空并不代表为None。
+```Python
+>>> def mm(arg):
+...     if arg is not None:
+...         print arg, 'is not None'
+...     if arg is None:
+...         print arg, 'is None'
+...     if arg:
+...         print arg, 'is not empty'
+...     if not arg:
+...         print arg, 'is empty'
+... 
+>>> mm([])
+[] is not None
+[] is empty
+```
+
+---
+<h3 id="faq-is-equal" style="color:#d35400;">is 和 ==</h3>
+
+> 判断对象(id 值)是否相等用 is，判断值是否相等用 ==。
+> 
+| 操作符 | 意义 |
+|-------|------|
+| is | object identity |
+| == | equal |
+
+> Python 中的string interning(字符串驻留机制)：对于较小的字符串，为了提高系统性能会保留其值的一个副本，创建新的值相同的字符串时直接指向该副本即可。
+```Python
+>>> a = 'Hello'
+>>> b = 'Hello'
+>>> a is b
+True
+>>> a == b
+True
+>>> id(a) == id(b)
+True
+>>>
+>>> c = 'long string'
+>>> d = 'long string'
+>>> c is d
+False
+>>> c == d
+True
+>>> id(c) == id(d)
+False
+```
 
 ---
 <h3 id="faq-encoding" style="color:#d35400;">编码和解码</h3>
@@ -264,7 +338,13 @@ u'\u4e2d\u6587'
 
  - 可变数据对象(*mutable* object)【列表，字典，字节数组】，可变对象的更改会直接影响原对象。list 的切片操作可以看做深拷贝，但重新生成一个对象。
  - 不可变数据对象(*immutable* object)【数字，字符串，元组】，对不可变对象的操作会直接创造一个新的对象；字符串对象不允许以索引的方式赋值就是因为其不可变性。
-
+```Python
+>>> s = 'Hello, world!'
+>>> s[7] = 'W'
+Traceback (most recent call last):
+  ...
+TypeError: 'str' object does not support item assignment
+```
 
 ---
 <h3 id="faq-default-arg" style="color:#d35400;">默认参数值</h3>
@@ -275,26 +355,75 @@ u'\u4e2d\u6587'
 ```Python
 >>> def foo(a, b=[]):
 ...     b.append(a)
-...     print b
+...     print '{0:#x} -> {1}'.format(id(b), b)
 ... 
->>> foo(1)
-[1]
->>> foo(2) 　# 不是[2]？丫的又不是全局变量
-[1, 2]
->>> #＃ 改进一下
+>>> foo(1, [])   # 还挺正常的
+0x7fd42d897ea8 -> [1]
+>>> foo(2, [])
+0x7fd42d897ea8 -> [2]
+>>> l = [3]      # 这里因为 l 是全局可变对象
+>>> foo(4, l)
+0x7fd42d897e18 -> [3, 4]
+>>> foo(5, l)
+0x7fd42d897e18 -> [3, 4, 5]
+>>> l
+[3, 4, 5]
+>>> foo(6)      # 使用默认参数值
+0x7fd42d883998 -> [6]
+>>> foo(7)
+0x7fd42d883998 -> [6, 7]   # 仅仅被评估一次
+>>> # 改进一下，不再使用可变对象作为默认参数值。
 >>> def bar(a, b=None):
-...     if b is None:
-...         b = []
+...     if b == None: b = []
 ...     b.append(a)
-...     print b
+...     print '{0:#x} -> {1}'.format(id(b), b)
 ... 
 >>> bar(1)
-[1]
+0x7fd42d897ea8 -> [1]
 >>> bar(2)
-[2]
+0x7fd42d897ea8 -> [2]   # 仅仅被评估一次
 ```
 
 - [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
+
+---
+<h3 id="faq-func-pass-value" style="color:#d35400;">传值还是传引用？</h3>
+
+> 传对象，不可变对象和可变对象有区别。
+
+> 函数参数在传递的过程中将整个对象传入，对可变对象的修改在函数外部以及内部都可见，调用者和被调用者之间共享这个对象；而对于不可变对象，由于并不能被改变，因此修改都是通过通过生成一个新的对象然后赋值来实现的。
+```Python
+>>> ##### 可变对象传引用
+>>> def foo(lst):
+...     lst.append('NEW')
+...     return lst
+... 
+>>> lst = [1, 2, 3]
+>>> id(lst)
+140492465764760
+>>> new_lst = foo(lst)
+>>> id(new_lst)
+140492465764760
+>>> new_lst
+[1, 2, 3, 'NEW']
+>>> lst
+[1, 2, 3, 'NEW']
+>>> ##### 可变对象传引用？？？？？
+>>> def foo(lst):
+...     lst = ['NEW', '???']
+...     return lst
+... 
+>>> lst = [1, 2, 3]
+>>> id(lst)
+140492465847904
+>>> new_lst = foo(lst)
+>>> id(new_lst)
+140492465848120
+>>> new_lst
+['NEW', '???']
+>>> lst
+[1, 2, 3]
+```
 
 ---
 <h3 id="faq-format" style="color:#d35400;">格式化</h3>
@@ -949,11 +1078,12 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 
  + 大量字符串拼接，使用 `''.join(list)` 而不是 `str + str`
  + 对于频繁增删元素的大大型列表,应该考虑用用链表等数据结构代替。
- + 如果需要创建 "海量" 对象实例,优先考虑 `__slots__`(**`__slots__` 属性会阻止虚拟机创建实例 `__dict__`,仅为名单中的指定成员分配内存空间。这有助于减少内存占用,提升执行行性能,尤其是在需要大量此类对象的时候。**) 。其派生类同样必须用` __slots__` 为新增字段分配存储空间 (即便是空 `__slots__ = []`),否则依然会创建 __dict__,反而导致更慢的执行行效率。。
+ + 如果需要创建 "海量" 对象实例,优先考虑 `__slots__`(**`__slots__` 属性会阻止虚拟机创建实例 `__dict__`,仅为名单中的指定成员分配内存空间。这有助于减少内存占用,提升执行行性能,尤其是在需要大量此类对象的时候。**) 。其派生类同样必须用` __slots__` 为新增字段分配存储空间 (即便是空 `__slots__ = []`),否则依然会创建 __dict__,反而导致更慢的执行行效率。
+
+ - [Python 内置数据结构各种操作效率](http://hujiaweibujidao.github.io/blog/2014/05/08/python-algorithms-datastructures/)
  - [18 条 Python 代码性能优化小贴士](http://infiniteloop.in/blog/quick-python-performance-optimization-part-i/)
  - [Python 代码优化指南](http://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/)
  - [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
- - [内存管理](http://www.cnblogs.com/vamei/p/3232088.html)
 
 
 ---
