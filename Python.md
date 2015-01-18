@@ -396,7 +396,7 @@ TypeError: 'str' object does not support item assignment
 
 函数参数在传递的过程中将整个对象传入，对可变对象的修改在函数外部以及内部都可见，调用者和被调用者之间共享这个对象；而对于不可变对象，由于并不能被改变，因此修改都是通过通过生成一个新的对象然后赋值来实现的。
 ```Python
->>> ##### 可变对象传引用
+>>> ######################## 可变对象传引用
 >>> def foo(lst):
 ...     lst.append('NEW')
 ...     return lst
@@ -411,7 +411,7 @@ TypeError: 'str' object does not support item assignment
 [1, 2, 3, 'NEW']
 >>> lst
 [1, 2, 3, 'NEW']
->>> ##### 可变对象传引用？？？？？
+>>> ######################## 可变对象传引用？？？？？
 >>> def foo(lst):
 ...     lst = ['NEW', '???']
 ...     return lst
