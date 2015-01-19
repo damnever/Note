@@ -96,7 +96,9 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 ```
 
-[禅译](http://wiki.woodpecker.org.cn/moin/PythonZen)
+=> [禅译](http://wiki.woodpecker.org.cn/moin/PythonZen)
+
+=> [实例](http://artifex.org/~hblanks/talks/2011/pep20_by_example.html)
 
 ---
 <h2 id="python-resource" style="color:#c0392b;">资源碎片</h2>
@@ -111,7 +113,10 @@ Namespaces are one honking great idea -- let's do more of those!
  - [码农IO Python 精选](http://baoz.me/446252)
  - [python 模块文档汇总](http://automationtesting.sinaapp.com/blog/python_modules)
  - [ZQ's SCRAPBOOK](http://pythonic.zoomquiet.io/tree/index.html)
- - [Top of 2014](http://pycoders.com/2014/)
+ - [Awesome-Python @vinta](https://github.com/vinta/awesome-python)
+ - [Top of 2014](http://pycoders.com/2014/) & [译文](http://weekly.pychina.org/issue/issue-147-top2014.html)
+ - [PythonShare](https://github.com/Yixiaohan/codeparkshare/blob/master/README.md)
+ - [stackoverflow 上 Python 相关回答整理翻译](https://github.com/wklken/stackoverflow-py-top-qa)
 
 ---
 ***
@@ -311,9 +316,11 @@ False
 ---
 <h3 id="faq-encoding" style="color:#d35400;">编码和解码</h3>
 
-str 类型在 Python2 中是ASCII码，Python 3 中为 unicode。
+**规则：unicode.encode() -> bytes，bytes.decode() -> unicode**
 
-**规则：unicode 作为中间态用来 encode，可以 decode 成 unicode.**
+str 类型在 Python2 中存储的是 bytes，Python 3 中为 unicode，存储的是 code points。
+
+在 Python 2 中将 byte 字符串和 unicode 字符串连接起来，byte 自动解码成 unicode，生成一个新的 unicode 字符串。但是 byte 字符串到 unicode 字符串可能会失败。
 
 `from __future__ import unicode_literals` 使用 Python 3 特性，把　str　变成　unicode.
 ```Python
@@ -332,6 +339,7 @@ u'\u4e2d\u6587'
 u'\u4e2d\u6587'
 2
 ```
+=> [Unicode 之痛](http://pycoders-weekly-chinese.readthedocs.org/en/latest/issue5/unipain.html)
 
 ---
 <h3 id="faq-object" style="color:#d35400;">可变对象和不可变对象</h3>
@@ -364,7 +372,7 @@ TypeError: 'str' object does not support item assignment
 0x7fd42d897ea8 -> [1]
 >>> foo(2, [])
 0x7fd42d897ea8 -> [2]
->>> l = [3]      # 这里因为 l 是全局可变对象
+>>> l = [3]      # 这里因为 l 是全局可变对象，参见下面<传值还是传引用>
 >>> foo(4, l)
 0x7fd42d897e18 -> [3, 4]
 >>> foo(5, l)
@@ -607,7 +615,7 @@ del:  y
 attribute:  __dict__
 ```
 
- => [雨痕 Python 笔记](https://github.com/qyuhen/book) 第十章
+ => [雨痕 Python 笔记](https://github.com/qyuhen/book)
 
  => [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 
@@ -1095,6 +1103,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `empty() / full()` # 返回 bool 型
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
+
+=> [Recursion(How to Think Like a Computer Scientist: Learning with Python 3)](http://openbookproject.net/thinkcs/python/english3e/recursion.html)
 
 => [算法 @老齐](https://github.com/qiwsir/algorithm/blob/master/README.md)
 
