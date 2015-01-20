@@ -29,15 +29,21 @@ import antigravity
     *   [格式化](#faq-format)
     *   [文件](#faq-file)
     *   [函数](#faq-functional-programing)
+    *   [偏函数 (partial)](#faq-partial)
     *   [类](#faq-class)
+        *   [名称空间](#faq-class-namespace)
+        *   [继承](#faq-class-inheritance)
+        *   [抽象类](#faq-class-abclass)
+        *   [操作符重载](#faq-class-overwrite)
+        *   [描述器](#faq-class-descriptor)
+        *   [属性 @property](#faq-class-property)
+        *   [@classmethod & @staticmethod](#faq-class-func)
     *   [元类 (metaclass)](#faq-metaclass)
     *   [MixIn](#faq-mixin)
+    *   [自省](#faq-introspection)
     *   [上下文与 with](#faq-with)
     *   [闭包 (closure)](#faq-closure)
     *   [装饰器"@" (decorator)](#faq-decorator)
-    *   [属性方法 @property](#faq-property)
-    *   [@classmethod & @staticmethod](#faq-class-func)
-    *   [偏函数 (partial)](#faq-partial)
     *   [yield & generator](#faq-yield)
     *   [协程](#faq-coroutine)
     *   [数据结构和算法](#faq-algorithm)
@@ -146,8 +152,8 @@ Namespaces are one honking great idea -- let's do more of those!
  - [Hidden features of Python](http://stackoverflow.com/questions/101268/hidden-features-of-python)
  - [《编写高质量代码：改善Python程序的91个建议》](http://book.douban.com/subject/25910544/)
 
-
 ---
+___
 ***
 <h2 id="python-regex" style="color:#c0392b;">正则表达式</h2>
 
@@ -219,6 +225,7 @@ Namespaces are one honking great idea -- let's do more of those!
  =>  [高级正则表达式](http://blog.jobbole.com/65605/)
 
 ---
+___
 ***
 <h2 id="faq" style="color:#c0392b;">援疑质理</h2>
 
@@ -244,6 +251,7 @@ True
 ```
 
 ---
+___
 <h3 id="faq-interpreter" style="color:#d35400;">解释器</h3>
 
  - [Introduction to the Python Interpreter](http://akaptur.github.io/blog/categories/python-internals/)
@@ -254,6 +262,7 @@ True
   - [动态语言](http://blog.jobbole.com/57381/)
 
 ---
+___
 <h3 id="faq-none-no" style="color:#d35400;">None 和 空</h3>
 
 Python 通过获取`__nonzero__()`或者`__len__()`方法的调用结果来进行空值判断。
@@ -283,6 +292,7 @@ None的类型是NoneType。None可以当作空来处理，但是空并不代表�
 ```
 
 ---
+___
 <h3 id="faq-is-equal" style="color:#d35400;">is 和 ==</h3>
 
 判断对象(id 值)是否相等用 is，判断值是否相等用 ==。
@@ -314,6 +324,7 @@ False
 ```
 
 ---
+___
 <h3 id="faq-encoding" style="color:#d35400;">编码和解码</h3>
 
 **规则：unicode.encode() -> bytes，bytes.decode() -> unicode**
@@ -342,6 +353,7 @@ u'\u4e2d\u6587'
 => [Unicode 之痛](http://pycoders-weekly-chinese.readthedocs.org/en/latest/issue5/unipain.html)
 
 ---
+___
 <h3 id="faq-object" style="color:#d35400;">可变对象和不可变对象</h3>
 
 **引用和对象**：对象是内存中储存数据的实体，引用指向对象。`a = 1; b = 'str'`中`1`和`'str'`是对象， `a`和`b`是对其的引用，相当于一个标示。
@@ -358,6 +370,7 @@ TypeError: 'str' object does not support item assignment
 ```
 
 ---
+___
 <h3 id="faq-default-arg" style="color:#d35400;">默认参数值</h3>
 
 **用 None 或不可变对象作为函数中的默认参数**
@@ -398,6 +411,7 @@ TypeError: 'str' object does not support item assignment
 => [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm) & [译文](http://blog.jobbole.com/40088/)
 
 ---
+___
 <h3 id="faq-func-pass-value" style="color:#d35400;">传值还是传引用？</h3>
 
 传对象，不可变对象和可变对象有区别。
@@ -437,6 +451,7 @@ TypeError: 'str' object does not support item assignment
 ```
 
 ---
+___
 <h3 id="faq-format" style="color:#d35400;">格式化</h3>
 
 `'{}, {}'.format('a', 'b')` # 2.7+ only
@@ -472,6 +487,7 @@ TypeError: 'str' object does not support item assignment
 => [关于格式化规范的迷你语言](http://digitser.net/python/2.7.8/zh-CN/library/string.html#format-string-syntax)
 
 ---
+___
 <h3 id="faq-file" style="color:#d35400;">文件</h3>
 
 如果要把数据写到磁盘上,除调用 `flush()` 外,还得用 `sync()`,以确保数据从系统缓冲区同步到磁盘。`close()` 总是会调用用这两个方法。
@@ -481,6 +497,7 @@ TypeError: 'str' object does not support item assignment
 通常建议用迭代器或 `xreadlines()` 代替 `readlines()`，后者默认一次性读取整个文件。d#tornado-source-code
 
 ---
+___
 <h3 id="faq-functional-programing" style="color:#d35400;">函数</h3>
 
 1. 内置函数
@@ -539,27 +556,61 @@ The number: 30
  => [Python函数式编程指南（一）：概述](http://www.cnblogs.com/huxi/archive/2011/06/18/2084316.html)
 
 ---
+___
+<h3 id="faq-partial" style="color:#d35400;">偏函数 (partial)</h3>
+
+**当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
+
+固定参数时，(1)若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。(2)若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数(首先`args = (...)`然后`args += (...)`)。
+```Python
+>>> def f(a, b, c):
+...     print 'a={}, b={}, c={}'.format(a, b, c)
+...
+>>> f(1, 2, 3)
+a=1, b=2, c=3
+>>> import functools
+>>> ff = functools.partial(f, a=1, c=3); ff(2) # (1)不能跳着固定
+Traceback (most recent call last):
+  ...
+TypeError: f() got multiple values for keyword argument 'a'
+>>> ff = functools.partial(f, b=2, c=3); ff(1) # (1)
+a=1, b=2, c=3
+>>> ff = functools.partial(f, 1, c=3); ff(2) # (2)
+a=1, b=2, c=3
+>>> ff = functools.partial(f, 1); ff(2, 3) # (2)
+a=1, b=2, c=3
+```
+
+
+
+---
+___
 <h3 id="faq-class" style="color:#d35400;">类</h3>
 
 > Python 2 中存在两种形式的类，1) New-Style Class，这种类需要显示的继承于object或设置文件的默认元类`__metaclass__=type`；2)Clasic Class，在 Python 3 中已经不存在了。
 
-1. **名称空间**
+---
+<h4 id="faq-class-namespace" style="color:#f39c12;">名称空间</h4>
+
  类型(class)存储了所有的静态字段和方法(包含实例方法)，而实例(instance)仅存储实例字段。
- **字段 (Field) 和 属性 (Property) 是不同的。**
+
+**字段 (Field) 和 属性 (Property) 是不同的。**
  - 实例字段存储在 `instance.__dict__`,代表单个对象实体的状态。
  - 静态字段存储在 `class.__dict__`,为所有同类型实例共享。
  - 必须通过类型和实例对象才能访问字段。
  - 以双下划线开头的 class/instance 成员视为私有,会被重命名为 `_<class>__<name>` 形式。(module 成员不变)
 
- 属性 (Property) 是由 getter、setter、deleter 几个方法构成的逻辑。属性可能直接返回字段值，也可能是动态逻辑运算的结果。
+属性 (Property) 是由 getter、setter、deleter 几个方法构成的逻辑。属性可能直接返回字段值，也可能是动态逻辑运算的结果。
 
- 某些时候,既想使用私有字段,又不想放弃外部访问权限。
+某些时候,既想使用私有字段,又不想放弃外部访问权限。
  - 用重命名后的格式访问。
  - 只用一个下划线,仅提醒,不重命名。
 
- 实例方法的特殊性: 当用实例调用时,它是个 bound method,动态绑定到对象实例。而当用类型调用时,是 unbound method,必须显式传递 self 参数。
+实例方法的特殊性: 当用实例调用时,它是个 bound method,动态绑定到对象实例。而当用类型调用时,是 unbound method,必须显式传递 self 参数。
 
-2. **继承**
+---
+<h4 id="faq-class-inheritance" style="color:#f39c12;">继承</h4>
+
  多继承，基类顺序影响成员搜索顺序。
 
  多重继承成员搜索顺序 mro(Method Resolution Order **旧式类是深度优先搜索，新式类为广度优先搜索**) 列表中的搜索起始位置,总是返回该参数后续类型的成员。单继承时总是搜索该参数的基类型。
@@ -568,18 +619,25 @@ The number: 30
 
  => [Understanding Python MRO - Class search path](http://makina-corpus.com/blog/metier/2014/python-tutorial-understanding-python-mro-class-search-path)
 
-3. **抽象类**
+---
+<h4 id="faq-class-abclass" style="color:#f39c12;">抽象类</h4>
+
  `from abc import ABCMeta, abstractmethod, abstractproperty` # 创建抽象类的类型，抽象方法，抽象属性 ，`__metaclass__ = ABCMeta`标明此类为抽象类。
 
  抽象类 (Abstract Class) 无法实例化,且派生类必须 "完整" 实现所有抽象成员才可创建实例。
 
  如果派生类也是抽象类型,那么可以部分实现或完全不实现基类抽象成员。
 
-4. **自省（反射）**
- **Python 里面一切皆对象，函数，方法，类，实例，代码块等都有自己的内置属性。**
- `__getattr__` (访问不存在的成员)，`__setattr__` (对任何成员的赋值操作), `__delattr__` (删除成员操作), `__getattribute__` (访问任何存在或不存在的成员,包括 __dict__)。
+---
+<h4 id="faq-class-overwrite" style="color:#f39c12;">操作符重载</h4>
 
- 不要在这几个方法里直接访问对象成员,也不要用 hasattr/getattr/setattr/delattr 函数,因为它们会被再次拦截,形成无限循环。正确的做法是直接操作 `__dict__`。而 `__getattribute__` 连 `__dict__` 都会拦截,只能用基类的 `__getattribute__` 返回结果。
+操作时机：
+- `__getattr__`: 访问不存在的成员
+- `__setattr__`: 对任何成员的赋值操作
+- `__delattr__`: 删除成员操作 
+- `__getattribute__`: 访问任何存在或不存在的成员,包括 `__dict__`
+
+不要在这几个方法里直接访问对象成员,也不要用 hasattr/getattr/setattr/delattr 函数,因为它们会被这些方法再次拦截,形成无限循环。正确的做法是直接操作 `__dict__`。而 `__getattribute__` 连 `__dict__` 都会拦截,只能用基类的 `__getattribute__` 返回结果。
 ```Python
 >>> class A(object):
 ...     def __init__(self, x):
@@ -614,12 +672,190 @@ attribute:  __dict__
 del:  y
 attribute:  __dict__
 ```
+以属性的方式访问字典的值
+```Python
+class Dict(dict):
 
- => [雨痕 Python 笔记](https://github.com/qyuhen/book)
+    def __init__(self, **kwargs):
+        dict.__init__(self, **kwargs)
 
- => [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
+    def __setattr__(self, key, value):
+        self[key] = value
+
+    def __getattr__(self, key):
+        return self.get(key, None)
+
+    def __delattr__(self, key):
+        self.pop(key, None)
+
+if __name__ == '__main__':
+    d = Dict(a=1, b=2)
+    print d             # {'a': 1, 'b': 2}
+    print d['a']        # 1
+    print d.a           # 1
+    del d.a
+    print d             # {'b': 2}
+```
+实现`__setitem__()/__getitem__()/__delitem__()`能像序列或字典类型那样操作对象。
+```Python
+class D(object):
+    def __init__(self, **kwargs):
+        self._data = kwargs
+    def __getitem__(self, key):
+        return self._data.get(key)
+    def __setitem__(self, key, value):
+        self._data[key] = value
+    def __delitem__(self, key):
+        self._data.pop(key, None)
+    def __contains__(self, key):
+        return key in self._data.keys()
+    def __repr__(self):
+        return '{0!r}'.format(self._data)
+    __str__ = __repr__
+
+if __name__ == '__main__':
+    d = D(a=1, b=2)
+    print d          # {'a': 1, 'b': 2}
+    print d['a']     # 1
+    d['a'] = 10      
+    print d['a']     # 10
+    del d['a']       
+    print d          # {'b': 2}
+```
+
+比较`__cmp__`(Python 3被移除)，`__eq__`==，`__lt__`<，`__le__`<=，`__ne__`!=，`__ge__`>=，`__gt__`>。
 
 ---
+<h4 id="faq-class-descriptor" style="color:#f39c12;">描述器</h4>
+
+一个描述器是一个有“绑定行为”的对象属性(object attribute)，它的访问控制被描述器协议方法重写。实现**描述器协议**的方法（实现任意一个即可）：
+ - `descr.__get__(self, obj, type=None) --> value`
+ - `descr.__set__(self, obj, value) --> None`
+ - `descr.__delete__(self, obj) --> None`
+
+如果一个对象同时定义了`__get__()`和`__set__()`，叫做 **data descriptor**；仅仅定义了`__get__()`叫做 **non-data descriptor**。区别在于：**相对于实例的字典的优先级**。在与实例字典中有同名的情况下，`data desriptor > instance.__dict__ > non-data descriptor`。
+
+描述器是在 object, type, 和 super 的 `__getattribute__()` 方法中实现的。
+ - 描述器的调用是因为`__getattribute__()`
+ - 重写`__getattribute__()`会阻止正常的描述器调用
+
+**属性(property), 方法(bound/unbound method), staticmethod 和 classmethod 都是基于描述器协议的。**
+```Python
+>>> class Mm(object):
+...      def __init__(self):
+...          self.same = '__dict__'
+...      def same(self):
+...          print 'non-data'
+... 
+>>> m = Mm()
+>>> m.__dict__
+{'same': '__dict__'}
+>>> m.same
+'__dict__'
+>>> m.same() # 实例函数是 non-data descripter，优先级不如实例字典
+Traceback (most recent call last):
+  ...
+TypeError: 'str' object is not callable
+```
+
+=> [Descriptor HowTo Guide](https://docs.python.org/2/howto/descriptor.html) & [翻译](http://pyzh.readthedocs.org/en/latest/Descriptor-HOW-TO-Guide.html)
+
+---
+<h4 id="faq-class-property" style="color:#f39c12;">属性 @property</h4>
+
+`property([fget[, fset[, fdel[, doc]]]])` **将方法当成属性用**
+
+可以通过函数的形式使用，也可以通过装饰器的形式来使用
+```Python
+>>> class Name(object):
+...     @property
+...     def name(self):
+...         print 'Get:'
+...         return self._name
+...     @name.setter
+...     def name(self, value):
+...         print 'Set: ', value
+...         self._name = value
+...     @name.deleter
+...     def name(self):
+...         print 'Del: name'
+...         del self._name
+... 
+>>> n = Name()
+>>> n.name = 'Damnever'
+Set: Damnever
+>>> n.name
+Get:
+'Damnever'
+>>> del n.name
+Del: name
+>>> n.name
+Get:
+Traceback (most recent call last):
+  ...
+AttributeError: 'Name' object has no attribute '_name'
+```
+
+---
+<h4 id="faq-class-func" style="color:#f39c12;">@classmethod & @staticmethod</h4>
+
+都与实例无关。classmethod 至少需要一个类名作为参数；staticmethod 相当与一个普通函数。因为这两个方法一般不会其它代码用到，通过 decorator 的方式放在类里可以**代码的可读性**。
+
+classmethod 和 staticmethod 都可以通过实例和类名来调用。classmethod　只能访问类属性，staticmethod 即不能访问类属性也不能访问实例属性。
+
+```Python
+class MyClass(object):
+
+    class_field = 'class field'
+
+    def __init__(self):
+        self.instance_field = 'instance_field'
+
+    def instance_method(*args):
+        print 'bound method args:', args
+        print 'I can get:', args[0].instance_field
+
+    @staticmethod
+    def static_method(*args):
+        print 'staticmethod args:', args
+
+    @classmethod
+    def class_method(*args):
+        print 'classmethod args:', args
+        print 'I can get:', args[0].class_field
+        # print 'cm call static method:', args[0].static_method('sm')
+        # print 'cm call bound method:', args[0]().instance_method()
+
+if __name__ == '__main__':
+    obj = MyClass()
+    print '** Call classmethod:'
+    obj.class_method()
+    MyClass.class_method()
+    print '** call staticmethod:'
+    obj.static_method()
+    MyClass.static_method()
+    print '** call boundmethod:'
+    obj.instance_method()
+```
+输出
+```
+** Call classmethod:
+classmethod args: (<class '__main__.MyClass'>,)
+I can get: class field
+classmethod args: (<class '__main__.MyClass'>,)
+I can get: class field
+** call staticmethod:
+staticmethod args: ()
+staticmethod args: ()
+** call boundmethod:
+bound method args: (<__main__.MyClass object at 0x7f7adbc89a90>,)
+I can get: instance_field
+```
+
+=> [PYTHON中STATICMETHOD和CLASSMETHOD的差异](http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html)
+
+---
+___
 <h3 id="faq-metaclass" style="color:#d35400;">元类 (metaclass)</h3>
 
 **类型对象,负责创建对象实例,控制对象行为 (方法)。而创建类型对象的是元类 (metaclass),也就是类型的类型。**
@@ -658,6 +894,7 @@ dynamic
 => [编写一个 ORM 框架](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba**000)
 
 ---
+___
 <h3 id="faq-mixin" style="color:#d35400;">MixIn</h3>
 
 一种特殊的多继承，在不改变原对象的情况下对其进行扩展。
@@ -672,7 +909,19 @@ dynamic
 
 => [Mixins considered harmful/2](http://www.artima.com/weblogs/viewpost.jsp?thread=246483)
 
+
 ---
+___
+<h3 id="faq-introspection" style="color:#d35400;">自省</h3>
+
+自省（introspection）是一种自我检查行为。
+
+**Python 里面一切皆对象，函数，方法，类，实例，代码块等都有自己的内置属性。**
+
+ => [Python自省（反射）指南](http://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
+
+---
+___
 <h3 id="faq-with" style="color:#d35400;">上下文与 with</h3>
 
 **上下文管理协议 (Context Management Protocol) 为代码块提供了包含初始化和清理操作的安全上下文环境。即便代码块发生异常,清理操作也会被执行。**
@@ -719,6 +968,7 @@ contextlib.nested
 => [理解 Python 的 with 语句](http://python.42qu.com/11155501)
 
 ---
+___
 <h3 id="faq-closure" style="color:#d35400;">闭包 (closure)</h3>
 
 **当函数离开创建环境后，依然持有其上下文状态。**
@@ -798,6 +1048,7 @@ contextlib.nested
 => [Python 2 nonlocal](http://code.activestate.com/recipes/578965-python-2-nonlocal/)
 
 ---
+___
 <h3 id="faq-decorator" style="color:#d35400;">装饰器"@" (decorator)</h3>
 
 **若需要增强某函数的功能，但又不希望修改该函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。**
@@ -845,125 +1096,7 @@ func = dec2( dec1(arg)(func) )
 => [Python Decorator Library](https://wiki.python.org/moin/PythonDecoratorLibrary)
 
 ---
-<h3 id="faq-property" style="color:#d35400;">属性方法 @property</h3>
-
-`property([fget[, fset[, fdel[, doc]]]])` **将方法当成属性用**
-
-可以通过函数的形式使用，也可以通过装饰器的形式来使用
-```Python
->>> class Name(object):
-...     @property
-...     def name(self):
-...         print 'Get:'
-...         return self._name
-...     @name.setter
-...     def name(self, value):
-...         print 'Set: ', value
-...         self._name = value
-...     @name.deleter
-...     def name(self):
-...         print 'Del: name'
-...         del self._name
-... 
->>> n = Name()
->>> n.name = 'Damnever'
-Set: Damnever
->>> n.name
-Get:
-'Damnever'
->>> del n.name
-Del: name
->>> n.name
-Get:
-Traceback (most recent call last):
-  ...
-AttributeError: 'Name' object has no attribute '_name'
-```
-
----
-<h3 id="faq-class-func" style="color:#d35400;">@classmethod & @staticmethod</h3>
-
-都与实例无关。classmethod 至少需要一个类名作为参数；staticmethod 相当与一个普通函数。因为这两个方法一般不会其它代码用到，通过 decorator 的方式放在类里可以**代码的可读性**。
-
-classmethod 和 staticmethod 都可以通过实例和类名来调用。classmethod　只能访问类属性，staticmethod 即不能访问类属性也不能访问实例属性。
-
-```Python
-class MyClass(object):
-
-    class_field = 'class field'
-
-    def __init__(self):
-        self.instance_field = 'instance_field'
-
-    def instance_method(*args):
-        print 'bound method args:', args
-        print 'I can get:', args[0].instance_field
-
-    @staticmethod
-    def static_method(*args):
-        print 'staticmethod args:', args
-
-    @classmethod
-    def class_method(*args):
-        print 'classmethod args:', args
-        print 'I can get:', args[0].class_field
-        # print 'cm call static method:', args[0].static_method('sm')
-        # print 'cm call bound method:', args[0]().instance_method()
-
-if __name__ == '__main__':
-    obj = MyClass()
-    print '** Call classmethod:'
-    obj.class_method()
-    MyClass.class_method()
-    print '** call staticmethod:'
-    obj.static_method()
-    MyClass.static_method()
-    print '** call boundmethod:'
-    obj.instance_method()
-```
-输出
-```
-** Call classmethod:
-classmethod args: (<class '__main__.MyClass'>,)
-I can get: class field
-classmethod args: (<class '__main__.MyClass'>,)
-I can get: class field
-** call staticmethod:
-staticmethod args: ()
-staticmethod args: ()
-** call boundmethod:
-bound method args: (<__main__.MyClass object at 0x7f7adbc89a90>,)
-I can get: instance_field
-```
-
-=> [PYTHON中STATICMETHOD和CLASSMETHOD的差异](http://www.wklken.me/posts/2013/12/22/difference-between-staticmethod-and-classmethod-in-python.html)
-
----
-<h3 id="faq-partial" style="color:#d35400;">偏函数 (partial)</h3>
-
-**当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。**
-
-固定参数时，(1)若指定了关键字，就如同函数的关键字参数，必须从右至左固定，不能跳过参数，也就是说最右边的参数必须被先固定。(2)若没有指定关键字，自动从最左边开始固定，传入参数亦同可变长参数(首先`args = (...)`然后`args += (...)`)。
-```Python
->>> def f(a, b, c):
-...     print 'a={}, b={}, c={}'.format(a, b, c)
-...
->>> f(1, 2, 3)
-a=1, b=2, c=3
->>> import functools
->>> ff = functools.partial(f, a=1, c=3); ff(2) # (1)不能跳着固定
-Traceback (most recent call last):
-  ...
-TypeError: f() got multiple values for keyword argument 'a'
->>> ff = functools.partial(f, b=2, c=3); ff(1) # (1)
-a=1, b=2, c=3
->>> ff = functools.partial(f, 1, c=3); ff(2) # (2)
-a=1, b=2, c=3
->>> ff = functools.partial(f, 1); ff(2, 3) # (2)
-a=1, b=2, c=3
-```
-
----
+___
 <h3 id="faq-yield" style="color:#d35400;">yield & generator</h3>
 
 **生成器**是可以迭代的，读取它的时候只可以读取一次，因为它并不把所有的值放在内存中，它是实时地生成数据。
@@ -1023,6 +1156,7 @@ If the yield-expression is a yield-statement, this returned value is ignored, si
 => [Iterators、Generators 和 itertools](http://blog.jobbole.com/66097/)
 
 ---
+___
 <h3 id="faq-coroutine" style="color:#d35400;">协程</h3>
 
 **协程(Coroutine)，协同程序，又称微线程。**
@@ -1051,7 +1185,7 @@ Python 使用 yield expression 来实现简单的协程。yield 表达式可以�
 Traceback (most recent call last):
   ...
 TypeError: can't send non-None value to a just-started generator
->>> g.next() # 或 g.send(None)
+>>> g.next() # 或 next(g) 或 g.send(None)
 GEN: 
 0
 >>> g.send('hi, gen')
@@ -1075,6 +1209,7 @@ StopIteration
 => [A Curious Course on Coroutines and Concurrency](http://www.dabeaz.com/coroutines/index.html)
 
 ---
+___
 <h3 id="faq-algorithm" style="color:#d35400;">数据结构和算法</h3>
 
 **bisect** 使用二分法在一个 "已排序 (sorted) 序列" 中查找合适的插入位置。
@@ -1115,6 +1250,7 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 => [whoosh 索引查找](https://pythonhosted.org/Whoosh/quickstart.html#a-quick-introduction)
 
 ---
+___
 <h3 id="faq-performance" style="color:#d35400;">性能和内存管理</h3>
 
  + 大量字符串拼接，使用 `''.join(list)` 而不是 `str + str`
@@ -1129,8 +1265,10 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
 
 => [Python 性能分析指南](http://www.oschina.net/translate/python-performance-analysis)
 
-
 ---
+
+___
+
 ***
 <h2 id="standard-library" style="color:#c0392b;">标准库</h2>
 
