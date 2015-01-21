@@ -2,7 +2,7 @@
 
 ***
 待学列表而已 ... 悲哉？
-import antigravity
+python -m antigravity
 
 ---
 
@@ -34,7 +34,7 @@ import antigravity
         *   [名称空间](#faq-class-namespace)
         *   [继承](#faq-class-inheritance)
         *   [抽象类](#faq-class-abclass)
-        *   [操作符重载](#faq-class-overwrite)
+        *   [魔术方法](#faq-class-overwrite)
         *   [描述器](#faq-class-descriptor)
         *   [属性 @property](#faq-class-property)
         *   [@classmethod & @staticmethod](#faq-class-func)
@@ -149,7 +149,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [Python 高级编程 @Dongweiming](http://dongweiming.github.io/Expert-Python/)
  - [10 个常见错误](http://blog.jobbole.com/68256/)
  - [30 Python Language Features and Tricks You May Not Know About](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
- - [Hidden features of Python](http://stackoverflow.com/questions/101268/hidden-features-of-python)
+ - [Hidden features of Python](http://stackoverflow.com/questions/101268/hidden-features-of-python) & [译文](http://pyzh.readthedocs.org/en/latest/python-hidden-features.html)
  - [《编写高质量代码：改善Python程序的91个建议》](http://book.douban.com/subject/25910544/)
 
 ---
@@ -250,6 +250,8 @@ True
 True
 ```
 
+4. `python -m` 可以直接运行一些 python 模块。参考：[使用Python解释器的一句话命令](http://pyzh.readthedocs.org/en/latest/single-line-command-with-python.html)
+
 ---
 ___
 <h3 id="faq-interpreter" style="color:#d35400;">解释器</h3>
@@ -265,7 +267,7 @@ ___
 ___
 <h3 id="faq-none-no" style="color:#d35400;">None 和 空</h3>
 
-Python 通过获取`__nonzero__()`或者`__len__()`方法的调用结果来进行空值判断。
+Python 通过获取`__nonzero__()`(Python 3 为`__bool__()`)或者`__len__()`方法的调用结果来进行空值判断。
 
 以下数据被当作空：
  - 常量 None
@@ -483,6 +485,29 @@ ___
 >>> import datetime; 'Now: {0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())  ##格式化时间
 'Now: 2015-01-10 21:04:42'
 ```
+使用 indent 来打印 JSON 数据
+```Python
+>>> import json; data = {u'status': u'OK', u'count': 2, u'results': [{u'age': 27, u'name': u'Oz', u'lactose_intolerant': True}, {u'age': 29, u'name': u'Joe', u'lactose_intolerant': False}]}
+>>> print json.dumps(data)
+{"status": "OK", "count": 2, "results": [{"age": 27, "name": "Oz", "lactose_intolerant": true}, {"age": 29, "name": "Joe", "lactose_intolerant": false}]}
+>>> print json.dumps(data, indent=2)
+{
+  "status": "OK", 
+  "count": 2, 
+  "results": [
+    {
+      "age": 27, 
+      "name": "Oz", 
+      "lactose_intolerant": true
+    }, 
+    {
+      "age": 29, 
+      "name": "Joe", 
+      "lactose_intolerant": false
+    }
+  ]
+}
+```
 
 => [关于格式化规范的迷你语言](http://digitser.net/python/2.7.8/zh-CN/library/string.html#format-string-syntax)
 
@@ -629,7 +654,7 @@ ___
  如果派生类也是抽象类型,那么可以部分实现或完全不实现基类抽象成员。
 
 ---
-<h4 id="faq-class-overwrite" style="color:#f39c12;">操作符重载</h4>
+<h4 id="faq-class-overwrite" style="color:#f39c12;">魔术方法(操作符重载)</h4>
 
 操作时机：
 - `__getattr__`: 访问不存在的成员
@@ -672,21 +697,29 @@ attribute:  __dict__
 del:  y
 attribute:  __dict__
 ```
-以属性的方式访问字典的值
+以属性的方式访问字典的数据。
+字典中还有一个特殊方法`__missing__`，找不到 key 时被调用。
 ```Python
 class Dict(dict):
 
     def __init__(self, **kwargs):
+        # super(Dict, self).__init__(**kwargs)
         dict.__init__(self, **kwargs)
 
     def __setattr__(self, key, value):
         self[key] = value
 
     def __getattr__(self, key):
-        return self.get(key, None)
+        # If want to catch 'KeyError' raise 'AttributeError',  
+        # '__missing__()' must raise 'KeyError' or remove `__missing__()`.
+        return self[key]
 
     def __delattr__(self, key):
         self.pop(key, None)
+
+    def __missing__(self, key):
+        # Raise a error or
+        return None
 
 if __name__ == '__main__':
     d = Dict(a=1, b=2)
@@ -695,6 +728,8 @@ if __name__ == '__main__':
     print d.a           # 1
     del d.a
     print d             # {'b': 2}
+  　print d['c']　　　　　# None
+    print d.c           # None
 ```
 实现`__setitem__()/__getitem__()/__delitem__()`能像序列或字典类型那样操作对象。
 ```Python
@@ -717,13 +752,15 @@ if __name__ == '__main__':
     d = D(a=1, b=2)
     print d          # {'a': 1, 'b': 2}
     print d['a']     # 1
-    d['a'] = 10      
+    d['a'] = 10
     print d['a']     # 10
-    del d['a']       
+    del d['a']
     print d          # {'b': 2}
 ```
 
 比较`__cmp__`(Python 3被移除)，`__eq__`==，`__lt__`<，`__le__`<=，`__ne__`!=，`__ge__`>=，`__gt__`>。
+
+=> [A Guide to Python's Magic Methods](http://www.rafekettler.com/magicmethods.html) & [译文](http://pyzh.readthedocs.org/en/latest/python-magic-methods-guide.html)
 
 ---
 <h4 id="faq-class-descriptor" style="color:#f39c12;">描述器</h4>
@@ -759,6 +796,8 @@ TypeError: 'str' object is not callable
 ```
 
 => [Descriptor HowTo Guide](https://docs.python.org/2/howto/descriptor.html) & [翻译](http://pyzh.readthedocs.org/en/latest/Descriptor-HOW-TO-Guide.html)
+
+=> [Class method differences in Python: bound, unbound and static](http://stackoverflow.com/a/114289/2996656) & [译文](http://pyzh.readthedocs.org/en/latest/python-questions-on-stackoverflow.html#unbound-methodbound-method)
 
 ---
 <h4 id="faq-class-property" style="color:#f39c12;">属性 @property</h4>
@@ -887,7 +926,7 @@ dynamic
 <class '__main__.MyClass'>
 ```
 
-=> [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/)
+=> [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/) & [原文](http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python/6581949#6581949)
 
 => [Python**3** 初探](https://www.ibm.com/developerworks/cn/linux/l-python3-2/)
 
@@ -1735,6 +1774,8 @@ Set-Cookie: vienna=finger
 <h3 id="lib-socket" style="color:#d35400;">SocketServer & SimpleHTTPServer & etc.</h3>
 
 `python -m SimpleHttpServer 8000` 可以在当前文件夹下创建一个HTTP Server，局域网内可以用来共享文件。
+
+Python 3: `python(3) -m http.server`
 
 => [非常简单的Python HTTP服务](http://coolshell.cn/articles/1480.html)
 
