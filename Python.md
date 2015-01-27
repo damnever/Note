@@ -28,7 +28,9 @@ python -m antigravity
     *   [传值还是传引用](#faq-func-pass-value)
     *   [格式化](#faq-format)
     *   [文件](#faq-file)
-    *   [函数](#faq-functional-programing)
+    *   [函数](#faq-func)
+        *   [内置函数](#faq-func-built-in)
+        *   [函数式编程](#faq-func-functional-programing)
     *   [偏函数 (partial)](#faq-partial)
     *   [类](#faq-class)
         *   [名称空间](#faq-class-namespace)
@@ -523,9 +525,10 @@ ___
 
 ---
 ___
-<h3 id="faq-functional-programing" style="color:#d35400;">函数</h3>
+<h3 id="faq-func" style="color:#d35400;">函数</h3>
 
-1. 内置函数
+<h4 id="faq-func-built-in" style="color:#f39c12;">内置函数</h4>
+
  - `lambda` 匿名函数，不显式地定义函数，不需要 return，返回值就是表达式的结果。
 
  - `map(function, sequence[, sequence, ...])` 将传入的函数行为映射到传入的序列的每个元素上，并返回一个 list。
@@ -540,15 +543,35 @@ ___
 
  - `iter(o[, sentinel])` 传入一个序列，返回可迭代对象，可选参数`sentinel`是一个终止标识。
 
- ```Python
+```Python
 # 一种有用形式，读取文件，直到readline()返回空字符串为止
 with open('mydata.txt') as fp:
     for line in iter(fp.readline, ''):
         process_line(line)
 ```
- => [Python Built-in Functions](https://docs.python.org/2/library/functions.html)
 
-2. **函数式编程**(Functional Programing)，一种抽象程度很高的编程范式，把运算过程尽量写成一系列嵌套的函数调用，函数仅接收输入并产生输出。
+- `execfile(filename[, globals[, locals]])` (1) 可以用来执行一个文件(Python)，默认传入执行环境的全局名称空间`globals()`和局部名称空间`locals()`；如果只传入`globals`那么`locals`与`globals`相同。(2) `filename`内的全局变量会被默认插入`locals()`，除非使用`global`关键字显示声明；在`filename`内可以改变`globals()`，但是无法改变`locals()`。(3) 如果不使用执行环境的默认名称空间，可以传入`{}`。
+
+```Python
+# 使用 tornado.options.parse_config_file 时必须先 define 的一种解决方式
+# 来自 https://bitbucket.org/felinx/poweredsites/src/6040f8cf119ca530c9359275f3beaf63d5fc441d/poweredsites/libs/utils.py?at=default
+def _parse_config_file(path):
+    config = {}
+    execfile(path, config, config)
+    for name in config:
+        if name in options:
+            options[name].set(config[name])
+        else:
+            define(name, default=config[name])
+```
+
+=> [名称空间和execfile函数](https://execfile.readthedocs.org/en/latest/)
+
+=> [Python Built-in Functions](https://docs.python.org/2/library/functions.html)
+
+<h4 id="faq-func-functional-programing" style="color:#f39c12;">函数式编程</h4>
+
+Functional Programing，一种抽象程度很高的编程范式，把运算过程尽量写成一系列嵌套的函数调用，函数仅接收输入并产生输出。
 ```Python
 >>> # 找出一个序列中的偶数并将它们乘以3
 >>> def even_filter(nums):
@@ -1883,7 +1906,7 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 {% if *condition* %} ... {% elif *condition* %} ... {% else %} ... {% end %}
 {% while *condition* %} ... {% end %}
 {% try %} ... {% except %} ... {% else %} ... {% finally %} ... {% end %}
-```
+```一杯
 默认提供了一些方法: escape(), url_escape(), json_encode(), squeeze().
 可以添加任意自命名的方法 (在 tornado.web.RquestHandler 里, 可重写 get_template_namespace):
 ```Python
