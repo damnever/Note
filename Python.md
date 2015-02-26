@@ -125,6 +125,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [Top of 2014](http://pycoders.com/2014/) & [译文](http://weekly.pychina.org/issue/issue-147-top2014.html)
  - [PythonShare](https://github.com/Yixiaohan/codeparkshare/blob/master/README.md)
  - [stackoverflow 上 Python 相关回答整理翻译](https://github.com/wklken/stackoverflow-py-top-qa)
+ - [收集 @Wilbeibi](https://github.com/Wilbeibi/NotesIndex/blob/master/Python_Index.md)
 
 ---
 ***
@@ -768,7 +769,7 @@ attribute:  __dict__
 class Dict(dict):
 
     def __init__(self, **kwargs):
-        # super(Dict, self).__init__(**kwargs)
+        # super(Dict, self).__init__(**kwargs) 仅用于新式类
         dict.__init__(self, **kwargs)
 
     def __setattr__(self, key, value):
@@ -1376,7 +1377,7 @@ ___
 ***
 <h2 id="standard-library" style="color:#c0392b;">标准库</h2>
 
-```peakhell
+```
   如果一定要推荐一些 python 的源码去读，我的建议是标准库里关于网络的代码。从 SocketServer 开始，补上 socket 模块的知识，熟悉 TCP/UDP 编程，然后了解 Mixin 机制的最佳示例 SocketServer.{ForkingMixIn|ThreadingMixIn}，借这个机会了解 thread/threading 模块，这时会对并发量提出新的要求，就可以读 select 模块，开始对 select/{epoll|kqueue} 有深刻理解，搞懂以后就可以接触一下异步框架 asyncore 和 asynchat。这时开始出现分岔。如果是做 game 等以 TCP/UDP 协议为基础的peakhell应用，可以去读 greenlet 和 gevent，如果是做 web，则走下一条路。
   做 web，读 BaseHTTPServer、SimpleHTTPServer 和 CGIHTTPServer，读 cgi/cgitb，自己随意写框架，读cookielib，读 wsgiref，这时候自己写一个简便的 web framework 就 so easy 了，老板再也不担心你写 web 了，选择 flask/web.py/django/pyramid 都心中有数了。因为走的是 web 的路，所以难免要调用一下别人的 api，搞懂一下 httplib/urllib/urllib/urlparse。
    引自：赖勇浩[http://laiyonghao.com/]
@@ -1504,7 +1505,7 @@ OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 ---
 <h3 id="lib-struct" style="color:#d35400;">struct & array</h3>
 
-struct： 在网络传输中，对于 C 语言的 struct 类型将会无法识别，通过此模块来进行 struct 类型和 Python 类型之间的转换。
+struct： 解决 str 和其他二进制数据类型的转换，特别是在在网络传输中。
  - `pack(fmt, v1, v2)` # 转换成 fmt 中描述的 struct类型的二进制形式
  - `unpack(fmt, v1, v2)` # 将二进制形式的 struct 类型通过 fmt 格式转换成 Python 类型
 
