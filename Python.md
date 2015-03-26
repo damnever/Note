@@ -71,7 +71,7 @@ python -m antigravity
 *   [Web 开发](#web-dev)
 *   [Flask](#flask)
     *   [使用](#flask-use)
-    *   [插件扩展](#flask-plugin)' '*(21-len(address[0]+str(address[1]))),
+    *   [插件扩展](#flask-plugin)
 *   [Tornado](#tornado)
     *   [使用](#tornado-use)
     *   [源码剖析](#tornado-source-code)
@@ -126,7 +126,6 @@ Namespaces are one honking great idea -- let's do more of those!
  - [PythonShare](https://github.com/Yixiaohan/codeparkshare/blob/master/README.md)
  - [stackoverflow 上 Python 相关回答整理翻译](https://github.com/wklken/stackoverflow-py-top-qa)
  - [收集 @Wilbeibi](https://github.com/Wilbeibi/NotesIndex/blob/master/Python_Index.md)
- - [Python Cheat Sheet](http://crazyguitar.github.io/cheatsheet/python-cs.html)
 
 ---
 ***
@@ -344,7 +343,7 @@ str 类型在 Python2 中存储的是 bytes，Python 3 中为 unicode，存储�
 >>> s = '中文'
 >>> s; len(s); type(s)
 '\xe4\xb8\xad\xe6\x96\x87'
-6
+6down
 <type 'str'>
 >>> us = s.decode('utf-8')
 >>> us; len(us); type(us)
@@ -1867,8 +1866,6 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 
 => [关于C10K、异步回调、协程、同步阻塞](http://rango.swoole.com/archives/381)
 
-=> [receive UDP broadcasts (Python recipe)](http://code.activestate.com/recipes/577278-receive-udp-broadcasts/)
-
 => [select 和 poll I/O复用的简单使用](http://www.cnblogs.com/coser/archive/2012/01/06/2315216.html)
 
 => [Python中使用epoll开发服务端程序](http://www.oschina.net/question/54100_8940)
@@ -1896,6 +1893,7 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
  - [ PEP 249 (Python Database API Specification v2.0)](http://legacy.python.org/dev/peps/pep-0249/) & [译文](http://blog.csdn.net/dajianshi/article/details/7482201)
  - [MySQLdb操作](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/304.md)
+ - [Introduction to MySQL in Python](http://www.mikusa.com/python-mysql-docs/introduction.html)
  -  [The Django Book](http://www.djangobook.com/en/2.0/index.html) & [译文](http://djangobook.py3k.cn/2.0/)
 
 ---
