@@ -126,6 +126,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [PythonShare](https://github.com/Yixiaohan/codeparkshare/blob/master/README.md)
  - [stackoverflow 上 Python 相关回答整理翻译](https://github.com/wklken/stackoverflow-py-top-qa)
  - [收集 @Wilbeibi](https://github.com/Wilbeibi/NotesIndex/blob/master/Python_Index.md)
+ - [Python Cheat Sheet](http://crazyguitar.github.io/cheatsheet/python-cs.html)
 
 ---
 ***
