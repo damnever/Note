@@ -20,6 +20,7 @@ python -m antigravity
 *   [援疑质理](#faq)
     *   [其它](#faq-other)
     *   [解释器](#faq-interpreter)
+    *   [GIL](#faq-gil)
     *   [None 和 空](#faq-none-no)
     *   [is 和 ==](#faq-is-equal)
     *   [编码和解码](#faq-encoding)
@@ -266,6 +267,14 @@ ___
   - [代码对象](http://blog.jobbole.com/56300/)
   - [理解字节码](http://blog.jobbole.com/56761/)
   - [动态语言](http://blog.jobbole.com/57381/)
+
+---
+___
+<h3 id="faq-gil" style="color:#d35400;">GIL</h3>
+
+GIL(global intepreter lock)，全局解释器锁。在解释器执行任何 Python 代码时，都需要先获得这把锁，在遇到 I/O 操作时会释放这把锁。同一时间只有一个获得了 GIL 的线程在执行，其它线程处于等待状态。可以通过 ctypes 和 C 动态库来让 python 充分利用物理内核的计算能力。
+
+=> [python 线程，GIL 和 ctypes](http://zhuoqiang.me/python-thread-gil-and-ctypes.html)
 
 ---
 ___
