@@ -1,6 +1,6 @@
-./Android
-./data/coroutine.py
-./Python_SC
+Android
+data/coroutine.py
+Python_SC/
 apt-get
 pip
 TOC
@@ -14,3 +14,4 @@ MongoDB.md
 MySQL.md
 Vim.md
 Todo.md
+Git.md
