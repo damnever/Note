@@ -257,7 +257,9 @@ True
 True
 ```
 
-4. `python -m` 可以直接运行一些 python 模块。参考：[使用Python解释器的一句话命令](http://pyzh.readthedocs.org/en/latest/single-line-command-with-python.html)
+4. **字典(dict)** 的`setdefault(key[, default])`方法只有当键不存在时才会设置默认值；`fromkeys(seq[, value])`设置一组键的默认值，可以用来去重（`{}.fromkeys(seq).keys()`或者`list(set(seq))`）；`view keys()/values()/items()`用于像集合那样操作字典。在 Python 3 中`keys()/values()/items()`都是可迭代的。
+
+5. `python -m` 可以直接运行一些 python 模块。参考：[使用Python解释器的一句话命令](http://pyzh.readthedocs.org/en/latest/single-line-command-with-python.html)
 
 ---
 ___
@@ -598,6 +600,8 @@ ___
 
  - `iter(o[, sentinel])` 传入一个序列，返回可迭代对象，可选参数`sentinel`是一个终止标识。
 
+ - 在 Python 3 中`map/filter/zip`都返回可迭代序列，Python 2 `itertools`中相应的`i*`被移除；Python 3 中`reduce`被移至`functools`模块。
+
 ```Python
 # 一种有用形式，读取文件，直到readline()返回空字符串为止
 with open('mydata.txt') as fp:
@@ -605,7 +609,7 @@ with open('mydata.txt') as fp:
         process_line(line)
 ```
 
-- `execfile(filename[, globals[, locals]])` (1) 可以用来执行一个文件(Python)，默认传入执行环境的全局名称空间`globals()`和局部名称空间`locals()`；如果只传入`globals`那么`locals`与`globals`相同。(2) `filename`内的全局变量会被默认插入`locals()`，除非使用`global`关键字显示声明；在`filename`内可以改变`globals()`，但是无法改变`locals()`。(3) 如果不使用执行环境的默认名称空间，可以传入`{}`。
+- `execfile(filename[, globals[, locals]])` (1) 可以用来执行一个文件(Python)，默认传入执行环境的全局名称空间`globals()`和局部名称空间`locals()`；如果只传入`globals`那么`locals`与`globals`相同。(2) `filename`内的全局变量会被默认插入`locals()`，除非使用`global`关键字显示声明；在`filename`内可以改变`globals()`，但是无法改变`locals()`。(3) 如果不使用执行环境的默认名称空间，可以传入`{}`。[**在 Python 3 中被移除，使用`exec(open(fn).read()[, globals[, locals]])`代替**]
 
 ```Python
 # 使用 tornado.options.parse_config_file 时必须先 define 的一种解决方式
