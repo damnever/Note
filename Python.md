@@ -276,7 +276,7 @@ ___
 ___
 <h3 id="faq-gil" style="color:#d35400;">GIL</h3>
 
-GIL(global intepreter lock)，全局解释器锁。在解释器执行任何 Python 代码时，都需要先获得这把锁，在遇到 I/O 操作时会释放这把锁。同一时间只有一个获得了 GIL 的线程在执行，其它线程处于等待状态。可以通过 ctypes 和 C 动态库来让 python 充分利用物理内核的计算能力。
+GIL(global intepreter lock)，全局解释器锁。在解释器执行任何 Python 代码时，都需要先获得这把锁，在遇到 I/O 操作时会释放这把锁。同一时间只有一个获得了 GIL 的线程在执行，其它线程处于等待状态。在纯计算的程序情况会好一点。可以通过 ctypes 和 C 动态库来让 python 充分利用物理内核的计算能力。
 
 => [python 线程，GIL 和 ctypes](http://zhuoqiang.me/python-thread-gil-and-ctypes.html)
 
@@ -1359,6 +1359,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `empty() / full()` # 返回 bool 型
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
+
+=> [Sorting Mini-HOW TO](https://wiki.python.org/moin/HowTo/Sorting)
 
 => [Recursion(How to Think Like a Computer Scientist: Learning with Python 3)](http://openbookproject.net/thinkcs/python/english3e/recursion.html)
 
