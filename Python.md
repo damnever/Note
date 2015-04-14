@@ -321,7 +321,7 @@ ___
 | is | object identity |
 | == | equal |
 
-Python 中的string interning(字符串驻留机制)：对于较小的字符串，为了提高系统性能会保留其值的一个副本，创建新的值相同的字符串时直接指向该副本即可。
+Python 中的string interning(字符串驻留机制)：对于某些字符串（仅包含数字，下划线，字母），为了提高系统性能会保留其值的一个副本，创建新的值相同的字符串时直接指向该副本即可。
 ```Python
 >>> a = 'Hello'
 >>> b = 'Hello'
@@ -341,6 +341,8 @@ True
 >>> id(c) == id(d)
 False
 ```
+
+=> [Python中的字符串驻留](http://cnn237111.blog.51cto.com/2359144/1615356)
 
 ---
 ___
