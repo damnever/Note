@@ -130,6 +130,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [stackoverflow 上 Python 相关回答整理翻译](https://github.com/wklken/stackoverflow-py-top-qa)
  - [收集 @Wilbeibi](https://github.com/Wilbeibi/NotesIndex/blob/master/Python_Index.md)
  - [Python Cheat Sheet](http://crazyguitar.github.io/cheatsheet/python-cs.html)
+ - [伯乐在线 Python 资源列表](http://hao.jobbole.com/category/Python-tools/)
 
 ---
 ***
@@ -137,8 +138,9 @@ Namespaces are one honking great idea -- let's do more of those!
 
 <h3 id="code-standard" style="color:#d35400;">规范</h3>
 
- - [PEP-0008](http://www.Python.org/dev/peps/pep-0008/) & [中文](https://code.google.com/p/zhong-wiki/wiki/PEP8)
+ - [PEP-0008](http://www.Python.org/dev/peps/pep-0008/) & [中文](http://damnever.github.io/2015/04/24/PEP8-style-guide-for-python-code/)
  - [Google Python 风格指南](http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/)
+ - [The Little Book of Python Anti-Patterns](http://docs.quantifiedcode.com/python-anti-patterns/index.html)
 
 ---
 <h3 id="code-debug" style="color:#d35400;">调试</h3>
@@ -158,6 +160,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [30 Python Language Features and Tricks You May Not Know About](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
  - [Hidden features of Python](http://stackoverflow.com/questions/101268/hidden-features-of-python) & [译文](http://pyzh.readthedocs.org/en/latest/python-hidden-features.html)
  - [《编写高质量代码：改善Python程序的91个建议》](http://book.douban.com/subject/25910544/)
+ - [Design Patterns and Python Flyweight Pattern(享元模式)](http://yloiseau.net/articles/DesignPatterns/flyweight/)
 
 ---
 ___
