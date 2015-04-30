@@ -161,6 +161,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [Hidden features of Python](http://stackoverflow.com/questions/101268/hidden-features-of-python) & [译文](http://pyzh.readthedocs.org/en/latest/python-hidden-features.html)
  - [《编写高质量代码：改善Python程序的91个建议》](http://book.douban.com/subject/25910544/)
  - [Design Patterns and Python Flyweight Pattern(享元模式)](http://yloiseau.net/articles/DesignPatterns/flyweight/)
+ - [Python: faster way](http://zokis.github.io/Python--Faster-Way/)
 
 ---
 ___
