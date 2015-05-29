@@ -1914,9 +1914,10 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
  -  [PEP333 (Python Web Server Gateway Interface v1.0)](http://www.python.org/dev/peps/pep-0333) & [译文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
  - [Serving Static Content With WSGI](http://pwp.stevecassidy.net/wsgi/static.html)
  - [jinja2](http://docs.jinkan.org/docs/jinja2/)
+ - [用Python一起写一个Web服务器](http://drops.wooyun.org/tips/6089)
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
  - [ PEP 249 (Python Database API Specification v2.0)](http://legacy.python.org/dev/peps/pep-0249/) & [译文](http://blog.csdn.net/dajianshi/article/details/7482201)
- - [MySQLdb操作](https://github.com/qiwsir/ITArticles/blob/master/BasicPython/304.md)
+ - [Returning Rows as Dicts in MySQLdb](http://www.halfcooked.com/mt/archives/000969.html)
  - [Introduction to MySQL in Python](http://www.mikusa.com/python-mysql-docs/introduction.html)
  -  [The Django Book](http://www.djangobook.com/en/2.0/index.html) & [译文](http://djangobook.py3k.cn/2.0/)
 
