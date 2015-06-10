@@ -1749,9 +1749,7 @@ Message          # 继承关系 #
             MIMEImage
 ```
 
-=> [SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
-
-=> [POP3收取邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001408244819215430d726128bf4fa78afe2890bec57736000)
+=> [email: Examples](https://docs.python.org/2/library/email-examples.html)
 
 ---
 <h3 id="lib-cookie" style="color:#d35400;">Cookie & cookielib</h3>
@@ -1880,8 +1878,6 @@ Python 3: `python(3) -m http.server`
 ---
 <h3 id="lib-async-1" style="color:#d35400;">select & epoll</h3>
 
-**异步管理多个 socket 连接，提高并发量。**
-
 select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
 
 当 event 可读时为奇数，可写时为偶数。边缘触发下被注册 socket 的 event 只被关注一次，需要一次完成 event 直到 socket.error 发生。
@@ -1914,7 +1910,7 @@ select.EPOLLIN,select.EPOLLOUT,select.EPOLLHUP 对应 1,4,16。
  -  [PEP333 (Python Web Server Gateway Interface v1.0)](http://www.python.org/dev/peps/pep-0333) & [译文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
  - [Serving Static Content With WSGI](http://pwp.stevecassidy.net/wsgi/static.html)
  - [jinja2](http://docs.jinkan.org/docs/jinja2/)
- - [用Python一起写一个Web服务器](http://drops.wooyun.org/tips/6089)
+ - [Let’s Build A Web Server.](http://ruslanspivak.com/archives.html)
  - [廖雪峰 Python 实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)
  - [ PEP 249 (Python Database API Specification v2.0)](http://legacy.python.org/dev/peps/pep-0249/) & [译文](http://blog.csdn.net/dajianshi/article/details/7482201)
  - [Returning Rows as Dicts in MySQLdb](http://www.halfcooked.com/mt/archives/000969.html)
