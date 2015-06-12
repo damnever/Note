@@ -1366,6 +1366,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
 
+=> 标准库 [collections [Counter, deque, namedtuple, defaultdict, OrderedDict]](#lib-collections)
+
 => [Sorting Mini-HOW TO](https://wiki.python.org/moin/HowTo/Sorting)
 
 => [Recursion(How to Think Like a Computer Scientist: Learning with Python 3)](http://openbookproject.net/thinkcs/python/english3e/recursion.html)
@@ -1515,6 +1517,31 @@ OrderedDict([('a', 1), ('b', 2), ('c', 3)])
 OrderedDict([('pear', 1), ('orange', 2), ('banana', 3), ('apple', 4)])
 >>> od.popitem(); od.popitem(); od.popitem() # LIFO
 ('c', 3) ('b', 2) ('a', 1)
+```
+在[leetcode](https://leetcode.com/problems/lru-cache/)上面看到一个`LRU cache`的题目，我用`OrderedDict`实现比用`list`+`dict`的实现快了不少，也更简洁:
+```Python
+class LRU(object):
+
+    def __init__(self, capacity):
+        self._count = 0  # or len(self._cache.keys()), which is slow way
+        self._capacity = capacity
+        self._cache = collections.OrderedDict()
+
+    def get(self, key):
+        if key in self._cache:
+            value = self._cache.pop(key)
+            self._count -= 1
+            self.set(key, value)
+        return self._cache.get(key, -1)
+
+    def set(self, key, value):
+        if key in self._cache:
+            self._cache.pop(key)
+        elif self._count < self._capacity:
+            self._count += 1
+        else:
+            self._cache.popitem(False)  # FIFO
+        self._cache[key] = value
 ```
 
 ---
