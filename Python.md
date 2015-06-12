@@ -280,7 +280,7 @@ ___
 ___
 <h3 id="faq-gil" style="color:#d35400;">GIL</h3>
 
-GIL(global intepreter lock)，全局解释器锁。在解释器执行任何 Python 代码时，都需要先获得这把锁，在遇到 I/O 操作时会释放这把锁。同一时间只有一个获得了 GIL 的线程在执行，其它线程处于等待状态。在纯计算的程序情况会好一点。可以通过 ctypes 和 C 动态库来让 python 充分利用物理内核的计算能力。
+GIL(global intepreter lock)，全局解释器锁。在解释器执行任何 Python 代码时，都需要先获得这把锁，在遇到 I/O 操作时会释放这把锁。可以通过 ctypes 和 C 动态库来让 python 充分利用物理内核的计算能力。
 
 => [python 线程，GIL 和 ctypes](http://zhuoqiang.me/python-thread-gil-and-ctypes.html)
 
