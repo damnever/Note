@@ -403,6 +403,7 @@ TypeError: 'str' object does not support item assignment
 - 浅拷贝会构筑新复合对象，然后 (尽可能) 把 references (引用) 插入原对象发现复合对象中。
 - 深拷贝会构筑新复合对象，然后把 copies (副本) 递归插入原对象发现复合对象中。
 
+如果已经知道了想拷贝对象的类型，可以使用`list(o)`或`切片[:]`或`列表推导式`、`set(o)`、`dict(o)`或`do.copy()`的方式来进行浅拷贝。
 ```Python
 >>> d1 = {'a': 1}
 >>> d2 = d1
