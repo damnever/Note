@@ -375,6 +375,9 @@ u'\u4e2d\u6587'
 u'\u4e2d\u6587'
 2
 ```
+
+Py3 里 str (unicode)和 bytes 的转换可以很方便：`bytes([source[, encoding[, errors]]])`/`str(object=b'', encoding='utf-8', errors='strict')`。
+
 => [Unicode 之痛](http://pycoders-weekly-chinese.readthedocs.org/en/latest/issue5/unipain.html)
 
 ---
@@ -517,6 +520,8 @@ ___
 >>> lst
 [1, 2, 3]
 ```
+
+可以把传入的可变对象默认值参数理解成一个全局变量。
 
 ---
 ___
@@ -849,6 +854,40 @@ if __name__ == '__main__':
 
 比较`__cmp__`(Python 3被移除)，`__eq__`==，`__lt__`<，`__le__`<=，`__ne__`!=，`__ge__`>=，`__gt__`>。
 
+`__subclasshook__`和元类一起使用可以用来判断是否是某个类的子类：
+
+```Python
+import abc
+
+
+class Test(object):  # Py3: object 换成 metaclass=abc.ABCMeta
+
+    __metaclass__ = abc.ABCMeta
+
+    @classmethod
+    def __subclasshook__(cls, sub_cls):
+        if cls is Test:
+            for super_cls in sub_cls.__mro__:  # __mro__ 仅在新式类下有效
+                if 'test' in super_cls.__dict__:
+                    return True
+        return NotImplemented
+
+
+class OneTest(object):
+
+    def test(self):
+        pass
+
+
+class TwoTest(object):
+    pass
+
+
+if __name__ == '__main__':
+    print(isinstance(OneTest(), Test))  # True
+    print(isinstance(TwoTest(), Test))  # False
+```
+
 => [A Guide to Python's Magic Methods](http://www.rafekettler.com/magicmethods.html) & [译文](http://pyzh.readthedocs.org/en/latest/python-magic-methods-guide.html)
 
 ---
@@ -1014,6 +1053,10 @@ dynamic
 <class '__main__.MyMetaclass'>
 <class '__main__.MyClass'>
 ```
+
+在`Python3`中指定元类的方式不同：`class ClassName(metaclass=MetaClassName)`。
+
+另外，`abc`模块可以创建一个抽象类和抽象方法（类似Java里的`interface`，C++中的纯虚函数`virtual void func() = 0;`用来实现抽象方法），`Py2`和`Py3`也有所不同。
 
 => [深刻理解 Python**2** 中的元类](http://blog.jobbole.com/21351/) & [原文](http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python/6581949#6581949)
 
@@ -1366,6 +1409,8 @@ Queue： FIFO 队列 / LifoQueue： LIFO 队列（似栈）/ PriorityQueue： �
  - `empty() / full()` # 返回 bool 型
  - `task_done()` # 在完成一项任务后，向任务已完成的队列发送一个信号
  - `join()` # 等待直到队列为空(阻塞直到任务完成)， 再执行别的操作
+
+=> [Algorithms @Damnever](https://github.com/Damnever/toys/tree/master/algorithm)
 
 => 标准库 [collections [Counter, deque, namedtuple, defaultdict, OrderedDict]](#lib-collections)
 
