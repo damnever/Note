@@ -402,6 +402,14 @@ TypeError: 'str' object does not support item assignment
 
 但是如`a = []; a = [1]`，此时 a 已经是另一个对象了， a 先是`[]`的引用，然后是`[1]`的引用。其实要就是**对象和引用**不能搞混了。
 
+**`Python`中的对象引用，当有很多相同的对象时可以很方便的体现出享元模式。**
+
+```Python
+>>> a, b, c = 'I am God!', 'I am winner!', 'I am the best one!'
+>>> x = [a, b, c, a, b, c]  # 使用对象引用，三个字符串
+>>> y = ['I am God!', 'I am winner!', 'I am the best one!', 'I am God!', 'I am winner!', 'I am the best one!']  # 至少六个字符串空间
+```
+
 **浅拷贝和深拷贝**间差别仅适于复合对象 (含有其它对象的对象，诸如：列表、字典、类实例):
 - 浅拷贝会构筑新复合对象，然后 (尽可能) 把 references (引用) 插入原对象发现复合对象中。
 - 深拷贝会构筑新复合对象，然后把 copies (副本) 递归插入原对象发现复合对象中。
