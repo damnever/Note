@@ -134,7 +134,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [stackoverflow 上 Python 相关回答整理翻译](https://github.com/wklken/stackoverflow-py-top-qa)
  - [收集 @Wilbeibi](https://github.com/Wilbeibi/NotesIndex/blob/master/Python_Index.md)
  - [Python Cheat Sheet](http://crazyguitar.github.io/cheatsheet/python-cs.html)
- - [伯乐在线 Python 资源列表](http://hao.jobbole.com/category/Python-tools/)
+ - [Popular Python Modules](http://www.programcreek.com/python/index/module/list)
 
 ---
 ***
