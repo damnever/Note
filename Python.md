@@ -78,6 +78,10 @@ python -m antigravity
 *   [Tornado](#tornado)
     *   [使用](#tornado-use)
     *   [源码剖析](#tornado-source-code)
+*   [Django](#django)
+    *   [网站](#django-sites)
+    *   [教程](#django-tutorials)
+    *   [文章](#django-articles)
 
 ---
 ***
@@ -2078,6 +2082,30 @@ tornado.template.execute(add = add)
 => [Tornado 源码分析系列](http://www.cnblogs.com/Bozh/archive/2012/07/22/2603976.html)
 
 => [Tornado 源码解析篇](http://www.nowamagic.net/librarys/veda/detail/2566)
+
+
+---
+***
+<h2 id="django" style="color:#c0392b;">Django</h2>
+<h3 id="django-sites" style="color:#d35400;">网站</h3>
+
+=> https://www.djangoproject.com/
+
+=> https://www.djangopackages.com/
+
+<h3 id="django-tutorials" style="color:#d35400;">教程</h3>
+
+=> [Django Girls 學習指南](http://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/content/index.html)
+=> [Tango with Django 中文文档](http://hackerxu.com/Twd/)
+
+<h3 id="django-articles" style="color:#d35400;">文章</h3>
+
+=> [Using Django querysets effectively](http://blog.etianen.com/blog/2013/06/08/django-querysets/) & [有效使用Django的QuerySets](http://www.oschina.net/translate/django-querysets)
+
+=> [Building a higher-level query API: the right way to use Django's ORM](http://www.dabapps.com/blog/higher-level-query-api-django-orm/) & [建立一个更高级别的查询 API：正确使用Django ORM 的方式](http://www.oschina.net/translate/higher-level-query-api-django-orm)
+
+=> [How exactly do Django content types work?](http://stackoverflow.com/questions/20895429/how-exactly-do-django-content-types-work)
+
 
 ---
 
