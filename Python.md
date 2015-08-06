@@ -237,7 +237,9 @@ ___
 
  => [Python正则表达式操作指南](http://wiki.ubuntu.org.cn/Python%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97)
 
- =>  [高级正则表达式](http://blog.jobbole.com/65605/)
+ => [高级正则表达式](http://blog.jobbole.com/65605/)
+
+ => [Readable regular expressions in Python](http://tonysyu.github.io/readable-regular-expressions-in-python.html)
 
 ---
 ___
