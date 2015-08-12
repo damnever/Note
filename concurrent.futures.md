@@ -1,6 +1,6 @@
 ## concurrent.futures -- Launching parallel tasks
 
-> 此文是 [Python 3 concurrent.futures (New in 3.2)](https://docs.python.org/3/library/concurrent.futures.html#module-concurrent.futures) 标准库版的简单翻译，第三方库 [concurrent.futures](http://pythonhosted.org/futures/) 基本一样。
+> 此文是 [Python 3 concurrent.futures (New in 3.2)](https://docs.python.org/3/library/concurrent.futures.html#module-concurrent.futures) 标准库版的糙译，第三方库 [concurrent.futures](http://pythonhosted.org/futures/) 基本一样。
 
 ---
 

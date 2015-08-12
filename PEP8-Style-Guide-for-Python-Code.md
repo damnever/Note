@@ -87,7 +87,8 @@ Guido 的一个主要见解是读代码多过写代码。这里提供指南的�
 续行要么与圆括号、中括号、花括号这样的被包裹元素保持垂直对齐，要么放在 Python 的隐线（注：应该是相对于def的内部块）内部，或者使用悬挂缩进<span id="id33">[5](#id3)</span>。使用悬挂缩进的注意事项：第一行不能有参数，用进一步的缩进来把其他行区分开。
 
 好的：
-{% highlight python %}
+
+```Python
 # Aligned with opening delimiter.
 foo = long_function_name(var_one, var_two,
                          var_three, var_four)
@@ -102,10 +103,11 @@ def long_function_name(
 foo = long_function_name(
     var_one, var_two,
     var_three, var_four)
-{% endhighlight %}
+```
 
 不好的：
-{% highlight python %}
+
+```Python
 # Arguments on first line forbidden when not using vertical alignment.
 foo = long_function_name(var_one, var_two,
     var_three, var_four)
@@ -115,18 +117,20 @@ def long_function_name(
     var_one, var_two, var_three,
     var_four):
     print(var_one)
-{% endhighlight %}
+```
 
 4空格规则是可选的：
-{% highlight python %}
+
+```Python
 # Hanging indents *may* be indented to other than 4 spaces.
 foo = long_function_name(
   var_one, var_two,
   var_three, var_four)
-{% endhighlight %}
+```
 
 当 if 语句的条件部分足够长，需要将它写入到多个行，值得注意的是两个连在一起的关键字（i.e. if），添加一个空格，给后续的多行条件添加一个左括号形成自然地4空格缩进。如果和嵌套在 if 语句内的缩进代码块产生了视觉冲突，也应该被自然缩进4个空格。这份增强建议书对于怎样（或是否）把条件行和 if 语句的缩进块在视觉上区分开来是没有明确规定的。可接受的情况包括，但不限于：
-{% highlight python %}
+
+```Python
 # No extra indentation.
 if (this_is_one_thing and
     that_is_another_thing):
@@ -143,10 +147,11 @@ if (this_is_one_thing and
 if (this_is_one_thing
         and that_is_another_thing):
     do_something()
-{% endhighlight %}
+```
 
 在多行结构中的右圆括号、右中括号、右大括号应该放在最后一行的第一个非空白字符的正下方，如下所示：
-{% highlight python %}
+
+```Python
 my_list = [
     1, 2, 3,
     4, 5, 6,
@@ -155,10 +160,11 @@ result = some_function_that_takes_arguments(
     'a', 'b', 'c',
     'd', 'e', 'f',
     )
-{% endhighlight %}
+```
 
 或者放在多行结构的起始行的第一个字符正下方，如下：
-{% highlight python %}
+
+```Python
 my_list = [
     1, 2, 3,
     4, 5, 6,
@@ -167,7 +173,7 @@ result = some_function_that_takes_arguments(
     'a', 'b', 'c',
     'd', 'e', 'f',
 )
-{% endhighlight %}
+```
 
 
 <h4 id="tab-and-spaces">制表符还是空格？</h4>
@@ -199,17 +205,19 @@ Python 标准库是非常专业的，限制最大代码长度为79个字符（�
 首选的换行方式是在括号（小中大）内隐式换行（非续行符`\`）。长行应该在括号表达式的包裹下换行。这比反斜杠作为续行符更好。
 
 反斜杠有时仍然适用。例如，多个很长的`with`语句不能使用隐式续行，因此反斜杠是可接受的。
-{% highlight python %}
+
+```Python
 with open('/path/to/some/file/you/want/to/read') as file_1, \
      open('/path/to/some/file/being/written', 'w') as file_2:
     file_2.write(file_1.read())
-{% endhighlight %}
+```
 （见前面关于[多行`if`语句](https://www.python.org/dev/peps/pep-0008/#multiline-if-statements)的讨论来进一步思考这种多行`with`语句该如何缩进）
 
 另一种使用反斜杠续行的案例是`assert`语句。
 
 确保续行的缩进是恰到好处的。遇到二元操作符，首选的断行位置是操作符的后面而不是前面。这有一些例子：
-{% highlight python %}
+
+```Python
 class Rectangle(Blob):
 
     def __init__(self, width, height,
@@ -224,7 +232,7 @@ class Rectangle(Blob):
                              (width, height))
         Blob.__init__(self, width, height,
                       color, emphasis, highlight)
-{% endhighlight %}
+```
 
 <h4 id="blank-lines">空行</h4>
 
@@ -256,20 +264,23 @@ Python 接受使用换页符（i.e. `Ctrl+L`）作为空格；许多工具都把
 + `import`不同的模块应该独立一行，如：
 
   好的:
-{% highlight python %}
+
+```Python
 import os
 import sys
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的:
-{% highlight python %}
+
+```Python
 import sys, os
-{% endhighlight %}
+```
 
 &emsp;&emsp;这样也是可行的：
-{% highlight python %}
+
+```Python
 from subprocess import Popen, PIPE
-{% endhighlight %}
+```
 
 + `import`语句应该总是放在文件的顶部，在模块注释和文档字符串之下，在模块全局变量和常量之前。
 
@@ -285,16 +296,18 @@ from subprocess import Popen, PIPE
 
 + 绝对导入是推荐的，它们通常是更可读的，并且在错误的包系统配置（如一个目录包含一个以`os.path`结尾的包）下有良好的行为倾向（至少有更清晰的错误消息）：
  
-{% highlight python %}
+
+```Python
 import mypkg.sibling
 from mypkg import sibling
 from mypkg.sibling import example
-{% endhighlight %}
+```
 &emsp;&emsp;当然，相对于绝对导入，相对导入是个可选替代，特别是处理复杂的包结构时，绝对导入会有不必要的冗余：
-{% highlight python %}
+
+```Python
 from . import sibling
 from .sibling import example
-{% endhighlight %}
+```
 
 &emsp;&emsp;标准库代码应该避免复杂的包结构，并且永远使用绝对导入。
 
@@ -302,16 +315,18 @@ from .sibling import example
 
 + 从一个包含类的模块导入类时，这样写通常是可行的：
 
-{% highlight python %}
+
+```Python
 from myclass import MyClass
 from foo.bar.yourclass import YourClass
-{% endhighlight %}
+```
 
 &emsp;&emsp;如果上面的方式会本地导致命名冲突，则这样写：
-{% highlight python %}
+
+```Python
 import myclass
 import foo.bar.yourclass
-{% endhighlight %}
+```
 
 &emsp;&emsp;以`myclass.MyClass`和`foo.bar.yourclass.YourClass`这样的方式使用。
 
@@ -335,65 +350,73 @@ import foo.bar.yourclass
 避免在下列情况中使用多余的空格：
 
 + 与括号保持紧凑（小括号、中括号、大括号）：
-{% highlight python %}
+
+```Python
 Yes: spam(ham[1], {eggs: 2})
 No:  spam( ham[ 1 ], { eggs: 2 } )
-{% endhighlight %}
+```
 
 + 与后面的逗号、分号或冒号保持紧凑：
-{% highlight python %}
+
+```Python
 Yes: if x == 4: print x, y; x, y = y, x
 No:  if x == 4 : print x , y ; x , y = y , x
-{% endhighlight %} 
+``` 
 
 + 切片内的冒号就像二元操作符一样，任意一侧应该被等同对待（把它当做一个极低优先级的操作）。在一个可扩展的切片中，冒号两侧必须有相同的空格数量。例外：切片参数省略时，空格也省略。
 
    好的：
-{% highlight python %}
+
+```Python
 ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
 ham[lower:upper], ham[lower:upper:], ham[lower::step]
 ham[lower+offset : upper+offset]
 ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
 ham[lower + offset : upper + offset]
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 ham[lower + offset:upper + offset]
 ham[1: 9], ham[1 :9], ham[1:9 :3]
 ham[lower : : upper]
 ham[ : upper]
-{% endhighlight %}
+```
 
 + 函数名与其后参数列表的左括号应该保持紧凑：
  
-{% highlight python %}
+
+```Python
 Yes: spam(1)
 No:  spam (1)
-{% endhighlight %} 
+``` 
 
 + 与切片或索引的左括号保持紧凑：
  
-{% highlight python %}
+
+```Python
 Yes: dct['key'] = lst[index]
 No:  dct ['key'] = lst [index]
-{% endhighlight %}
+```
 
 + 在复制操作符（或其它）的两侧保持多余一个的空格：
 
   好的：
-{% highlight python %}
+
+```Python
 x = 1
 y = 2
 long_variable = 3
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 x             = 1
 y             = 2
 long_variable = 3
-{% endhighlight %}
+```
 
 <h4 id="other-recommendations">其他建议</h4>
 
@@ -402,82 +425,92 @@ long_variable = 3
 + 在不同优先级之间，考虑在更低优先级的操作符两侧插入空格。用你自己的判断力；但不要使用超过一个空格，并且在二元操作符的两侧有相同的空格数。
  
   好的：
-{% highlight python %}
+
+```Python
 i = i + 1
 submitted += 1
 x = x*2 - 1
 hypot2 = x*x + y*y
 c = (a+b) * (a-b)
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 i=i+1
 submitted +=1
 x = x * 2 - 1
 hypot2 = x * x + y * y
 c = (a + b) * (a - b)
-{% endhighlight %}
+```
 
 + 不要在关键值参数或默认值参数的等号两边加入空格。
  
   好的：
-{% highlight python %}
+
+```Python
 def complex(real, imag=0.0):
     return magic(r=real, i=imag)
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 def complex(real, imag = 0.0):
     return magic(r = real, i = imag)
-{% endhighlight %}
+```
 
 + 【注：Python 3】带注释的函数定义中的等号两侧要各插入空格。此外，在冒号后用一个单独的空格，也要在表明函数返回值类型的`->`左右各插入一个空格。
 
   好的：
-  {% highlight python %}
+  
+  ```Python
 def munge(input: AnyStr):
 def munge(sep: AnyStr = None):
 def munge() -> AnyStr:
 def munge(input: AnyStr, sep: AnyStr = None, limit=1000):
-  {% endhighlight %}
+  ```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 def munge(input: AnyStr=None):
 def munge(input:AnyStr):
 def munge(input: AnyStr)->PosInt:
-{% endhighlight %}
+```
 
 + 打消使用复合语句（多条语句在同一行）的念头。
 
   好的：
-{% highlight python %}
+
+```Python
 if foo == 'blah':
     do_blah_thing()
 do_one()
 do_two()
 do_three()
-{% endhighlight %}
+```
 
 &emsp;&emsp;宁可不：
-{% highlight python %}
+
+```Python
 if foo == 'blah': do_blah_thing()
 do_one(); do_two(); do_three()
-{% endhighlight %}
+```
 
 + 有时候把 `if/for/while` 和一个小的主体放在同一行也是可行的，千万不要在有多条语句的情况下这样做。此外，还要避免折叠，例如长行。
 
   宁可不：
-{% highlight python %}
+
+```Python
 if foo == 'blah': do_blah_thing()
 for x in lst: total += x
 while t < 10: t = delay()
-{% endhighlight %}
+```
 
 &emsp;&emsp;绝对不：
-{% highlight python %}
+
+```Python
 if foo == 'blah': do_blah_thing()
 else: do_non_blah_thing()
 
@@ -488,7 +521,7 @@ do_one(); do_two(); do_three(long, argument,
                              list, like, this)
 
 if foo == 'blah': one(); two(); three()
-{% endhighlight %}
+```
 
 ---
 
@@ -518,14 +551,16 @@ if foo == 'blah': one(); two(); three()
 一个行内注释与语句在同一行。行内注释应该至少与语句相隔两个空格。以`#`打头，`#`后接一个空格。
 
 无谓的行内注释如果状态明显，会转移注意力。不要这样做：
-{% highlight python %}
+
+```Python
 x = x + 1                 # Increment x
-{% endhighlight %}
+```
 
 但有的时候，这样是有用的：
-{% highlight python %}
+
+```Python
 x = x + 1                 # Compensate for border
-{% endhighlight %}
+```
 
 <h4 id="doc-strings">文档字符串</h4>
 
@@ -535,12 +570,13 @@ x = x + 1                 # Compensate for border
 
 + [PEP 257](https://www.python.org/dev/peps/pep-0257) 描述了良好的文档字符串的约定。注意，文档字符串的结尾`"""`应该放在单独的一行，例如：
 
-{% highlight python %}
+
+```Python
 """Return a foobang
 
 Optional plotz says to frobnicate the bizbaz first.
 """
-{% endhighlight %}
+```
 
 + 对于单行的文档字符串，把结尾`"""`放在同一行。
 
@@ -548,10 +584,11 @@ Optional plotz says to frobnicate the bizbaz first.
 <h3 id="version-bookkeeping">版本注记</h3>
 
 如果必须要 Subversion，CVS 或 RCS 标记在你的源文件里，像这样做：
-{% highlight python %}
+
+```Python
 __version__ = "$Revision$"
 # $Source$
-{% endhighlight %}
+```
 
 这几行应该在模块的文档字符串后面，其它代码的前面，上下由一个空行分隔。
 
@@ -732,14 +769,16 @@ Python 命名改编通过添加一个类名：如果类`Foo`有一个属性叫`_
 + 用`is not`操作符而不是`not ... is`。虽然这两个表达式是功能相同的，前一个是更可读的，是首选。
 
   好的:
-{% highlight python %}
+
+```Python
 if foo is not None:
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的:
-{% highlight python %}
+
+```Python
 if not foo is None:
-{% endhighlight %}
+```
 
 + 用富比较实现排序操作的时候，实现所有六个比较操作符（ `__eq__` 、 `__ne__` 、 `__lt__` , `__le__` , `__gt__` , `__ge__`）是更好的，而不是依赖其它仅仅运用一个特定比较的代码
 
@@ -750,14 +789,16 @@ if not foo is None:
 + 始终使用`def`语句来代替直接绑定了一个`lambda`表达式的赋值语句。
 
   好的:
-{% highlight python %}
+
+```Python
 def f(x): return 2*x
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的:
-{% highlight python %}
+
+```Python
 f = lambda x: 2*x
-{% endhighlight %}
+```
 
 &emsp;&emsp;第一种形式意味着函数对象的名字是'f'而不是'<lambda>'的。通常这对异常追踪和字符串表述是更有用的。使用赋值语句消除的唯一好处，`lambda`表达式可以提供一个显示的`def`语句不能提供的，如，`lambda`能镶嵌在一个很长的表达式里。
 
@@ -780,12 +821,13 @@ f = lambda x: 2*x
 + 捕获异常时，尽可能使用明确的异常，而不是用一个空的`except:`语句。
 
   例如，用：
-{% highlight python %}
+
+```Python
 try:
     import platform_specific_module
 except ImportError:
     platform_specific_module = None
-{% endhighlight %}
+```
 
 &emsp;&emsp;一个空的`except:`语句将会捕获到`SystemExit`和`KeyboardInterrupt`异常，很难区分程序的中断到底是`Ctrl+C`还是其他问题引起的。如果你想捕获程序的所有错误，使用`except Exception:`(空`except:`等同于`except BaseException`)。
 
@@ -797,12 +839,13 @@ except ImportError:
 
 + 绑定异常给一个名字时，最好使用 Python 2.6 里添加的明确的名字绑定语法：
 
-{% highlight python %}
+
+```Python
 try:
     process_data()
 except Exception as exc:
     raise DataProcessingFailedError(str(exc))
-{% endhighlight %}
+```
 
   Python 3 只支持这种语法，避免与基于逗号的旧式语法产生二义性。
 
@@ -811,47 +854,53 @@ except Exception as exc:
 + 此外，对于所有的`try/except`语句来说，限制`try`里面有且仅有绝对必要的代码。在强调一次，这能避免屏蔽错误。
 
   好的：
-{% highlight python %}
+
+```Python
 try:
     value = collection[key]
 except KeyError:
     return key_not_found(key)
 else:
     return handle_value(value)
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 try:
     # Too broad!
     return handle_value(collection[key])
 except KeyError:
     # Will also catch KeyError raised by handle_value()
     return key_not_found(key)
-{% endhighlight %}
+```
 
 + 当资源是本地的特定代码段，用`with`语句确保其在使用后被立即干净的清除了，`try/finally`也是也接受的。
 
 + 当它们做一些除了获取和释放资源之外的事的时候，上下文管理器应该通过单独的函数或方法调用。例如：
 
   好的：
-{% highlight python %}
+
+```Python
 with conn.begin_transaction():
     do_stuff_in_transaction(conn)
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 with conn:
     do_stuff_in_transaction(conn)
-{% endhighlight %}
+```
 
 &emsp;&emsp;第二个例子没有提供任何信息来表明`__enter__`和`__exit__`方法在完成一个事务后做了一些除了关闭连接以外的其它事。在这种情况下明确是很重要的。
 
 + 坚持使用`return`语句。函数内的`return`语句都应该返回一个表达式，或者`None`。如果一个`return`语句返回一个表达式，另一个没有返回值的应该用`return None`清晰的说明，并且在一个函数的结尾应该明确使用一个`return`语句（如果有返回值的话）。
 
   好的：
-{% highlight python %}
+
+
+```Python
 def foo(x):
     if x >= 0:
         return math.sqrt(x)
@@ -862,10 +911,11 @@ def bar(x):
     if x < 0:
         return None
     return math.sqrt(x)
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 def foo(x):
     if x >= 0:
         return math.sqrt(x)
@@ -874,7 +924,7 @@ def bar(x):
     if x < 0:
         return
     return math.sqrt(x)
-{% endhighlight %}
+```
 
 + 用字符串方法代替字符串模块。
 
@@ -883,50 +933,57 @@ def bar(x):
 + 用`''.startswith()`和`''.endswith()`代替字符串切片来检查前缀和后缀。
 
   `startswith()`和`endswith()`是更简洁的，不容易出错的。例如：
-{% highlight python %}
+
+
+```Python
 Yes: if foo.startswith('bar'):
 No:  if foo[:3] == 'bar':
-{% endhighlight %}
+```
 
 + 对象类型的比较应该始终使用`isinstance()`而不是直接比较。
  
-{% highlight python %}
+
+```Python
 Yes: if isinstance(obj, int):
 
 No:  if type(obj) is type(1):
-{% endhighlight %}
+```
 
 &emsp;&emsp;当比较一个对象是不是字符串时，记住它有可能也是一个 unicode 字符串！在 Python 2 里面，`str`和`unicode`有一个公共的基类叫`basestring`，因此你可以这样做：
 
-{% highlight python %}
+
+```Python
 if isinstance(obj, basestring):
-{% endhighlight %}
+```
 
 &emsp;&emsp;注意，在 Python 3 里面，`unicode`和`basestring`已经不存在了（只有`str`），`byte`对象不再是字符串的一种（被一个整数序列替代）。
 
 + 对于序列（字符串、列表、元组）来说，空的序列为`False`：
 
   好的：
-{% highlight python %}
+
+```Python
 if not seq:
 if seq:
-{% endhighlight %}
+```
 
 &emsp;&emsp;不好的：
-{% highlight python %}
+
+```Python
 if len(seq):
 if not len(seq):
-{% endhighlight %}
+```
 
 + 不要让字符串对尾随的空格有依赖。这样的尾随空格是视觉上无法区分的，一些编辑器（or more recently, reindent.py）会将其裁剪掉。
 
 + 不要用`==`比较`True`和`False`。
 
-{% highlight python %}
+
+```Python
 Yes:   if greeting:
 No:    if greeting == True:
 Worse: if greeting is True:
-{% endhighlight %}
+```
 
 + Python 标准库将不再使用函数标注，以至于给特殊的标注风格给一个过早的承若。代替的，这些标注是留给用户去发现和体验的有用的标注风格。
 
