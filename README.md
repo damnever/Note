@@ -7,3 +7,7 @@
 - [grep/sed/awk](./grep-sed-awk.md)
 - [Git](./Git.md)
 
+---
+
+Q: 为毛你要把逗逼模式（[singleton.py](./singleton.py)）记下来？一定是没见过世面吧！
+A: 你才是逗逼！
