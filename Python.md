@@ -135,6 +135,7 @@ Namespaces are one honking great idea -- let's do more of those!
  - [收集 @Wilbeibi](https://github.com/Wilbeibi/NotesIndex/blob/master/Python_Index.md)
  - [Python Cheat Sheet](http://crazyguitar.github.io/cheatsheet/python-cs.html)
  - [Popular Python Modules](http://www.programcreek.com/python/index/module/list)
+ - [Intermediate Python](https://github.com/yasoob/intermediatePython)
 
 ---
 ***
