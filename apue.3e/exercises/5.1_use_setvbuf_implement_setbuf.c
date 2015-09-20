@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /*
  * If `buf` is NULL, close buffer,
@@ -22,7 +23,7 @@ my_setbuf(FILE *fp, char *buf)
 
     if (setvbuf(fp, buf, mode, BUFSIZ) != 0) {
         fprintf(stderr, "setvbuf error!\n");
-        return;
+        exit(1);
     }
 }
 
