@@ -8,6 +8,7 @@
  - [GitHub 秘籍](http://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html)
  - [Git 参考手册](http://gitref.justjavac.com/)
  - [EMOJI CHEAT SHEET](http://www.emoji-cheat-sheet.com/)
+ - [用对 gitignore](http://www.barretlee.com/blog/2015/09/06/set-gitignore-after-add-file/)
  
 ---
 
