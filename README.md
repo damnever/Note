@@ -1,4 +1,4 @@
-## Note.
+## Note(大杂烩).
 
 - [Python](https://github.com/Damnever/Note/blob/master/Python.md)
 - Python 相关的糙译
