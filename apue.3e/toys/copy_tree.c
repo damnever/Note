@@ -89,7 +89,7 @@ copy(char *src, char *des)
     if ((fsrc = fopen(src, "rb")) == NULL) {
         err_msg("open source file error\n");
     }
-    if ((fdes = fopen(des, "wb")) < 0) {
+    if ((fdes = fopen(des, "wb")) == NULL) {
         err_msg("open destination file error\n");
     }
 
