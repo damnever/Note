@@ -51,10 +51,7 @@ def code_table(tree):
                     yield item
                 codes.pop()
 
-    ct = dict()
-    for (k, v) in _df_traversal(tree):
-        ct[k] = v
-    return ct
+    return dict(_df_traversal(tree))
 
 
 def encode(table, s):
