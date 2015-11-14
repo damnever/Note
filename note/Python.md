@@ -175,7 +175,7 @@ ___
 
 - <h3 id="regex-overview" style="color:#d35400;">概览</h3>
 
- ![](./data/regex.png)
+ ![](../data/regex.png)
 
 - <h3 id="regex-method" style="color:#d35400;">方法</h3>
 
