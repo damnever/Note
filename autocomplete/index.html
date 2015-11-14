@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8a/">
+    <meta name="keywords" content="autocomplete, trie, redis"/>
+    <meta name="description" content="Implements autocomplete with trie and redis."/>
+    <title>Autocomplement Demo</title>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.min.js"></script>
+    <style type="text/css">
+        #content, #add, #search{
+            margin: 20px auto;
+            width: 50%;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>简单的自动提示/补全[Trie/Redis]（Vue.js/WebSocket/Tornado）</h1>
+        <div id="add">
+            <label for="add-word">添加单词:</label>
+            <input id="add-word" v-model="word" v-on:keyup.enter="addWord" placeholder="Add a word"/>
+            <p>${ words | json }</p>
+        </div>
+        <div id="search">
+            <label for="seacrh-word">查看效果:</label>
+            <input id="seacrh-word" v-model="word" v-on:input="getSuggestion" placeholder="Search a word"/>
+            <ul>
+                <li v-for="wd in suggestions">
+                    <p>${ wd }</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    Vue.config.delimiters = ['${', '}'];
+
+    var ws = new WebSocket("ws://localhost:9487/autocomplete");
+
+    var vmAdd = new Vue({
+        el: '#add',
+        data: {
+            word: '',
+            words: [],
+        },
+        methods: {
+            addWord: function() {
+                var word = this.word.trim();
+                ws.send(JSON.stringify({'type': 'new', 'text': word}));
+                this.words.push(word);
+                this.word = '';
+            }
+        }
+    });
+    var vmSearch = new Vue({
+        el: '#search',
+        data: {
+            word: '',
+            suggestions: [],
+        },
+        methods: {
+            getSuggestion: function() {
+                var prefix = this.word.trim();
+                if (prefix === '') {
+                    this.suggestions.splice(0, this.suggestions.length);
+                    return;
+                }
+                ws.send(JSON.stringify({'type': 'prefix', 'text': prefix}));
+            }
+        }
+    });
+
+    ws.onopen = function() {
+        console.log('WebSocket opened!');
+    };
+    ws.onmessage = function(event) {
+        vmSearch.suggestions.splice(0, vmSearch.suggestions.length);
+        var data = JSON.parse(event.data);
+        vmSearch.suggestions = data.suggestions;
+    }
+    ws.onclose = function() {
+        console.log('WebSocket closed!');
+    }
+    ws.onerror = function() {
+        console.log('Got ERROR!!!');
+    }
+</script>
+</html>
