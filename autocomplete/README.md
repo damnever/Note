@@ -1,6 +1,6 @@
 
 两种方式：
-- `Trie`：二叉前缀树。[use_trie/trie.py](https://github.com/Damnever/Note/blob/master/autocomplete/use_trie/trie.py)
+- `Trie`：前缀树。[use_trie/trie.py](https://github.com/Damnever/Note/blob/master/autocomplete/use_trie/trie.py)
 - `Redis`：使用 SortedSet 和 HASH。[use_redis/rds.py](https://github.com/Damnever/Note/blob/master/autocomplete/use_redis/rds.py)
 
 ---
