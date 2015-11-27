@@ -38,13 +38,20 @@ static int set_cloexec(int fd);
 int
 main(int argc, char *argv[])
 {
+    int failed = false;
+
     parse_options(argc, argv);
 
     if (server && client) {
         fprintf(stderr, "The program can not be server and client at the same time!\n");
-        abort();
+        failed = true;
     } else if (!server && !client) {
         fprintf(stderr, "Argument `-s/--server` or `-c/--client` is required.\n");
+        failed = true;
+    }
+    if (failed) {
+        print_help(argv[0]);
+        abort();
     }
 
     if (server) {
