@@ -2,6 +2,6 @@ data/coroutine.py
 ignore/
 TOC
 *.md~
-*.pyc
-*.o
+*.py[cod]
+__pycache__/
 *.out
