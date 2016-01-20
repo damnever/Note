@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO, good enough.
-# add to .bashrc `. ./path/to/todo.sh
+# add to .bashrc `. ./path/to/todo.sh`
 
 _FILE=~/.dsh/todo.md
 
