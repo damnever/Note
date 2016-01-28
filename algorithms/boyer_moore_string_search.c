@@ -22,6 +22,8 @@ int main()
     char pattern2[] = "marry";
     char str3[] = "bed is so cold";
     char pattern3[] = "so";
+    char str4[] = "not found";
+    char pattern4[] = "404";
 
     idx = boyer_moore_search(str1, strlen(str1), pattern1, strlen(pattern1));
     printf("boyer_moore_search(\"%s\", \"%s\") = %d\n", str1, pattern1, idx);
@@ -31,6 +33,9 @@ int main()
 
     idx = boyer_moore_search(str3, strlen(str3), pattern3, strlen(pattern3));
     printf("boyer_moore_search(\"%s\", \"%s\") = %d\n", str3, pattern3, idx);
+
+    idx = boyer_moore_search(str4, strlen(str4), pattern4, strlen(pattern4));
+    printf("boyer_moore_search(\"%s\", \"%s\") = %d\n", str4, pattern4, idx);
 
     return 0;
 }
@@ -43,7 +48,7 @@ int boyer_moore_search(char *str, int s_len, char *pattern, int p_len)
         if (str[idx] == pattern[p_len - 1]) {
             goffset = good_suffix_offset(pattern, &str[idx], p_len);
             if (goffset == p_len) {
-                break;
+                return idx - p_len + 1;
             } else {
                 boffset = bad_char_offset(pattern, str[p_len - goffset], p_len);
                 idx += goffset > boffset ? goffset : boffset;
@@ -53,7 +58,7 @@ int boyer_moore_search(char *str, int s_len, char *pattern, int p_len)
         }
     }
 
-    return idx - p_len + 1;
+    return -1;
 }
 
 int bad_char_offset(char *pattern, char c, int len)
