@@ -36,11 +36,7 @@ int cmp_int(void *x, void *y)
 
 int cmp_double(void *x, void *y)
 {
-    double v_x = *((double *)x);
-    double v_y = *((double *)y);
-
-    if (v_x < v_y) return 1;
-    return -1;
+    return -(memcmp(x, y, sizeof(double)));
 }
 
 int main()
