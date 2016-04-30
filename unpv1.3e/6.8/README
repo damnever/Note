@@ -1,0 +1,4 @@
+Use sysconf get max file descriptors.
+
+$ man 3 sysconf
+$ limit
