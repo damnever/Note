@@ -8,7 +8,7 @@
 
 
 #undef MAXLINE
-#define MAXLINE 23
+#define MAXLINE 512
 
 
 void _error_msg(const char *fmt, va_list ap);

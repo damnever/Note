@@ -18,7 +18,8 @@
 int max_fds();
 void close_fd(int fd);
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     int idx, nready, nread, nfds, open_max = max_fds();
     int srv_fd, cli_fd;
@@ -54,7 +55,7 @@ int main(int argc, char *argv[])
     }
     nfds = 0;
 
-    printf("Server: tcp://localhost:%s ...\n", argv[1]);
+    printf("Server: tcp://localhost:%s\n", argv[1]);
 
     for (;;) {
         if((nready = poll(poll_fds, nfds + 1, -1)) < 0) {
@@ -99,7 +100,10 @@ accept_again:
 
             if (poll_fds[idx].revents & (POLLIN | POLLERR)) {
                 if ((nread = readn(poll_fds[idx].fd, buf, MAX_READ_LINE)) < 0) {
-                    if (errno == ECONNRESET) {  // connection reset by peer: cli SO_LINGER
+                    // connection reset by peer:
+                    // 1) HERE: server *recv* RST: client set SO_LINGER option with linger{l_onoff=1, l_linger=0}, and closed connection.
+                    // 2) server *send* RST: server restarted and lose all connection information.
+                    if (errno == ECONNRESET) {
                         close_fd(poll_fds[idx].fd);
                         poll_fds[idx].fd = -1;
                     } else {
@@ -131,7 +135,8 @@ close_fd(int fd)
     }
 }
 
-int max_fds()
+int
+max_fds()
 {
     return sysconf(_SC_OPEN_MAX);
 }
