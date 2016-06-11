@@ -2,7 +2,7 @@
  *
  * Example usage:
  *   int i, tmp,  max = 6;
- *   Stack *s = stack_new(5, sizeof(int));
+ *   Stack *s = stack_new(sizeof(int));
  *   for (i = 0; i < max; ++i) {
  *       stack_push(s, &i);
  *   }
@@ -17,20 +17,20 @@
 
 
 Stack *
-stack_new(int cap, int elem_size)
+stack_new(int elem_size)
 {
     Stack *stack;
 
     if ( (stack = ((Stack *)malloc(sizeof(Stack)))) == NULL ) {
         return NULL;
     }
-    if ( (stack->elements = malloc(elem_size * cap)) == NULL ) {
+    if ( (stack->elements = malloc(elem_size * INIT_STACK_CAP)) == NULL ) {
         free(stack);
         stack = NULL;
         return NULL;
     }
     stack->elem_size = elem_size;
-    stack->cap = cap;
+    stack->cap = INIT_STACK_CAP;
     stack->len = 0;
 
     return stack;
@@ -61,14 +61,14 @@ stack_pop(Stack *stack, void *val_addr)
     assert(stack != NULL);
 
     if (stack->len <= 0) return false;
-    stack_top(stack, val_addr);
+    stack_peek(stack, val_addr);
     stack->len -= 1;
 
     return true;
 }
 
 bool
-stack_top(Stack *stack, void *val_addr)
+stack_peek(Stack *stack, void *val_addr)
 {
     assert(stack != NULL);
     char *addr;
@@ -85,6 +85,13 @@ stack_is_empty(Stack *stack)
 {
     assert(stack != NULL);
     return (stack->len == 0);
+}
+
+int
+stack_size(Stack *stack)
+{
+    assert(stack != NULL);
+    return stack->len;
 }
 
 void
