@@ -17,4 +17,6 @@
 #define log_warn(FMT, ...) fprintf(stderr, "[WARN] (%s:%s:%d errno: %s) " FMT "\n", __FILE__, __func__, __LINE__, str_errno(), ##__VA_ARGS__)
 #define log_info(FMT, ...) fprintf(stderr, "[INFO] (%s:%s:%d) " FMT "\n", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
 
+#define check(S, FMT, ...) if (!(S)) { log_err(FMT, ...); errno=0; goto error; }
+
 #endif
