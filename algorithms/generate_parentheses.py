@@ -17,10 +17,22 @@ class Solution(object):
         return list(parentheses)
 
 
+def _check_balance(s):
+    balanced = 0
+    for c in s:
+        if c == '(':
+            balanced += 1
+        elif c == ')':
+            if balanced == 0:
+                return False
+            balanced -= 1
+    return balanced == 0
+
+
 if __name__ == '__main__':
-    print Solution().generateParenthesis(0)
-    print Solution().generateParenthesis(1)
-    print Solution().generateParenthesis(2)
-    print Solution().generateParenthesis(3)
-    print Solution().generateParenthesis(4)
-    print Solution().generateParenthesis(5)
+    print(all(_check_balance(p) for p in Solution().generateParenthesis(0)))
+    print(all(_check_balance(p) for p in Solution().generateParenthesis(1)))
+    print(all(_check_balance(p) for p in Solution().generateParenthesis(2)))
+    print(all(_check_balance(p) for p in Solution().generateParenthesis(3)))
+    print(all(_check_balance(p) for p in Solution().generateParenthesis(4)))
+    print(all(_check_balance(p) for p in Solution().generateParenthesis(5)))
