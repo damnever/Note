@@ -28,7 +28,7 @@
  *       return 0;
  *   }
 **/
-#include "sort.h"
+#include "quick_sort.h"
 
 void q_recursive_sort(void *elems, int elem_size, int start, int end, int (*cmp)(void *, void *));
 int q_partition(void *elems, int elem_size, int start, int end, int (*cmp)(void *, void *));
