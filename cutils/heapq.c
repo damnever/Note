@@ -62,7 +62,7 @@ void
 heapify(void *elems, int elem_num, int elem_size, int (*cmp)(void *, void *))
 {
     for (int end = idx_parent(elem_num-1); end >= 0; --end) {
-        _sift_up(elems, 0, elem_num, elem_size, cmp);
+        _sift_up(elems, end, elem_num, elem_size, cmp);
     }
 }
 
@@ -103,11 +103,14 @@ void heap_push_pop(void *elems, void *elem, int elem_num,
     if (elem_num == 0) {
         return;
     }
+
     char tmp[elem_size];
     char *es = (char*)elems;
+    if (cmp(elem, es) < 0) return;
+
     memcpy(tmp, es, elem_size);
-    memcpy(es, elem, elem_size);
     memcpy(elem, tmp, elem_size);
+    memcpy(es, elem, elem_size);
     _sift_up(elems, 0, elem_num, elem_size, cmp);
 }
 
