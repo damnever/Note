@@ -106,7 +106,7 @@ void heap_push_pop(void *elems, void *elem, int elem_num,
 
     char tmp[elem_size];
     char *es = (char*)elems;
-    if (cmp(elem, es) < 0) return;
+    if (cmp(elem, es) <= 0) return;
 
     memcpy(tmp, es, elem_size);
     memcpy(elem, tmp, elem_size);
