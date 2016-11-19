@@ -1,8 +1,8 @@
 ## 大杂烩
 
 - [autocomplete](https://github.com/Damnever/Note/blob/master/autocomplete/) An auto compelet demo based-on Trie/Redis
-- [algorithms](https://github.com/Damnever/Note/blob/master/autocomplete/algorithms/) OJ
-- [cutils](https://github.com/Damnever/Note/blob/master/autocomplete/cutils/) Generic librarys for C
+- [algorithms](https://github.com/Damnever/Note/blob/master/algorithms/) OJ
+- [cutils](https://github.com/Damnever/Note/blob/master/cutils/) Generic librarys for C
 
 ---
 
