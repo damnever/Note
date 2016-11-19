@@ -43,7 +43,7 @@
 #define idx_lchild(idx) ( ((idx) << 1) + 1 )
 #define idx_rchild(idx) ( ((idx) << 1) + 2 )
 
-static void _shift_down(void *elems, int start, int end,
+static void _sift_down(void *elems, int start, int end,
                         int elem_size, int (*cmp)(void *, void *));
 static void _swap(void *x, void *y, int size);
 
@@ -53,7 +53,7 @@ heap_sort(void *elems, int elem_num, int elem_size, int (*cmp)(void *, void *))
 {
     int end = elem_num - 1;
     for (int start = idx_parent(end); start >= 0; --start) {
-        _shift_down(elems, start, end, elem_size, cmp);
+        _sift_down(elems, start, end, elem_size, cmp);
     }
 
     while (end > 0) {
@@ -61,11 +61,11 @@ heap_sort(void *elems, int elem_num, int elem_size, int (*cmp)(void *, void *))
         char *es = (char*)elems;
         _swap(ee, es, elem_size);
         end -= 1;
-        _shift_down(elems, 0, end, elem_size, cmp);
+        _sift_down(elems, 0, end, elem_size, cmp);
     }
 }
 
-static void _shift_down(void *elems, int start, int end,
+static void _sift_down(void *elems, int start, int end,
                         int elem_size, int (*cmp)(void *, void *))
 {
     int lar_idx = start;
