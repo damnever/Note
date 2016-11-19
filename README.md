@@ -1,12 +1,12 @@
 ## 大杂烩
 
-- [autocomplete](https://github.com/Damnever/Note/blob/master/autocomplete/) 基于 Trie 和 Redis 两种方式的自动提示/补全 Demo
+- [autocomplete](https://github.com/Damnever/Note/blob/master/autocomplete/) An auto compelet demo based-on Trie/Redis
+- [algorithms](https://github.com/Damnever/Note/blob/master/autocomplete/algorithms/) OJ
+- [cutils](https://github.com/Damnever/Note/blob/master/autocomplete/cutils/) Generic librarys for C
 
 ---
 
-- some scripts.........
-
----
+some scripts aaand notes......................
 
 - [Python](https://github.com/Damnever/Note/blob/master/note/Python.md)
 - Python 相关的糙译
