@@ -1,6 +1,7 @@
 /** A simple generic quick sort.
  *
  * Example usage:
+ *   #define len 6
  *   // memcmp(x, y, sizeof(int))
  *   int cmp(void *x, void *y)
  *   {
@@ -14,7 +15,6 @@
  *   int main()
  *   {
  *       int i;
- *       const int len = 6;
  *       int elems[len] = {3, 5, 4, 2, 6, 1};
  *       for (i = 0; i < len; ++i) {
  *           printf("%d ", elems[i]);
