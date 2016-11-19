@@ -3,6 +3,7 @@
  *
  * Example:
  *
+ *   #include <stdio.h>
  *   #define len  5
  *
  *   // memcmp(x, y, sizeof int)
@@ -36,7 +37,6 @@
  */
 
 #include <string.h>
-#include <stdio.h>
 #include "heap_sort.h"
 
 #define idx_parent(idx) ( ((idx) - 1) >> 1 )
