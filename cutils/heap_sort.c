@@ -65,8 +65,9 @@ heap_sort(void *elems, int elem_num, int elem_size, int (*cmp)(void *, void *))
     }
 }
 
-static void _sift_down(void *elems, int start, int end,
-                        int elem_size, int (*cmp)(void *, void *))
+static void
+_sift_down(void *elems, int start, int end,
+           int elem_size, int (*cmp)(void *, void *))
 {
     int lar_idx = start;
     int lch_idx = idx_lchild(start);
