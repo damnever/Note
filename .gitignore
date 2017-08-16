@@ -5,3 +5,4 @@ TOC
 *.py[cod]
 __pycache__/
 *.out
+*.o
