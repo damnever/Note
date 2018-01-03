@@ -6,3 +6,5 @@ TOC
 __pycache__/
 *.out
 *.o
+.gdb_history
+*.dSYM/
